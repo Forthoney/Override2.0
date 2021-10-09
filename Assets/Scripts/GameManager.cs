@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance = null;
 
-    public GameObject PlayerShip;
+    public static GameObject PlayerShip;
     public List<GameObject> EnemyShips;
 
     public float Score;

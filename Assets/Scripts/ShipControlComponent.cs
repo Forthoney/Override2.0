@@ -4,18 +4,12 @@ using UnityEngine;
 
 public class ShipControlComponent : MonoBehaviour
 {
-<<<<<<< HEAD
 
     private ShipBody _shipBody;
     private ShipWeapon _shipWeapon;
 
     private EnemyBehaviour _enemyBehaviour;
 
-
-
-
-=======
->>>>>>> fa334139d135ab8e86a2ef791d67cdbc2ebdc686
     public float maxHealth;
     private float currentHealth;
 
@@ -37,7 +31,7 @@ public class ShipControlComponent : MonoBehaviour
 
         gameObject.GetComponent<SpriteRenderer>().color = tint;
         
-        if (GameManager.playerShip != this.gameObject) {    
+        if (GameManager.PlayerShip != this.gameObject) {    
             _enemyBehaviour.doAction();
         }
     }
