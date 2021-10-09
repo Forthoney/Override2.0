@@ -8,7 +8,7 @@ public class ShipControlComponent : MonoBehaviour
     private ShipBody _shipBody;
     private ShipWeapon _shipWeapon;
 
-    private EnemyBehaviour _enemyBehaviour;
+    // private EnemyBehaviour _enemyBehaviour;
 
     public float maxHealth;
     private float currentHealth;

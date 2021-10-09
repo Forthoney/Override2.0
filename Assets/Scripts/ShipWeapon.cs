@@ -9,7 +9,7 @@ public abstract class ShipWeapon
     public double Firerate;
 
     // called on trigger (click for player)
-    public void Fire();
+    public abstract void Fire();
 
     public string BulletPrefab;
 
