@@ -37,8 +37,13 @@ public class GameManager : MonoBehaviour
         else
         {
             EnemyShips.Remove(destroyedShip);
-            Score += destroyedShip.GetComponent<ShipControlComponent>().maxHealth;
+            AddScore(100);
             Destroy(destroyedShip);
         }
+    }
+
+    public void AddScore(float add)
+    {
+        Score += add;
     }
 }
