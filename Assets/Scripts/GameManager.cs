@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> EnemyShips;
 
     public float Score;
+    public TextMeshProUGUI ScoreNumber;
 
     void Awake()
     {
@@ -45,5 +47,6 @@ public class GameManager : MonoBehaviour
     public void AddScore(float add)
     {
         Score += add;
+        ScoreNumber.SetText(Score.ToString());
     }
 }
