@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ShipControlComponent : MonoBehaviour
 {
-
-    
     public float maxHealth;
     private float currentHealth;
 
@@ -19,7 +17,7 @@ public class ShipControlComponent : MonoBehaviour
     void Update()
     {
         if (currentHealth < 0) {
-            Destroy(gameObject);
+            GameManager.Instance.ShipDestroy(gameObject);
         }
 
         Color tint = new Color(1, currentHealth/maxHealth, currentHealth/maxHealth);
