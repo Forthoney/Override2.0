@@ -36,7 +36,14 @@ public class PlayerControl : MonoBehaviour
 
         
 
-        if(Input.GetButton("Fire1")){
+        // if (Input.GetButton("Fire1")){
+        //     if(canFire) {
+        //         instantiateBullet();
+        //         canFire = false;
+        //     } 
+
+        // }
+        if (InputController.Instance.Firing){
             if(canFire) {
                 instantiateBullet();
                 canFire = false;
@@ -58,8 +65,8 @@ public class PlayerControl : MonoBehaviour
 
 
     void rotateTowardsMouse(){
-        Vector3 mousePos = Input.mousePosition;
-        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+        Vector3 mousePos = InputController.Instance.MouseWorldPos; // Input.mousePosition;
+        // mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
         Vector3 playerToMouse = mousePos - player.transform.position;
         float angle = Mathf.Atan2(playerToMouse.y, playerToMouse.x) * Mathf.Rad2Deg;
@@ -67,15 +74,17 @@ public class PlayerControl : MonoBehaviour
     }
 
     void movePlayer(){
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
+        // float horizontal = Input.GetAxisRaw("Horizontal");
+        // float vertical = Input.GetAxisRaw("Vertical");
 
-        player.GetComponent<Rigidbody2D>().velocity += new Vector2(speed * horizontal * Time.deltaTime, speed * vertical * Time.deltaTime);
+        // player.GetComponent<Rigidbody2D>().velocity += new Vector2(speed * horizontal * Time.deltaTime, speed * vertical * Time.deltaTime);
+        player.GetComponent<Rigidbody2D>().velocity += InputController.Instance.Movement * speed * Time.deltaTime;
     }
 
     void instantiateBullet() {
-            Vector3 mousePos = Input.mousePosition;
-            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+            // Vector3 mousePos = Input.mousePosition;
+            // mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+            Vector3 mousePos = InputController.Instance.MouseWorldPos;
 
             Vector3 playerToMouse = mousePos - player.transform.position;
             float angle = Mathf.Atan2(playerToMouse.y, playerToMouse.x) * Mathf.Rad2Deg;
