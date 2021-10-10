@@ -13,9 +13,6 @@ public abstract class ShipWeapon
 
     private Vector2 spritePosOffset;
 
-    // called on trigger (click for player)
-    private void Fire();
-
     public double Damage
     {
         get { return damage; }
@@ -35,4 +32,7 @@ public abstract class ShipWeapon
     {
         get { return spritePosOffset; }
     }
+
+    // called on trigger (click for player)
+    public abstract void Fire();
 }

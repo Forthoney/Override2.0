@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance = null;
 
-    public GameObject PlayerShip;
+    public static GameObject PlayerShip;
     public List<GameObject> EnemyShips;
 
     public float Score;
+    public TextMeshProUGUI ScoreNumber;
 
     void Awake()
     {
@@ -37,8 +39,14 @@ public class GameManager : MonoBehaviour
         else
         {
             EnemyShips.Remove(destroyedShip);
-            Score += destroyedShip.GetComponent<ShipControlComponent>().maxHealth;
+            AddScore(100);
             Destroy(destroyedShip);
         }
+    }
+
+    public void AddScore(float add)
+    {
+        Score += add;
+        ScoreNumber.SetText(Score.ToString());
     }
 }
