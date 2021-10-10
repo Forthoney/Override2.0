@@ -4,14 +4,35 @@ using UnityEngine;
 
 public abstract class ShipWeapon 
 {
-    public double Damage;
+    private double damage;
 
-    public double Firerate;
+    // firerate is per second (?)
+    private bool isFiring;
+
+    private string bulletPrefab;
+
+    private Vector2 spritePosOffset;
 
     // called on trigger (click for player)
-    public void Fire();
+    private void Fire();
 
-    public string BulletPrefab;
+    public double Damage
+    {
+        get { return damage; }
+    }
 
-    public Vector2 SpritePosOffset;
+    public double IsFiring
+    {
+        get { return isFiring; }
+    }
+
+    public double BulletPrefab
+    {
+        get { return bulletPrefab; }
+    }
+
+    public double SpritePosOffset
+    {
+        get { return spritePosOffset; }
+    }
 }
