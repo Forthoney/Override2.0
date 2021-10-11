@@ -7,6 +7,10 @@ public abstract class ShipBody
     private float _health;
     private float _speed;
     private float _colliderRadius;
+
+    public void move(){
+        GameManager.PlayerShip.GetComponent<Rigidbody2D>().velocity += InputController.Instance.Movement * _speed * Time.deltaTime;
+    }
     
     // _health functions
     public float getHealth()

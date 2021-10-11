@@ -5,8 +5,6 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
 
-    public GameObject player;
-
     // This value should be read out of the ship body in the future
     public float speed;
 
@@ -34,64 +32,33 @@ public class PlayerControl : MonoBehaviour
 
         float attackSpeed = 1/rateOfFire;
 
-        
-
-        // if (Input.GetButton("Fire1")){
-        //     if(canFire) {
-        //         instantiateBullet();
-        //         canFire = false;
-        //     } 
-
-        // }
         if (InputController.Instance.Firing){
-            if(canFire) {
-                instantiateBullet();
-                canFire = false;
+                GameManager.PlayerShip.GetComponent<ShipControlComponent>().getWeapon().Fire();
             } 
-
-        }
-
-        if(timer > attackSpeed){
-            canFire = true;
-            timer = 0;
-        }
-
-        if (!canFire){
-            timer += Time.deltaTime;
-        }
-
 
     }
 
 
     void rotateTowardsMouse(){
-        Vector3 mousePos = InputController.Instance.MouseWorldPos; // Input.mousePosition;
-        // mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-
-        Vector3 playerToMouse = mousePos - player.transform.position;
+        Vector3 mousePos = InputController.Instance.MouseWorldPos;
+        Vector3 playerToMouse = mousePos - GameManager.PlayerShip.transform.position;
         float angle = Mathf.Atan2(playerToMouse.y, playerToMouse.x) * Mathf.Rad2Deg;
-        player.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+        GameManager.PlayerShip.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
     }
 
     void movePlayer(){
-        // float horizontal = Input.GetAxisRaw("Horizontal");
-        // float vertical = Input.GetAxisRaw("Vertical");
-
-        // player.GetComponent<Rigidbody2D>().velocity += new Vector2(speed * horizontal * Time.deltaTime, speed * vertical * Time.deltaTime);
-        player.GetComponent<Rigidbody2D>().velocity += InputController.Instance.Movement * speed * Time.deltaTime;
+        GameManager.PlayerShip.GetComponent<ShipControlComponent>().getBody().move();
     }
 
     void instantiateBullet() {
-            // Vector3 mousePos = Input.mousePosition;
-            // mousePos = Camera.main.ScreenToWorldPoint(mousePos);
             Vector3 mousePos = InputController.Instance.MouseWorldPos;
 
-            Vector3 playerToMouse = mousePos - player.transform.position;
+            Vector3 playerToMouse = mousePos - GameManager.PlayerShip.transform.position;
             float angle = Mathf.Atan2(playerToMouse.y, playerToMouse.x) * Mathf.Rad2Deg;
 
             playerToMouse = playerToMouse.normalized;
 
-            Instantiate(bullet, player.transform.position + playerToMouse, Quaternion.Euler(new Vector3(0, 0, angle - 90)));
+            Instantiate(bullet, GameManager.PlayerShip.transform.position + playerToMouse, Quaternion.Euler(new Vector3(0, 0, angle - 90)));
     }
 
 }

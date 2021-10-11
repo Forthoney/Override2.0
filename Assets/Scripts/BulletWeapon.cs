@@ -6,10 +6,15 @@ public class BulletWeapon : ShipWeapon
 {
     public BulletWeapon(string PrefabName, Vector2 PosOffsetAmt)
     {
-        damage = 5;
-        Firerate = 3;
-        BulletPrefab = PrefabName;
-        SpritePosOffset = PosOffsetAmt;
+        this.damage = 5;
+        this.FireRate = 3;
+        this.BulletPrefab = PrefabName;
+        this.SpritePosOffset = PosOffsetAmt;
+    }
+
+    public override void Fire(){
+        // TODO: Load bulelt prefab from resource
+        // TODO: instantiate bullet and set its owner
     }
 
 
