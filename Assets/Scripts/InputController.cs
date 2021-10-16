@@ -13,6 +13,7 @@ public class InputController : MonoBehaviour {
 	[HideInInspector] public Vector2 Movement;
 	[HideInInspector] public Vector2 MouseScreenPos;
 	[HideInInspector] public bool Firing = false;
+	[HideInInspector] public bool Swapping = false;
 
 	public Vector2 MouseWorldPos {
 		get {
@@ -40,5 +41,12 @@ public class InputController : MonoBehaviour {
 			Firing = true;
 		else if (context.canceled)
 			Firing = false;
+	}
+
+	public void OnSwapInput(InputAction.CallbackContext context) {
+		if (context.started)
+			Swapping = true;
+		else if (context.canceled)
+			Swapping = false;
 	}
 }

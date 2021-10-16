@@ -7,7 +7,7 @@ public class SlowChunk : ShipBody
     public SlowChunk()
     {
         setHealth(100);
-        setSpeed(10);
+        setSpeed(4);
         setRadius(15);
     }
 }

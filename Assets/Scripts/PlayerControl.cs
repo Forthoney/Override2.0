@@ -17,6 +17,8 @@ public class PlayerControl : MonoBehaviour
 
     public Transform bullet;
 
+	private Timer _firingCooldown;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,11 +34,12 @@ public class PlayerControl : MonoBehaviour
 
         float attackSpeed = 1/rateOfFire;
 
-        if (InputController.Instance.Firing){
-                GameManager.PlayerShip.GetComponent<ShipControlComponent>().getWeapon().Fire();
-            } 
+        if (InputController.Instance.Firing && !_firingCooldown) {
+            GameManager.PlayerShip.GetComponent<ShipControlComponent>().getWeapon().Fire();
+			_firingCooldown = new Timer((float) (1f / GameManager.PlayerShip.GetComponent<ShipControlComponent>().getWeapon().FireRate));
+			_firingCooldown.Start();
+        } 
     }
-
 
     void rotateTowardsMouse(){
         Vector3 mousePos = InputController.Instance.MouseWorldPos;
