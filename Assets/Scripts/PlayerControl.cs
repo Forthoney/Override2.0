@@ -35,7 +35,6 @@ public class PlayerControl : MonoBehaviour
         if (InputController.Instance.Firing){
                 GameManager.PlayerShip.GetComponent<ShipControlComponent>().getWeapon().Fire();
             } 
-
     }
 
 

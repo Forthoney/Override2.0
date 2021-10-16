@@ -488,7 +488,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f578247f374ebb045a4efdedc0324cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1893050541}
   speed: 10
   rateOfFire: 2
   bullet: {fileID: 549320140095666342, guid: 582a299cb64424f429ab0b090c518c2b, type: 3}
@@ -579,11 +578,6 @@ MonoBehaviour:
   otherBoundary: {fileID: 522599020}
   offset: {x: -3, y: 0, z: 0}
   isVertical: 1
---- !u!1 &1893050541 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 725246089138930479, guid: c29ad676ca4814c58a9bb6a5935ca38b, type: 3}
-  m_PrefabInstance: {fileID: 725246089393580930}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &725246089393580930
 PrefabInstance:
   m_ObjectHideFlags: 0

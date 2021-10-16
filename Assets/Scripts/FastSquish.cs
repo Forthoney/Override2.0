@@ -7,7 +7,7 @@ public class FastSquish : ShipBody
     public FastSquish()
     {
         setHealth(10);
-        setSpeed(100);
+        setSpeed(8);
         setRadius(5);
     }
 }

@@ -224,6 +224,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d7c015f528566d4496be7e11a348222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  otherBoundary: {fileID: 1735107014}
+  offset: {x: 0, y: 0, z: 0}
+  isVertical: 0
 --- !u!61 &157912097
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -434,6 +437,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d7c015f528566d4496be7e11a348222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  otherBoundary: {fileID: 2085944996}
+  offset: {x: 0, y: 0, z: 0}
+  isVertical: 0
 --- !u!61 &835169015
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -490,7 +496,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f578247f374ebb045a4efdedc0324cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2126808703}
   speed: 10
   rateOfFire: 2
   bullet: {fileID: 549320140095666342, guid: 582a299cb64424f429ab0b090c518c2b, type: 3}
@@ -520,10 +525,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e60ad2efe0f54a59b093ea8e7c0d089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerShip: {fileID: 2126808703}
   EnemyShips:
   - {fileID: 1645986157}
   Score: 0
+  ScoreNumber: {fileID: 0}
 --- !u!1 &1402895567
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,6 +704,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d7c015f528566d4496be7e11a348222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  otherBoundary: {fileID: 157912095}
+  offset: {x: 0, y: 0, z: 0}
+  isVertical: 0
 --- !u!61 &1735107016
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -803,6 +811,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d7c015f528566d4496be7e11a348222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  otherBoundary: {fileID: 835169013}
+  offset: {x: 0, y: 0, z: 0}
+  isVertical: 0
 --- !u!61 &2085944998
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -829,8 +840,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 20.066628}
   m_EdgeRadius: 0
---- !u!1 &2126808703 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 725246089138930479, guid: c29ad676ca4814c58a9bb6a5935ca38b, type: 3}
-  m_PrefabInstance: {fileID: 598079468}
-  m_PrefabAsset: {fileID: 0}
