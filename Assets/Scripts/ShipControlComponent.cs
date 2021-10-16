@@ -31,7 +31,7 @@ public class ShipControlComponent : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().color = tint;
 
         if (GameManager.PlayerShip != this.gameObject) {
-            _enemyBehaviour.doAction();
+            // _enemyBehaviour.doAction(); 
         }
     }
 
