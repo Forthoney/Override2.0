@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
 		PlayerShip = GameObject.FindWithTag("Player");
-		Debug.Log(PlayerShip);
     }
 
     // Start is called before the first frame update

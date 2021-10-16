@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class BulletWeapon : ShipWeapon
 {
-    public BulletWeapon(string PrefabName, Vector2 PosOffsetAmt)
+	GameObject _firingSource;
+
+    public BulletWeapon(string PrefabName, Vector2 PosOffsetAmt, GameObject FiringSource)
     {
         this.damage = 5;
         this.FireRate = 3;
         this.BulletPrefab = PrefabName;
         this.SpritePosOffset = PosOffsetAmt;
+		this._firingSource = FiringSource;
     }
 
     public override void Fire(){
         // TODO: Load bulelt prefab from resource
-		GameObject bullet = Object.Instantiate<GameObject>(Resources.Load<GameObject>(this.bulletPrefab), 
-			Vector2.zero, Quaternion.identity);
         // TODO: instantiate bullet and set its owner
+		GameObject bullet = Object.Instantiate<GameObject>(Resources.Load<GameObject>(this.bulletPrefab), 
+			_firingSource.transform.position, _firingSource.transform.rotation);
     }
 
 
