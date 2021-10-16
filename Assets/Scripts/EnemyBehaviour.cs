@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBehaviour : MonoBehaviour
+public abstract class EnemyBehaviour
 {
+    public ShipControlComponent enemyShip;
     // Start is called before the first frame update
-    void Start()
-    {
-        
+
+    public EnemyBehaviour(ShipControlComponent enemyShip){
+      this.enemyShip = enemyShip;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public abstract void doAction();
 }

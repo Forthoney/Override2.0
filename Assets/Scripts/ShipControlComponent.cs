@@ -7,8 +7,7 @@ public class ShipControlComponent : MonoBehaviour
 
     private ShipBody _shipBody;
     private ShipWeapon _shipWeapon;
-
-    // private EnemyBehaviour _enemyBehaviour;
+    private EnemyBehaviour _enemyBehaviour;
 
     public float maxHealth;
     private float currentHealth;
@@ -30,9 +29,9 @@ public class ShipControlComponent : MonoBehaviour
 
 
         gameObject.GetComponent<SpriteRenderer>().color = tint;
-        
-        if (GameManager.PlayerShip != this.gameObject) {    
-            //_enemyBehaviour.doAction();
+
+        if (GameManager.PlayerShip != this.gameObject) {
+            _enemyBehaviour.doAction();
         }
     }
 
@@ -41,7 +40,7 @@ public class ShipControlComponent : MonoBehaviour
     }
 
     public void hijackShip(GameObject shipToHijack){
-        
+
     }
 
     public void setWeapon(ShipWeapon newWeapon){
@@ -58,6 +57,14 @@ public class ShipControlComponent : MonoBehaviour
 
     public ShipBody getBody(){
         return _shipBody;
+    }
+
+    public EnemyBehaviour getEnemyBehaviour() {
+      return _enemyBehaviour;
+    }
+
+    public void setEnemyBehaviour(EnemyBehaviour newBehaviour) {
+      _enemyBehaviour = newBehaviour;
     }
 
 }
