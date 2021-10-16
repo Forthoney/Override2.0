@@ -28,7 +28,6 @@ public class InputController : MonoBehaviour {
 
 	public void OnMoveInput(InputAction.CallbackContext context) {
 		Movement = context.ReadValue<Vector2>();
-		Debug.Log(Movement);
 	}
 
 	public void OnMouseInput(InputAction.CallbackContext context)

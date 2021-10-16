@@ -31,7 +31,7 @@ public class BulletBehaviour : MonoBehaviour
                 this.Die();
             }
         } else {
-            if(other.gameObject.CompareTag("Enemy")){
+            if(other.gameObject != GameManager.PlayerShip){
                 other.gameObject.GetComponent<ShipControlComponent>().takeDamage(damage);
                 this.Die();
             }
