@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class LaserWeapon : ShipWeapon
 {
-    public BulletWeapon(
-        string PrefabName, 
-        Vector2 PosOffsetAmt)
+    GameObject _firingSource;
+
+    public LaserWeapon(string PrefabName, Vector2 PosOffsetAmt, GameObject FiringSource)
     {
-        Damage = 10;
-        Firerate = 2;
-        BulletPrefab = PrefabName;
-        SpritePosOffset = PosOffsetAmt;
+        this.damage = 10;
+        this.FireRate = 2;
+        this.BulletPrefab = PrefabName;
+        this.SpritePosOffset = PosOffsetAmt;
+		this._firingSource = FiringSource;
     }
+
+    public override void Fire(){
+        // TODO: Load laser prefab from resource
+        // TODO: instantiate laser and set its owner
+		GameObject laser = Object.Instantiate<GameObject>(Resources.Load<GameObject>(this.bulletPrefab), 
+			_firingSource.transform.position, _firingSource.transform.rotation);
+    }
+
 }
