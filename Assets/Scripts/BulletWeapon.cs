@@ -14,6 +14,8 @@ public class BulletWeapon : ShipWeapon
 
     public override void Fire(){
         // TODO: Load bulelt prefab from resource
+		GameObject bullet = Object.Instantiate<GameObject>(Resources.Load<GameObject>(this.bulletPrefab), 
+			Vector2.zero, Quaternion.identity);
         // TODO: instantiate bullet and set its owner
     }
 

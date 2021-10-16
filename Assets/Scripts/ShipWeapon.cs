@@ -27,8 +27,8 @@ public abstract class ShipWeapon
 
     public string BulletPrefab
     {
-        get;
-        set;
+        get => bulletPrefab;
+        set => bulletPrefab = value;
     }
 
     public Vector2 SpritePosOffset
