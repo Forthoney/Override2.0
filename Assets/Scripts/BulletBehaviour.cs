@@ -6,17 +6,15 @@ public class BulletBehaviour : MonoBehaviour
 {
 
     // Set by the ship weapon after spawn
-    public float speed;
-
-    public float damage;
-
-    public string whatShouldIDamage;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public float speed {
+        get; set;
     }
+
+    public float damage {
+        get; set;
+    }
+
+    public bool isEnemyBullet;
 
     // Update is called once per frame
     void Update()
@@ -27,12 +25,16 @@ public class BulletBehaviour : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Hit " + other.gameObject.name);
-
-        if(other.gameObject.CompareTag(whatShouldIDamage)){
-            Debug.Log("Hit an enemy");
-            other.gameObject.GetComponent<ShipControlComponent>().takeDamage(damage);
-            this.Die();
+        if(isEnemyBullet) {
+            if(other.gameObject == GameManager.PlayerShip){
+                other.gameObject.GetComponent<ShipControlComponent>().takeDamage(damage);
+                this.Die();
+            }
+        } else {
+            if(other.gameObject.CompareTag("Enemy")){
+                other.gameObject.GetComponent<ShipControlComponent>().takeDamage(damage);
+                this.Die();
+            }
         }
     }
 
@@ -45,9 +47,5 @@ public class BulletBehaviour : MonoBehaviour
     public void Die(){
         Destroy(gameObject);
     }
-
-    public void setSpeed(){}
-
-    public void setDamage(){}
 
 }

@@ -11,10 +11,6 @@ public class PlayerControl : MonoBehaviour
     // Represents how many bullets fired per second. This should be read out of the ship weapon in the future
     public float rateOfFire;
 
-    private float timer;
-
-    private bool canFire;
-
     public Transform bullet;
 
 	private Timer _firingCooldown;
@@ -22,8 +18,7 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timer = 0;
-        canFire = true;
+
     }
 
     // Update is called once per frame
