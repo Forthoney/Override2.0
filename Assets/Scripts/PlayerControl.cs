@@ -32,8 +32,8 @@ public class PlayerControl : MonoBehaviour
         float attackSpeed = 1/rateOfFire;
 
         if (InputController.Instance.Firing && !_firingCooldown) {
-            GameManager.PlayerShip.GetComponent<ShipControlComponent>().getWeapon().Fire(false);
-			_firingCooldown = new Timer((float) (1f / GameManager.PlayerShip.GetComponent<ShipControlComponent>().getWeapon().FireRate));
+            GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon.Fire(false);
+			_firingCooldown = new Timer((float) (1f / GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon.FireRate));
 			_firingCooldown.Start();
         } 
 
@@ -62,7 +62,7 @@ public class PlayerControl : MonoBehaviour
     }
 
     void movePlayer(){
-        GameManager.PlayerShip.GetComponent<ShipControlComponent>().getBody().move();
+        GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.move();
     }
 
     void instantiateBullet() {
@@ -81,7 +81,7 @@ public class PlayerControl : MonoBehaviour
 		TimerUnscaled pause = new TimerUnscaled(FreezeDurationOnSwap);
 		pause.Start();
 
-		otherShip.getBody().CurrHealth = otherShip.getBody().MaxHealth;
+		otherShip.ShipBody.CurrHealth = otherShip.ShipBody.MaxHealth;
 
 		Destroy(GameManager.PlayerShip);
 		GameManager.PlayerShip = otherShip.gameObject;
