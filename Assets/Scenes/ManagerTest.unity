@@ -602,8 +602,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyShips:
   - {fileID: 1645986157}
-  Score: 0
-  ScoreNumber: {fileID: 0}
+  ScoreNumber: {fileID: 1725848430}
 --- !u!1 &1005520207
 GameObject:
   m_ObjectHideFlags: 0

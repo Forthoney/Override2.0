@@ -10,8 +10,12 @@ public class GameManager : MonoBehaviour
     public static GameObject PlayerShip;
     public List<GameObject> EnemyShips;
 
-    public float Score;
     public TextMeshProUGUI ScoreNumber;
+	float _score;
+    public float Score {get => _score; set {
+		_score = value;
+        ScoreNumber.SetText(_score.ToString());
+	}}
 
     void Awake()
     {
