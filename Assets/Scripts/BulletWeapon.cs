@@ -4,27 +4,18 @@ using UnityEngine;
 
 public class BulletWeapon : ShipWeapon
 {
-	GameObject _firingSource;
+    public BulletWeapon(string bPrefab, Vector2 sPosOffset, GameObject fSource) :
+        base(5, 3, 10, fSource, bPrefab, sPosOffset)
+    {}
 
-    public BulletWeapon(string PrefabName, Vector2 PosOffsetAmt, GameObject FiringSource)
+    public override void Fire(bool isEnemyBullet)
     {
-        this.damage = 5;
-        this.FireRate = 3;
-        this.BulletPrefab = PrefabName;
-        this.SpritePosOffset = PosOffsetAmt;
-		this._firingSource = FiringSource;
-    }
-
-    public override void Fire(bool isEnemyBullet){
-        // TODO: Load bulelt prefab from resource
-		GameObject bullet = Object.Instantiate<GameObject>(Resources.Load<GameObject>(this.bulletPrefab), 
+        // Load and instantiate bullet prefab from resource
+		GameObject bullet = Object.Instantiate<GameObject>(Resources.Load<GameObject>(this._bulletPrefab), 
 			_firingSource.transform.position, _firingSource.transform.rotation);
-        // TODO: instantiate bullet and set its owner
+        // Instantiate bullet fields
 		bullet.GetComponent<BulletBehaviour>().isEnemyBullet = isEnemyBullet;
-		bullet.GetComponent<BulletBehaviour>().damage = damage;
-		bullet.GetComponent<BulletBehaviour>().speed = 10; 
-		// TODO: Change speed
+		bullet.GetComponent<BulletBehaviour>().damage = _damage;
+		bullet.GetComponent<BulletBehaviour>().speed = _bulletSpeed;
     }
-
-
 }
