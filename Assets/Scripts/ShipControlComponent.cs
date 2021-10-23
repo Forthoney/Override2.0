@@ -43,12 +43,26 @@ public class ShipControlComponent : MonoBehaviour
 
     }
 
-    public void setWeapon(ShipWeapon newWeapon){
-        _shipWeapon = newWeapon;
+    public void setWeapon(ShipWeaponType weaponType){
+        switch(weaponType) {
+            case ShipWeaponType.BulletWeapon:
+                _shipWeapon = new BulletWeapon("Prefabs/Bullet", new Vector2(0, 0), gameObject);
+                break;
+            default:
+                _shipWeapon = new LaserWeapon("Prefabs/Bullet", new Vector2(0, 0), gameObject);
+                break;
+        }
     }
 
-    public void setBody(ShipBody newBody){
-        _shipBody = newBody;
+    public void setBody(ShipBodyType bodyType){
+        switch(bodyType) {
+            case ShipBodyType.FastSquish:
+                _shipBody = new FastSquish();
+                break;
+            default:
+                _shipBody = new SlowChunk();
+                break;
+        }
     }
 
     public ShipWeapon getWeapon(){

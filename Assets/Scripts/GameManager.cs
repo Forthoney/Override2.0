@@ -40,7 +40,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        Debug.Log(timer);
         if (timer > EnemyRate) {
             generateEnemy();
             timer = 0;
@@ -49,29 +48,44 @@ public class GameManager : MonoBehaviour
 
     public void generateEnemy()
     {
-        Instantiate(BaseShip, new Vector3(Random.value, Random.value, -5), Quaternion.Euler(new Vector3(0, 0, 0)));
-        int bodyType = Mathf.FloorToInt(Random.Range(0, 2));
-        int weaponType = Mathf.FloorToInt(Random.Range(0, 2));
-
-        switch(bodyType) {
-            case 0:
-                BaseShip.GetComponent<ShipControlComponent>().setBody(new FastSquish());
-                break;
-            default:
-                BaseShip.GetComponent<ShipControlComponent>().setBody(new SlowChunk());
-                break;
-        }
-
-        switch(weaponType) {
-            case 0:
-                BaseShip.GetComponent<ShipControlComponent>().setWeapon(new BulletWeapon("Enemy Bullet", new Vector2(0, 0), BaseShip));
-                break;
-            default:
-                BaseShip.GetComponent<ShipControlComponent>().setWeapon(new LaserWeapon("Bullet", new Vector2(0, 0), BaseShip));
-                break;
-        }
-
+        Instantiate(BaseShip, generateEnemyCoords(), Quaternion.Euler(new Vector3(0, 0, 0)));
+        // better way to randomly choose type from enum without casting int??
+        ShipBodyType bodyType = (ShipBodyType) Mathf.Round(Random.Range(0, 1));
+        ShipWeaponType weaponType = (ShipWeaponType) Mathf.Round(Random.Range(0, 1));
+        BaseShip.GetComponent<ShipControlComponent>().setBody(bodyType);
+        BaseShip.GetComponent<ShipControlComponent>().setWeapon(weaponType);
         EnemyShips.Add(BaseShip);
+    }
+
+    private Vector3 generateEnemyCoords() {
+        CameraWallNum wall = (CameraWallNum) Mathf.FloorToInt(Random.Range(0, 4));
+
+        float borderOffset = 3;
+
+        float height = Camera.main.GetComponent<Camera>().orthographicSize;
+        float width = height * Screen.width / Screen.height;
+
+        float x = Random.Range(0, width);
+        float y = Random.Range(0, height);
+        switch (wall) {
+            case CameraWallNum.North:
+                Debug.Log("north");
+                y = height + borderOffset;
+                break;
+            case CameraWallNum.South:
+            Debug.Log("south");
+                y = -height - borderOffset;
+                break;
+            case CameraWallNum.Weest:
+            Debug.Log("weest");
+                x = -width - borderOffset;
+                break;
+            case CameraWallNum.East:
+            Debug.Log("east");
+                x = width + borderOffset;
+                break;
+        }
+        return new Vector3(x, y, -5);
     }
 
     public void ShipDestroy(GameObject destroyedShip)
