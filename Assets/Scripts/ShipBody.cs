@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// A class which represents the body of a ship
 public abstract class ShipBody
 {
-    private float _health;
+    // Backing fields
+    private float _maxHealth;
+    private float _currHealth;
     private float _speed;
     private float _colliderRadius;
 	private float _accelerationLambda = 8f;
@@ -19,51 +22,24 @@ public abstract class ShipBody
 			= Vector2.Lerp(vel,InputController.Instance.Movement*_speed,1-Mathf.Exp(-AccelerationLambda*Time.deltaTime));
     }
     
-    // _health functions
-    public float getHealth()
-    {
-        return _health;
+    // Constructor
+    protected ShipBody(float h, float s, float cr, float accelerationLambda) {
+        _maxHealth = h;
+        _currHealth = h;
+        _speed = s;
+        _colliderRadius = cr;
+		_accelerationLambda = accelerationLambda;
     }
 
-    public void setHealth(float newHealth)
-    {
-        _health = newHealth;
+    // Accessors
+    public float MaxHealth { 
+        get { return _maxHealth; }
     }
-
-    public void incHealth(float upHealth)
-    {
-        _health += upHealth;
+    public float CurrHealth { 
+        get { return _currHealth; }
+        set { _currHealth = value; }
     }
-
-    // _speed functions
-    public float getSpeed()
-    {
-        return _speed;
-    }
-
-    public void setSpeed(float newSpeed)
-    {
-        _speed = newSpeed;
-    }
-
-    public void incSpeed(float upSpeed)
-    {
-        _speed += upSpeed;
-    }
-
-    // _health functions
-    public float getRadius()
-    {
-        return _colliderRadius;
-    }
-
-    public void setRadius(float newRadius)
-    {
-        _colliderRadius = newRadius;
-    }
-
-    public void incRadius(float upRadius)
-    {
-        _colliderRadius += upRadius;
+    public float Speed { 
+        get { return _speed; }
     }
 }

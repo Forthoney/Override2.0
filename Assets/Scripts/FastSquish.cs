@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class FastSquish : ShipBody
 {
-    public FastSquish()
-    {
-        setHealth(10);
-        setSpeed(8);
-        setRadius(5);
-
-		AccelerationLambda = 16f;
-    }
+    // Constructor
+    // Calls ShipBody constructor
+    public FastSquish() :
+        base(10, 8, 5, 32)
+    {}
 }
