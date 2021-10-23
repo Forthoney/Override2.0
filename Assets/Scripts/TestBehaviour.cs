@@ -9,12 +9,9 @@ public class TestBehaviour : MonoBehaviour
     {
         ShipControlComponent enemyShipControl = gameObject.GetComponent<ShipControlComponent>();
         BasicBehaviour enemyBehaviour = new BasicBehaviour(enemyShipControl);
-        enemyShipControl.setEnemyBehaviour(enemyBehaviour);
+        enemyShipControl.EnemyBehaviour = enemyBehaviour;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-
-    }
+    void Update() {}
 }

@@ -39,6 +39,13 @@ public class BasicBehaviour : EnemyBehaviour
   public override void doAction()
   {
 
+    // FOLLOWS PLAYER BEHAVIOR
+    // Vector3 playerShip = GameManager.PlayerShip.transform.position;
+    // Vector3 enemyToOrigin = playerShip - enemyShip.gameObject.transform.position;
+    // float angle = Mathf.Atan2(enemyToOrigin.y, enemyToOrigin.x) * Mathf.Rad2Deg;
+    // enemyShip.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+    // enemyShip.gameObject.transform.position += 0.03f * Vector3.Normalize(enemyToOrigin);
+
     Vector2 playerPos = enemyShip.gameObject.transform.position;
 
     float topDist, botDist, leftDist, rightDist;
@@ -85,6 +92,18 @@ public class BasicBehaviour : EnemyBehaviour
       else if (min == topDist)
       {
         moveRight();
+<<<<<<< HEAD
+=======
+      } 
+
+      rotateTowardsPlayer();
+
+      if (timer >= 1/attackSpeed){
+        enemyShip.ShipWeapon.Fire(true);
+        timer = 0;
+      } else {
+        timer += Time.deltaTime;
+>>>>>>> 97f908efe99298d899d6165fabdc89d79de2de03
       }
     }
 

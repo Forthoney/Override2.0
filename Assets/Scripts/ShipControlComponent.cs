@@ -4,84 +4,86 @@ using UnityEngine;
 
 public class ShipControlComponent : MonoBehaviour
 {
-
+    // Backing fields
     private ShipBody _shipBody;
     private ShipWeapon _shipWeapon;
     private EnemyBehaviour _enemyBehaviour;
 
-    public float maxHealth;
-    private float currentHealth;
-	public float CurrentHealth {
-		get => currentHealth;
-	}
-
     // Start is called before the first frame update
-    void Start()
-    {
-        currentHealth = maxHealth;
-    }
+    void Start() {}
 
     // Update is called once per frame
     void Update()
     {
-        if (currentHealth < 0) {
+        // Check if ship body has zero health
+        if (_shipBody.CurrHealth < 0) {
             GameManager.Instance.ShipDestroy(gameObject);
         }
+        
+        // TEMPORARY: change color of ship based on fraction of health
+        float hFrac = _shipBody.CurrHealth / _shipBody.MaxHealth;
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, hFrac, hFrac);
 
-        Color tint = new Color(1, currentHealth/maxHealth, currentHealth/maxHealth);
-
-
-        gameObject.GetComponent<SpriteRenderer>().color = tint;
-
+        // If this is an enemy ship, ask the behaviour to do things
         if (GameManager.PlayerShip != this.gameObject) {
-            _enemyBehaviour?.doAction();
+            _enemyBehaviour.doAction();
         }
     }
 
-    public void takeDamage(float damage){
-        currentHealth -= damage;
+    public void takeDamage(float damage)
+    {
+        _shipBody.CurrHealth -= damage;
     }
 
-    public void hijackShip(GameObject shipToHijack){
-
+    // Accessors
+    public ShipBody ShipBody {
+        get { return _shipBody; }
+        set { _shipBody = value; }
+    }
+    public ShipWeapon ShipWeapon {
+        get { return _shipWeapon; }
+        set { _shipWeapon = value; }
+    }
+    public EnemyBehaviour EnemyBehaviour {
+        get { return _enemyBehaviour; }
+        set { _enemyBehaviour = value; }
     }
 
-    public void setWeapon(ShipWeaponType weaponType){
-        switch(weaponType) {
-            case ShipWeaponType.BulletWeapon:
-                _shipWeapon = new BulletWeapon("Prefabs/Bullet", new Vector2(0, 0), gameObject);
-                break;
-            default:
-                _shipWeapon = new LaserWeapon("Prefabs/Bullet", new Vector2(0, 0), gameObject);
-                break;
-        }
-    }
-
-    public void setBody(ShipBodyType bodyType){
+    // Create a new ShipBody or ShipWeapon
+    public void setNewBodyFromType(ShipBodyType bodyType)
+    {
         switch(bodyType) {
-            case ShipBodyType.FastSquish:
+            case ShipBodyType.FastSquish: {
                 _shipBody = new FastSquish();
                 break;
-            default:
+            }
+            case ShipBodyType.SlowChunk: {
                 _shipBody = new SlowChunk();
                 break;
+            }
+            default: {
+                Debug.LogWarning("Unknown ShipBodyType passed to ShipControlComponent::setBody!");
+                _shipBody = new SlowChunk();
+                break;
+            }
         }
     }
-
-    public ShipWeapon getWeapon(){
-        return _shipWeapon;
+    public void setNewWeaponFromType(ShipWeaponType weaponType)
+    {
+        switch(weaponType) {
+            case ShipWeaponType.BulletWeapon: {
+                _shipWeapon = new BulletWeapon("Prefabs/Bullet", new Vector2(0, 0), gameObject);
+                break;
+            }
+            case ShipWeaponType.LaserWeapon: {
+                _shipWeapon = new LaserWeapon("Prefabs/Bullet", new Vector2(0, 0), gameObject);
+                break;
+            }
+            default: {
+                Debug.LogWarning("Unknown ShipWeaponType passed to ShipControlComponent::setWeapon!");
+                _shipWeapon = new LaserWeapon("Prefabs/Bullet", new Vector2(0, 0), gameObject);
+                break;
+            }
+        }
     }
-
-    public ShipBody getBody(){
-        return _shipBody;
-    }
-
-    public EnemyBehaviour getEnemyBehaviour() {
-      return _enemyBehaviour;
-    }
-
-    public void setEnemyBehaviour(EnemyBehaviour newBehaviour) {
-      _enemyBehaviour = newBehaviour;
-    }
-
 }
