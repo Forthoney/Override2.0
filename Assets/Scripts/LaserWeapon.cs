@@ -8,6 +8,9 @@ public class LaserWeapon : ShipWeapon
   public LaserWeapon(string bPrefab, Vector2 sPosOffset, GameObject fSource, string weaponSprite) :
       base(float.NaN, float.NaN, float.NaN, fSource, bPrefab, sPosOffset, weaponSprite)
   { }
+  public LaserWeapon(string bPrefab, Vector2 sPosOffset, GameObject fSource) :
+      base(10, 2, 7, fSource, bPrefab, sPosOffset, "")
+  { }
 
   public override void Fire(bool isEnemyBullet)
   {

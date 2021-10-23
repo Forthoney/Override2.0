@@ -21,12 +21,7 @@ public class GameManager : MonoBehaviour
       ScoreNumber.SetText(_score.ToString());
     }
   }
-
-  // This pool represents the ship part tiers. 
-  // parts in tier 0 are the worst, while parts with a higher tier are better
-  ShipBody[,] bodyPool = new ShipBody[,] { { } };
-  ShipWeapon[,] weaponPool = new ShipWeapon[,] { { } };
-
+  public GameObject[] PauseUIObjects;
 
   public float EnemyRate;
   private float timer;
@@ -37,7 +32,17 @@ public class GameManager : MonoBehaviour
   {
     Instance = this;
     PlayerShip = GameObject.FindWithTag("Player");
+    foreach (GameObject obj in PauseUIObjects)
+    {
+      obj.SetActive(false);
+    }
   }
+
+  // This pool represents the ship part tiers. 
+  // parts in tier 0 are the worst, while parts with a higher tier are better
+  ShipBody[,] bodyPool = new ShipBody[,] { { } };
+  ShipWeapon[,] weaponPool = new ShipWeapon[,] { { } };
+
 
   // Start is called before the first frame update
   void Start()
@@ -51,6 +56,11 @@ public class GameManager : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
+    if (InputController.Instance.Pausing)
+    {
+      StartCoroutine(_pause());
+    }
+
     timer += Time.deltaTime;
     if (timer > EnemyRate)
     {
@@ -58,8 +68,6 @@ public class GameManager : MonoBehaviour
       timer = 0;
     }
   }
-
-
   public void ShipDestroy(GameObject destroyedShip)
   {
     if (GameObject.ReferenceEquals(destroyedShip, PlayerShip))
@@ -68,9 +76,16 @@ public class GameManager : MonoBehaviour
     }
     else
     {
-      EnemyShips.Remove(destroyedShip);
-      AddScore(100);
-      Destroy(destroyedShip);
+      if (GameObject.ReferenceEquals(destroyedShip, PlayerShip))
+      {
+
+      }
+      else
+      {
+        EnemyShips.Remove(destroyedShip);
+        AddScore(100);
+        Destroy(destroyedShip);
+      }
     }
   }
 
@@ -120,5 +135,23 @@ public class GameManager : MonoBehaviour
         break;
     }
     return new Vector3(x, y, -5);
+  }
+
+  IEnumerator _pause()
+  {
+    Time.timeScale = 0;
+    foreach (GameObject obj in PauseUIObjects)
+    {
+      obj.SetActive(true);
+    }
+
+    while (InputController.Instance.Pausing)
+      yield return null;
+
+    foreach (GameObject obj in PauseUIObjects)
+    {
+      obj.SetActive(false);
+    }
+    Time.timeScale = 1;
   }
 }
