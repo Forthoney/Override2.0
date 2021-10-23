@@ -67,7 +67,8 @@ public class PlayerControl : MonoBehaviour
     Vector3 mousePos = InputController.Instance.MouseWorldPos;
     Vector3 playerToMouse = mousePos - GameManager.PlayerShip.transform.position;
     float angle = Mathf.Atan2(playerToMouse.y, playerToMouse.x) * Mathf.Rad2Deg;
-    GameManager.PlayerShip.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+    if (Time.deltaTime != 0)
+        GameManager.PlayerShip.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
   }
 
   void movePlayer()

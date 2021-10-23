@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 		_score = value;
         ScoreNumber.SetText(_score.ToString());
 	}}
+    public GameObject[] PauseUIObjects;
 
     public float EnemyRate;
     private float timer;
@@ -27,6 +28,9 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
 		PlayerShip = GameObject.FindWithTag("Player");
+        foreach (GameObject obj in PauseUIObjects) {
+            obj.SetActive(false);
+        }
     }
 
     // Start is called before the first frame update
@@ -41,6 +45,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (InputController.Instance.Pausing) {
+            StartCoroutine(_pause());
+        }
+
         timer += Time.deltaTime;
         if (timer > EnemyRate) {
             generateEnemy();
@@ -92,7 +100,7 @@ public class GameManager : MonoBehaviour
     {
         if (GameObject.ReferenceEquals(destroyedShip, PlayerShip))
         {
-
+            
         }
         else
         {
@@ -106,5 +114,23 @@ public class GameManager : MonoBehaviour
     {
         Score += add;
         // ScoreNumber.SetText(Score.ToString());
+    }
+
+    IEnumerator _pause()
+    {
+        Time.timeScale = 0;
+        foreach (GameObject obj in PauseUIObjects)
+        {
+            obj.SetActive(true);
+        }
+
+        while (InputController.Instance.Pausing)
+            yield return null;
+
+        foreach (GameObject obj in PauseUIObjects)
+        {
+            obj.SetActive(false);
+        }
+        Time.timeScale = 1;
     }
 }

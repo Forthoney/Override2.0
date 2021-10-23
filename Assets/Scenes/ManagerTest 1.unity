@@ -499,6 +499,7 @@ MonoBehaviour:
   speed: 10
   rateOfFire: 2
   bullet: {fileID: 549320140095666342, guid: 582a299cb64424f429ab0b090c518c2b, type: 3}
+  FreezeDurationOnSwap: 1
 --- !u!4 &967296038
 Transform:
   m_ObjectHideFlags: 0
@@ -527,9 +528,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyShips:
   - {fileID: 1645986157}
-  Score: 0
   ScoreNumber: {fileID: 0}
-  EnemyRate: 0
+  EnemyRate: 5
   BaseShip: {fileID: 5999682469853266921, guid: 2e9743b014d2e4fabbaaf2d26e5bc128, type: 3}
 --- !u!1 &1402895567
 GameObject:

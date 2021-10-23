@@ -11,10 +11,11 @@ public class InputController : MonoBehaviour
   [Tooltip("How long are the inputs buffered, in seconds.")]
   public float InputBufferTime = .2f;
 
-  [HideInInspector] public Vector2 Movement;
-  [HideInInspector] public Vector2 MouseScreenPos;
-  [HideInInspector] public bool Firing = false;
-  [HideInInspector] public bool Swapping = false;
+	[HideInInspector] public Vector2 Movement;
+	[HideInInspector] public Vector2 MouseScreenPos;
+	[HideInInspector] public bool Firing = false;
+	[HideInInspector] public bool Swapping = false;
+	[HideInInspector] public bool Pausing = false;
 
   public Vector2 MouseWorldPos
   {
@@ -40,19 +41,23 @@ public class InputController : MonoBehaviour
     MouseScreenPos = context.ReadValue<Vector2>();
   }
 
-  public void OnFireInput(InputAction.CallbackContext context)
-  {
-    if (context.started)
-      Firing = true;
-    else if (context.canceled)
-      Firing = false;
-  }
+	public void OnFireInput(InputAction.CallbackContext context) {
+		if (context.started)
+			Firing = true;
+		else if (context.canceled)
+			Firing = false;
+    }
 
-  public void OnSwapInput(InputAction.CallbackContext context)
-  {
-    if (context.started)
-      Swapping = true;
-    else if (context.canceled)
-      Swapping = false;
-  }
+	public void OnSwapInput(InputAction.CallbackContext context) {
+		if (context.started)
+			Swapping = true;
+		else if (context.canceled)
+			Swapping = false;
+	}
+
+	public void OnPauseInput(InputAction.CallbackContext context)
+    {
+		if (context.started)
+			Pausing = !Pausing;
+    }
 }

@@ -22,7 +22,7 @@ public class SceneControl : MonoBehaviour
     /// </summary>
     public void StartGame()
     {
-        //SceneManager.LoadScene("MainGame");
+        SceneManager.LoadScene("MainGameScene");
     }
 
     /// <summary>
@@ -48,7 +48,7 @@ public class SceneControl : MonoBehaviour
     public void RestartGame()
     {
         //Make sure to reset any objects in DontDestroyOnLoad
-        //SceneManager.LoadScene("MainGame");
+        SceneManager.LoadScene("MainGameScene");
     }
 
     /// <summary>
