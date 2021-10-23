@@ -2,61 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// A class which represents the body of a ship
 public abstract class ShipBody
 {
-    private float _health;
+    // Backing fields
+    private float _maxHealth;
+    private float _currHealth;
     private float _speed;
     private float _colliderRadius;
+    // Note: Might potentially hold the sprite as well
+    
+    // Constructor
+    protected ShipBody(float h, float s, float cr) {
+        _maxHealth = h;
+        _currHealth = h;
+        _speed = s;
+        _colliderRadius = cr;
+    }
 
-    public void move(){
-        GameManager.PlayerShip.GetComponent<Rigidbody2D>().velocity = InputController.Instance.Movement * _speed;
+    // Accessors
+    public float MaxHealth { 
+        get { return _maxHealth; }
+    }
+    public float CurrHealth { 
+        get { return _currHealth; }
+        set { _currHealth = value; }
+    }
+    public float Speed { 
+        get { return _speed; }
     }
     
-    // _health functions
-    public float getHealth()
+    // Called by the player's ship controller; uses player input to move ship
+    public void move()
     {
-        return _health;
-    }
-
-    public void setHealth(float newHealth)
-    {
-        _health = newHealth;
-    }
-
-    public void incHealth(float upHealth)
-    {
-        _health += upHealth;
-    }
-
-    // _speed functions
-    public float getSpeed()
-    {
-        return _speed;
-    }
-
-    public void setSpeed(float newSpeed)
-    {
-        _speed = newSpeed;
-    }
-
-    public void incSpeed(float upSpeed)
-    {
-        _speed += upSpeed;
-    }
-
-    // _health functions
-    public float getRadius()
-    {
-        return _colliderRadius;
-    }
-
-    public void setRadius(float newRadius)
-    {
-        _colliderRadius = newRadius;
-    }
-
-    public void incRadius(float upRadius)
-    {
-        _colliderRadius += upRadius;
+        GameManager.PlayerShip.GetComponent<Rigidbody2D>().velocity =
+            InputController.Instance.Movement * _speed;
     }
 }
