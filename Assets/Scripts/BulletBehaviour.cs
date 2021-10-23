@@ -5,47 +5,55 @@ using UnityEngine;
 public class BulletBehaviour : MonoBehaviour
 {
 
-    // Set by the ship weapon after spawn
-    public float speed {
-        get; set;
-    }
+  // Set by the ship weapon after spawn
+  public float speed
+  {
+    get; set;
+  }
 
-    public float damage {
-        get; set;
-    }
+  public float damage
+  {
+    get; set;
+  }
 
-    public bool isEnemyBullet;
+  public bool isEnemyBullet;
 
-    // Update is called once per frame
-    void Update()
+  // Update is called once per frame
+  void Update()
+  {
+    transform.position += transform.rotation * Vector2.up * speed * Time.deltaTime;
+  }
+
+  void OnTriggerEnter2D(Collider2D other)
+  {
+    if (isEnemyBullet)
     {
-
-        transform.position += transform.rotation * Vector2.up * speed * Time.deltaTime;
+      if (other.gameObject == GameManager.PlayerShip)
+      {
+        other.gameObject.GetComponent<ShipControlComponent>().takeDamage(damage);
+        this.Die();
+      }
     }
-
-    void OnTriggerEnter2D(Collider2D other)
+    else
     {
-        if(isEnemyBullet) {
-            if(other.gameObject == GameManager.PlayerShip){
-                other.gameObject.GetComponent<ShipControlComponent>().takeDamage(damage);
-                this.Die();
-            }
-        } else {
-            if(other.gameObject != GameManager.PlayerShip){
-                other.gameObject.GetComponent<ShipControlComponent>().takeDamage(damage);
-                this.Die();
-            }
-        }
+      if (other.gameObject != GameManager.PlayerShip)
+      {
+        other.gameObject.GetComponent<ShipControlComponent>().takeDamage(damage);
+        this.Die();
+      }
     }
+  }
 
 
-    // TODO: add animation
-    public void playDieAnimation(){
-        
-    }
+  // TODO: add animation
+  public void playDieAnimation()
+  {
 
-    public void Die(){
-        Destroy(gameObject);
-    }
+  }
+
+  public void Die()
+  {
+    Destroy(gameObject);
+  }
 
 }

@@ -5,91 +5,100 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
 
-    // This value should be read out of the ship body in the future
-    public float speed;
+  // This value should be read out of the ship body in the future
+  public float speed;
 
-    // Represents how many bullets fired per second. This should be read out of the ship weapon in the future
-    public float rateOfFire;
+  // Represents how many bullets fired per second. This should be read out of the ship weapon in the future
+  public float rateOfFire;
 
-    public Transform bullet;
+  public Transform bullet;
 
-	private Timer _firingCooldown;
+  private Timer _firingCooldown;
 
-	public float FreezeDurationOnSwap = 1f;
-    public float HealthDecrement = 2f;
+  public float FreezeDurationOnSwap = 1f;
+  public float HealthDecrement = 2f;
 
-    // Start is called before the first frame update
-    void Start()
+  // Start is called before the first frame update
+  void Start()
+  {
+
+  }
+
+  // Update is called once per frame
+  void Update()
+  {
+    rotateTowardsMouse();
+    movePlayer();
+
+    float attackSpeed = 1 / rateOfFire;
+
+    GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth -= HealthDecrement * Time.deltaTime;
+
+    if (InputController.Instance.Firing && !_firingCooldown)
     {
-
+      GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon.Fire(false);
+      _firingCooldown = new Timer((float)(1f / GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon.FireRate));
+      _firingCooldown.Start();
     }
 
-    // Update is called once per frame
-    void Update()
+    if (InputController.Instance.Swapping)
     {
-        rotateTowardsMouse();
-        movePlayer();
+      ShipControlComponent otherShip = null;
+      foreach (var ship in GameObject.FindObjectsOfType<ShipControlComponent>())
+      {
+        if (ship.gameObject != GameManager.PlayerShip)
+        {
+          if (otherShip == null ||
+            (InputController.Instance.MouseWorldPos - (Vector2)ship.transform.position).magnitude <
+            (InputController.Instance.MouseWorldPos - (Vector2)otherShip.transform.position).magnitude) otherShip = ship;
+        }
+      }
+      if (otherShip != null)
+      {
+        StartCoroutine(_hijack(otherShip));
+      }
 
-        float attackSpeed = 1/rateOfFire;
-
-        GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth -= HealthDecrement*Time.deltaTime;
-
-        if (InputController.Instance.Firing && !_firingCooldown) {
-            GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon.Fire(false);
-			_firingCooldown = new Timer((float) (1f / GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon.FireRate));
-			_firingCooldown.Start();
-        } 
-
-		if (InputController.Instance.Swapping) {
-			ShipControlComponent otherShip = null;
-			foreach (var ship in GameObject.FindObjectsOfType<ShipControlComponent>()) {
-				if (ship.gameObject != GameManager.PlayerShip) {
-					if (otherShip == null || 
-						(InputController.Instance.MouseWorldPos - (Vector2) ship.transform.position).magnitude < 
-						(InputController.Instance.MouseWorldPos - (Vector2) otherShip.transform.position).magnitude) otherShip = ship;
-				}
-			}
-			if (otherShip != null) {
-				StartCoroutine(_hijack(otherShip));
-			}
-
-			InputController.Instance.Swapping = false;
-		}
+      InputController.Instance.Swapping = false;
     }
+  }
 
-    void rotateTowardsMouse(){
-        Vector3 mousePos = InputController.Instance.MouseWorldPos;
-        Vector3 playerToMouse = mousePos - GameManager.PlayerShip.transform.position;
-        float angle = Mathf.Atan2(playerToMouse.y, playerToMouse.x) * Mathf.Rad2Deg;
-        GameManager.PlayerShip.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
-    }
+  void rotateTowardsMouse()
+  {
+    Vector3 mousePos = InputController.Instance.MouseWorldPos;
+    Vector3 playerToMouse = mousePos - GameManager.PlayerShip.transform.position;
+    float angle = Mathf.Atan2(playerToMouse.y, playerToMouse.x) * Mathf.Rad2Deg;
+    GameManager.PlayerShip.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+  }
 
-    void movePlayer(){
-        GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.move();
-    }
+  void movePlayer()
+  {
+    GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.move();
+  }
 
-    void instantiateBullet() {
-            Vector3 mousePos = InputController.Instance.MouseWorldPos;
+  void instantiateBullet()
+  {
+    Vector3 mousePos = InputController.Instance.MouseWorldPos;
 
-            Vector3 playerToMouse = mousePos - GameManager.PlayerShip.transform.position;
-            float angle = Mathf.Atan2(playerToMouse.y, playerToMouse.x) * Mathf.Rad2Deg;
+    Vector3 playerToMouse = mousePos - GameManager.PlayerShip.transform.position;
+    float angle = Mathf.Atan2(playerToMouse.y, playerToMouse.x) * Mathf.Rad2Deg;
 
-            playerToMouse = playerToMouse.normalized;
+    playerToMouse = playerToMouse.normalized;
 
-            Instantiate(bullet, GameManager.PlayerShip.transform.position + playerToMouse, Quaternion.Euler(new Vector3(0, 0, angle - 90)));
-    }
+    Instantiate(bullet, GameManager.PlayerShip.transform.position + playerToMouse, Quaternion.Euler(new Vector3(0, 0, angle - 90)));
+  }
 
-	IEnumerator _hijack(ShipControlComponent otherShip) {
-		Time.timeScale = 0;
-		TimerUnscaled pause = new TimerUnscaled(FreezeDurationOnSwap);
-		pause.Start();
+  IEnumerator _hijack(ShipControlComponent otherShip)
+  {
+    Time.timeScale = 0;
+    TimerUnscaled pause = new TimerUnscaled(FreezeDurationOnSwap);
+    pause.Start();
 
-		otherShip.ShipBody.CurrHealth = otherShip.ShipBody.MaxHealth;
+    otherShip.ShipBody.CurrHealth = otherShip.ShipBody.MaxHealth;
 
-		Destroy(GameManager.PlayerShip);
-		GameManager.PlayerShip = otherShip.gameObject;
+    Destroy(GameManager.PlayerShip);
+    GameManager.PlayerShip = otherShip.gameObject;
 
-		while (pause) yield return null;
-		Time.timeScale = 1;
-	}
+    while (pause) yield return null;
+    Time.timeScale = 1;
+  }
 }
