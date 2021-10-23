@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
         ShipControlComponent shipComponent = ship.GetComponent<ShipControlComponent>();
         shipComponent.setNewBodyFromType(bodyType);
         shipComponent.setNewWeaponFromType(weaponType);
-        shipComponent.setEnemyBehaviour(new BasicBehaviour(shipComponent));
+        shipComponent.EnemyBehaviour = new BasicBehaviour(shipComponent);
         EnemyShips.Add(ship);
     }
 
