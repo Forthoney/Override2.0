@@ -26,7 +26,7 @@ public class ShipControlComponent : MonoBehaviour
 
         // If this is an enemy ship, ask the behaviour to do things
         if (GameManager.PlayerShip != this.gameObject) {
-            _enemyBehaviour?.doAction();
+            _enemyBehaviour.doAction();
         }
     }
 

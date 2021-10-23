@@ -37,6 +37,12 @@ public class BasicBehaviour : EnemyBehaviour
 
     public override void doAction()
     {
+        // FOLLOWS PLAYER BEHAVIOR
+        // Vector3 playerShip = GameManager.PlayerShip.transform.position;
+        // Vector3 enemyToOrigin = playerShip - enemyShip.gameObject.transform.position;
+        // float angle = Mathf.Atan2(enemyToOrigin.y, enemyToOrigin.x) * Mathf.Rad2Deg;
+        // enemyShip.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+        // enemyShip.gameObject.transform.position += 0.03f * Vector3.Normalize(enemyToOrigin);
 
       Vector2 playerPos = enemyShip.gameObject.transform.position;
 

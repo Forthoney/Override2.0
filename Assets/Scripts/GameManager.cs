@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
         Score = 0;
         timer = 0;
         EnemyRate = 5;
+        EnemyShips = new List<GameObject>();
     }
 
     // Update is called once per frame
@@ -49,13 +50,15 @@ public class GameManager : MonoBehaviour
 
     public void generateEnemy()
     {
-        Instantiate(BaseShip, generateEnemyCoords(), Quaternion.Euler(new Vector3(0, 0, 0)));
+        GameObject ship = Instantiate(BaseShip, generateEnemyCoords(), Quaternion.Euler(new Vector3(0, 0, 0)));
         // better way to randomly choose type from enum without casting int??
         ShipBodyType bodyType = (ShipBodyType) Mathf.Round(Random.Range(0, 1));
         ShipWeaponType weaponType = (ShipWeaponType) Mathf.Round(Random.Range(0, 1));
-        BaseShip.GetComponent<ShipControlComponent>().setNewBodyFromType(bodyType);
-        BaseShip.GetComponent<ShipControlComponent>().setNewWeaponFromType(weaponType);
-        EnemyShips.Add(BaseShip);
+        ShipControlComponent shipComponent = ship.GetComponent<ShipControlComponent>();
+        shipComponent.setNewBodyFromType(bodyType);
+        shipComponent.setNewWeaponFromType(weaponType);
+        shipComponent.setEnemyBehaviour(new BasicBehaviour(shipComponent));
+        EnemyShips.Add(ship);
     }
 
     private Vector3 generateEnemyCoords() {
@@ -70,19 +73,15 @@ public class GameManager : MonoBehaviour
         float y = Random.Range(0, height);
         switch (wall) {
             case CameraWallNum.North:
-                Debug.Log("north");
                 y = height + borderOffset;
                 break;
             case CameraWallNum.South:
-            Debug.Log("south");
                 y = -height - borderOffset;
                 break;
             case CameraWallNum.Weest:
-            Debug.Log("weest");
                 x = -width - borderOffset;
                 break;
             case CameraWallNum.East:
-            Debug.Log("east");
                 x = width + borderOffset;
                 break;
         }
