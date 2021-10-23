@@ -9,5 +9,7 @@ public class FastSquish : ShipBody
         setHealth(10);
         setSpeed(8);
         setRadius(5);
+
+		AccelerationLambda = 16f;
     }
 }

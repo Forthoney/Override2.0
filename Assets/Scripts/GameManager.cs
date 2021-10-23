@@ -44,7 +44,6 @@ public class GameManager : MonoBehaviour
             generateEnemy();
             timer = 0;
         }
-		PlayerShip.GetComponent<ShipControlComponent>().takeDamage(1f * Time.deltaTime);
     }
 
     public void generateEnemy()

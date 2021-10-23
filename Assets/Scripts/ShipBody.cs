@@ -7,9 +7,16 @@ public abstract class ShipBody
     private float _health;
     private float _speed;
     private float _colliderRadius;
+	private float _accelerationLambda = 8f;
+	public float AccelerationLambda { 
+		get=> _accelerationLambda;
+		set => _accelerationLambda = value;
+	}
 
     public void move(){
-        GameManager.PlayerShip.GetComponent<Rigidbody2D>().velocity = InputController.Instance.Movement * _speed;
+		Vector2 vel = GameManager.PlayerShip.GetComponent<Rigidbody2D>().velocity;
+        GameManager.PlayerShip.GetComponent<Rigidbody2D>().velocity 
+			= Vector2.Lerp(vel,InputController.Instance.Movement*_speed,1-Mathf.Exp(-AccelerationLambda*Time.deltaTime));
     }
     
     // _health functions

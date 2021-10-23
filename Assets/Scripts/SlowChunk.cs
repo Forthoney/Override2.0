@@ -9,5 +9,6 @@ public class SlowChunk : ShipBody
         setHealth(100);
         setSpeed(4);
         setRadius(15);
+		AccelerationLambda = 4f;
     }
 }
