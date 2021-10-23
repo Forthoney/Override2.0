@@ -22,7 +22,7 @@ public class BulletWeapon : ShipWeapon
         // TODO: instantiate bullet and set its owner
 		bullet.GetComponent<BulletBehaviour>().isEnemyBullet = isEnemyBullet;
 		bullet.GetComponent<BulletBehaviour>().damage = damage;
-		bullet.GetComponent<BulletBehaviour>().speed = 4; 
+		bullet.GetComponent<BulletBehaviour>().speed = 10; 
 		// TODO: Change speed
     }
 

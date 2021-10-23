@@ -6,49 +6,94 @@ using UnityEngine;
 public class BasicBehaviour : EnemyBehaviour
 {
 
-    private double minX;
-    private double maxX;
-    private double minY;
-    private double maxY;
-    private double mapX = 30.0;
-    private double mapY = 30.0;
+    private float minX;
+    private float maxX;
+    private float minY;
+    private float maxY;
+    private float mapX = 30.0f;
+    private float mapY = 30.0f;
     private Vector3 radius;
     SpriteRenderer rend;
+    float speed = 5;
+    float attackSpeed = 0.5f; 
+    float timer = 0;
 
     public BasicBehaviour(ShipControlComponent enemyShip) : base(enemyShip) {
       this.enemyShip = enemyShip;
 
-      // var vertExtent = Camera.main.GetComponent<Camera>().orthographicSize;
-      // var horzExtent = vertExtent * Screen.width / Screen.height;
-      //
-      //    // Calculations assume map is position at the origin
-      // minX = horzExtent - mapX / 2.0;
-      // maxX = mapX / 2.0 - horzExtent;
-      // minY = vertExtent - mapY / 2.0;
-      // maxY = mapY / 2.0 - vertExtent;
+      var vertExtent = Camera.main.GetComponent<Camera>().orthographicSize;
+      var horzExtent = vertExtent * Screen.width / Screen.height;
+      
+      // Calculations assume map is position at the origin
+      minX = horzExtent;
+      maxX = -horzExtent;
+      minY = vertExtent;
+      maxY = -vertExtent;
       rend = enemyShip.gameObject.GetComponent<SpriteRenderer>();
       // A sphere that fully encloses the bounding box.
       radius = rend.bounds.extents;
-
-      minX = -10;
-      maxX = 10;
-      minY = -5;
-      maxY = 5;
 
     }
 
     public override void doAction()
     {
 
+      Vector2 playerPos = enemyShip.gameObject.transform.position;
+
+      float topDist, botDist, leftDist, rightDist = 0;
 
 
-      if (enemyShip.gameObject.transform.position.x < (maxX - radius.x))
-      {
-        enemyShip.gameObject.transform.position += new Vector3(Time.deltaTime * 10, 0, 0);
+      rightDist = Mathf.Abs(playerPos.x - maxX); 
+      leftDist = Mathf.Abs(playerPos.x - minX);
+      botDist = Mathf.Abs(playerPos.y - maxY);
+      topDist = Mathf.Abs(playerPos.y - minY);
+
+      float min = Mathf.Min(Mathf.Min(rightDist, leftDist), Mathf.Min(topDist, botDist));
+
+      // TODO: more robust movement that doesnt assume the enemies are spawned on the edge 
+      if(min == rightDist){
+        moveDown();
+      } else if(min == leftDist) {
+        moveUp();
+      } else if(min == botDist) {
+        moveLeft();
+      } else if(min == topDist) {
+        moveRight();
+      } 
+
+      rotateTowardsPlayer();
+
+      if (timer >= 1/attackSpeed){
+        enemyShip.getWeapon().Fire(true);
+        timer = 0;
+      } else {
+        timer += Time.deltaTime;
       }
-      // } elif (enemyShip.gameObject.transform.position.y) {
-      //
-      //   enemyShip.gameObject.transform.position += new Vector3(0, Time.deltaTime * 10, 0);
-      // }
+
     }
+
+    private void moveRight(){
+      enemyShip.gameObject.transform.position += new Vector3(1, 0) * Time.deltaTime * speed;
+    }
+
+    private void moveLeft(){
+      enemyShip.gameObject.transform.position += new Vector3(-1, 0) * Time.deltaTime * speed;
+    }
+
+    private void moveUp(){
+      enemyShip.gameObject.transform.position += new Vector3(0, -1) * Time.deltaTime * speed;
+
+    }
+
+    private void moveDown(){
+      enemyShip.gameObject.transform.position += new Vector3(0, 1) * Time.deltaTime * speed;
+    }
+
+    private void rotateTowardsPlayer(){
+      Vector3 thisToPlayer = GameManager.PlayerShip.transform.position - enemyShip.gameObject.transform.position;
+      float angle = Mathf.Atan2(thisToPlayer.y, thisToPlayer.x) * Mathf.Rad2Deg;
+      enemyShip.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+    }
+
+
 }
