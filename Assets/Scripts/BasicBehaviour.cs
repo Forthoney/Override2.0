@@ -92,18 +92,6 @@ public class BasicBehaviour : EnemyBehaviour
       else if (min == topDist)
       {
         moveRight();
-<<<<<<< HEAD
-=======
-      } 
-
-      rotateTowardsPlayer();
-
-      if (timer >= 1/attackSpeed){
-        enemyShip.ShipWeapon.Fire(true);
-        timer = 0;
-      } else {
-        timer += Time.deltaTime;
->>>>>>> 97f908efe99298d899d6165fabdc89d79de2de03
       }
     }
 
@@ -111,7 +99,7 @@ public class BasicBehaviour : EnemyBehaviour
 
     if (timer >= 1 / attackSpeed)
     {
-      enemyShip.getWeapon().Fire(true);
+      enemyShip.ShipWeapon.Fire(true);
       timer = 0;
     }
     else
