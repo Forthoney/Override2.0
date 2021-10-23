@@ -38,6 +38,9 @@ public class ShipControlComponent : MonoBehaviour
         } else {
             _shipBody.CurrHealth -= damage;
         }
+
+		if (GameManager.PlayerShip == this.gameObject || _shipBody.CurrHealth < 0)
+			ShockManager.Instance?.StartShake();
     }
 
     // Accessors
