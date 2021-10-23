@@ -7,6 +7,6 @@ public class FastSquish : ShipBody
     // Constructor
     // Calls ShipBody constructor
     public FastSquish() :
-        base(10, 8, 5, 32)
+        base(3, 8, 5, 32)
     {}
 }

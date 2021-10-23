@@ -16,6 +16,7 @@ public class PlayerControl : MonoBehaviour
 	private Timer _firingCooldown;
 
 	public float FreezeDurationOnSwap = 1f;
+    public float HealthDecrement = 2f;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,8 @@ public class PlayerControl : MonoBehaviour
         movePlayer();
 
         float attackSpeed = 1/rateOfFire;
+
+        GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth -= HealthDecrement*Time.deltaTime;
 
         if (InputController.Instance.Firing && !_firingCooldown) {
             GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon.Fire(false);

@@ -32,7 +32,12 @@ public class ShipControlComponent : MonoBehaviour
 
     public void takeDamage(float damage)
     {
-        _shipBody.CurrHealth -= damage;
+        if (GameManager.PlayerShip == this.gameObject) {
+            Debug.Log("player hit");
+            _shipBody.CurrHealth = Mathf.FloorToInt(_shipBody.CurrHealth) ;
+        } else {
+            _shipBody.CurrHealth -= damage;
+        }
     }
 
     // Accessors
