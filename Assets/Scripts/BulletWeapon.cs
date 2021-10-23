@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BulletWeapon : ShipWeapon
 {
-  public BulletWeapon(string bPrefab, Vector2 sPosOffset, GameObject fSource) :
-      base(5, 3, 10, fSource, bPrefab, sPosOffset)
+  public BulletWeapon(string bPrefab, Vector2 sPosOffset, GameObject fSource, string weaponSprite) :
+      base(5, 3, 10, fSource, bPrefab, sPosOffset, weaponSprite)
   { }
 
   public override void Fire(bool isEnemyBullet)

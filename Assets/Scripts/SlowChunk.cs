@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SlowChunk : ShipBody
 {
-    // Calls ShipBody constructor
-    public SlowChunk() :
-        base(6, 4, 15, 8)
-    {}
+  // Calls ShipBody constructor
+  public SlowChunk() :
+      base(6, 4, 15, 8, "_Sprites/Spaceship_02_ORANGE")
+  { }
 }
