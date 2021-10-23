@@ -12,7 +12,7 @@ public class BasicBehaviour : EnemyBehaviour
   private float maxY;
   private float mapX = 30.0f;
   private float mapY = 30.0f;
-  private Vector3 radius;
+  private float radius;
   SpriteRenderer rend;
   float speed = 5;
   float attackSpeed = 0.5f;
@@ -26,13 +26,13 @@ public class BasicBehaviour : EnemyBehaviour
     var horzExtent = vertExtent * Screen.width / Screen.height;
 
     // Calculations assume map is position at the origin
-    minX = horzExtent;
-    maxX = -horzExtent;
-    minY = vertExtent;
-    maxY = -vertExtent;
+    minX = -horzExtent;
+    maxX = horzExtent;
+    minY = -vertExtent;
+    maxY = vertExtent;
     rend = enemyShip.gameObject.GetComponent<SpriteRenderer>();
     // A sphere that fully encloses the bounding box.
-    radius = rend.bounds.extents;
+    radius = rend.bounds.extents.magnitude;
 
   }
 
@@ -55,21 +55,21 @@ public class BasicBehaviour : EnemyBehaviour
     botDist = Mathf.Abs(playerPos.y - maxY);
     topDist = Mathf.Abs(playerPos.y - minY);
 
-    if (playerPos.x > maxX)
+    if (playerPos.x > maxX - radius)
     {
       moveLeft();
     }
-    else if (playerPos.x < minX)
+    else if (playerPos.x < minX + radius)
     {
       moveRight();
     }
-    else if (playerPos.y < minY)
-    {
-      moveUp();
-    }
-    else if (playerPos.y > maxY)
+    else if (playerPos.y < minY + radius)
     {
       moveDown();
+    }
+    else if (playerPos.y > maxY - radius)
+    {
+      moveUp();
     }
     else
     {
