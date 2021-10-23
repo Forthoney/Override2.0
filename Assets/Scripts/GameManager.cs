@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -52,8 +53,8 @@ public class GameManager : MonoBehaviour
         // better way to randomly choose type from enum without casting int??
         ShipBodyType bodyType = (ShipBodyType) Mathf.Round(Random.Range(0, 1));
         ShipWeaponType weaponType = (ShipWeaponType) Mathf.Round(Random.Range(0, 1));
-        BaseShip.GetComponent<ShipControlComponent>().setBody(bodyType);
-        BaseShip.GetComponent<ShipControlComponent>().setWeapon(weaponType);
+        BaseShip.GetComponent<ShipControlComponent>().setNewBodyFromType(bodyType);
+        BaseShip.GetComponent<ShipControlComponent>().setNewWeaponFromType(weaponType);
         EnemyShips.Add(BaseShip);
     }
 

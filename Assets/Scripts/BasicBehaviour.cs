@@ -64,7 +64,7 @@ public class BasicBehaviour : EnemyBehaviour
       rotateTowardsPlayer();
 
       if (timer >= 1/attackSpeed){
-        enemyShip.getWeapon().Fire(true);
+        enemyShip.ShipWeapon.Fire(true);
         timer = 0;
       } else {
         timer += Time.deltaTime;
