@@ -15,7 +15,7 @@ public class LaserWeapon : ShipWeapon
 		this._firingSource = FiringSource;
     }
 
-    public override void Fire(){
+    public override void Fire(bool isEnemyBullet){
         // TODO: Load laser prefab from resource
         // TODO: instantiate laser and set its owner
 		GameObject laser = Object.Instantiate<GameObject>(Resources.Load<GameObject>(this.bulletPrefab), 

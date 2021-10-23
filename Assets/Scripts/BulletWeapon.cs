@@ -15,11 +15,15 @@ public class BulletWeapon : ShipWeapon
 		this._firingSource = FiringSource;
     }
 
-    public override void Fire(){
+    public override void Fire(bool isEnemyBullet){
         // TODO: Load bulelt prefab from resource
-        // TODO: instantiate bullet and set its owner
 		GameObject bullet = Object.Instantiate<GameObject>(Resources.Load<GameObject>(this.bulletPrefab), 
 			_firingSource.transform.position, _firingSource.transform.rotation);
+        // TODO: instantiate bullet and set its owner
+		bullet.GetComponent<BulletBehaviour>().isEnemyBullet = isEnemyBullet;
+		bullet.GetComponent<BulletBehaviour>().damage = damage;
+		bullet.GetComponent<BulletBehaviour>().speed = 4; 
+		// TODO: Change speed
     }
 
 

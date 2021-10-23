@@ -11,19 +11,16 @@ public class PlayerControl : MonoBehaviour
     // Represents how many bullets fired per second. This should be read out of the ship weapon in the future
     public float rateOfFire;
 
-    private float timer;
-
-    private bool canFire;
-
     public Transform bullet;
 
 	private Timer _firingCooldown;
 
+	public float FreezeDurationOnSwap = 1f;
+
     // Start is called before the first frame update
     void Start()
     {
-        timer = 0;
-        canFire = true;
+
     }
 
     // Update is called once per frame
@@ -35,10 +32,26 @@ public class PlayerControl : MonoBehaviour
         float attackSpeed = 1/rateOfFire;
 
         if (InputController.Instance.Firing && !_firingCooldown) {
-            GameManager.PlayerShip.GetComponent<ShipControlComponent>().getWeapon().Fire();
+            GameManager.PlayerShip.GetComponent<ShipControlComponent>().getWeapon().Fire(false);
 			_firingCooldown = new Timer((float) (1f / GameManager.PlayerShip.GetComponent<ShipControlComponent>().getWeapon().FireRate));
 			_firingCooldown.Start();
         } 
+
+		if (InputController.Instance.Swapping) {
+			ShipControlComponent otherShip = null;
+			foreach (var ship in GameObject.FindObjectsOfType<ShipControlComponent>()) {
+				if (ship.gameObject != GameManager.PlayerShip) {
+					if (otherShip == null || 
+						(InputController.Instance.MouseWorldPos - (Vector2) ship.transform.position).magnitude < 
+						(InputController.Instance.MouseWorldPos - (Vector2) otherShip.transform.position).magnitude) otherShip = ship;
+				}
+			}
+			if (otherShip != null) {
+				StartCoroutine(_hijack(otherShip));
+			}
+
+			InputController.Instance.Swapping = false;
+		}
     }
 
     void rotateTowardsMouse(){
@@ -63,4 +76,17 @@ public class PlayerControl : MonoBehaviour
             Instantiate(bullet, GameManager.PlayerShip.transform.position + playerToMouse, Quaternion.Euler(new Vector3(0, 0, angle - 90)));
     }
 
+	IEnumerator _hijack(ShipControlComponent otherShip) {
+		Time.timeScale = 0;
+		TimerUnscaled pause = new TimerUnscaled(FreezeDurationOnSwap);
+		pause.Start();
+
+		otherShip.getBody().setHealth(otherShip.maxHealth);
+
+		Destroy(GameManager.PlayerShip);
+		GameManager.PlayerShip = otherShip.gameObject;
+
+		while (pause) yield return null;
+		Time.timeScale = 1;
+	}
 }
