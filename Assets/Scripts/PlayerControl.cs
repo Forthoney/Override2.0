@@ -81,7 +81,7 @@ public class PlayerControl : MonoBehaviour
 		TimerUnscaled pause = new TimerUnscaled(FreezeDurationOnSwap);
 		pause.Start();
 
-		otherShip.getBody().setHealth(otherShip.maxHealth);
+		otherShip.getBody().CurrHealth = otherShip.getBody().MaxHealth;
 
 		Destroy(GameManager.PlayerShip);
 		GameManager.PlayerShip = otherShip.gameObject;
