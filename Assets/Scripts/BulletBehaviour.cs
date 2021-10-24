@@ -31,6 +31,7 @@ public class BulletBehaviour : MonoBehaviour
       if (other.gameObject == GameManager.PlayerShip)
       {
         other.gameObject.GetComponent<ShipControlComponent>().takeDamage(damage);
+
         this.Die();
       }
     }
@@ -39,6 +40,7 @@ public class BulletBehaviour : MonoBehaviour
       if (other.gameObject != GameManager.PlayerShip)
       {
         other.gameObject.GetComponent<ShipControlComponent>().takeDamage(damage);
+        ShockManager.Instance.StartShake(new Vector3(0, -2, 0));
         this.Die();
       }
     }

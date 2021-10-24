@@ -17,5 +17,12 @@ public class BulletWeapon : ShipWeapon
     bullet.GetComponent<BulletBehaviour>().isEnemyBullet = isEnemyBullet;
     bullet.GetComponent<BulletBehaviour>().damage = _damage;
     bullet.GetComponent<BulletBehaviour>().speed = _bulletSpeed;
+
+    // If this is a player bullet
+    if (!isEnemyBullet)
+    {
+      bullet.GetComponent<BulletBehaviour>().speed *= 2;
+      ShockManager.Instance.StartShake(new Vector3(0, -0.5f, 0));
+    }
   }
 }

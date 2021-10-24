@@ -6,6 +6,6 @@ public class SlowChunk : ShipBody
 {
   // Calls ShipBody constructor
   public SlowChunk() :
-      base(6, 4, 15, 8, "_Sprites/Spaceship_02_ORANGE")
+      base(6, 4, 15, 8, "_Sprites/BRGD_Ships-02")
   { }
 }
