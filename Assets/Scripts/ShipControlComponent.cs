@@ -15,8 +15,8 @@ public class ShipControlComponent : MonoBehaviour
     SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
     // Debug.Log(_shipBody);
     // Debug.Log(_shipBody.spritePath);
-    var sprite = Resources.Load<Sprite>(_shipBody.spritePath);
-    renderer.sprite = sprite;
+    //var sprite = Resources.Load<Sprite>(_shipBody.spritePath);
+    //renderer.sprite = sprite;
   }
 
   // Update is called once per frame
