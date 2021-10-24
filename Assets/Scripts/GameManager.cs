@@ -49,7 +49,6 @@ public class GameManager : MonoBehaviour
   {
     Score = 0;
     timer = 0;
-    EnemyRate = 5;
     EnemyShips = new List<GameObject>();
   }
 
@@ -64,7 +63,10 @@ public class GameManager : MonoBehaviour
     timer += Time.deltaTime;
     if (timer > EnemyRate)
     {
-      generateEnemy();
+      for (int i = 0; i < (int)Random.Range(1, 3); i++)
+      {
+        generateEnemy();
+      }
       timer = 0;
     }
   }

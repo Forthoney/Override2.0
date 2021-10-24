@@ -203,10 +203,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 680752423037851804, guid: a58a4fbd55045444aae2e216224b4ecd, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 3d04aa37adfe35d4382feb16e022833c, type: 2}
     - target: {fileID: 680752423037851805, guid: a58a4fbd55045444aae2e216224b4ecd, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -254,18 +250,6 @@ PrefabInstance:
     - target: {fileID: 680752423037851807, guid: a58a4fbd55045444aae2e216224b4ecd, type: 3}
       propertyPath: m_Name
       value: SB SG Ship (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9125241232217048413, guid: a58a4fbd55045444aae2e216224b4ecd, type: 3}
-      propertyPath: m_Color.b
-      value: 0.92156863
-      objectReference: {fileID: 0}
-    - target: {fileID: 9125241232217048413, guid: a58a4fbd55045444aae2e216224b4ecd, type: 3}
-      propertyPath: m_Color.g
-      value: 0.9254902
-      objectReference: {fileID: 0}
-    - target: {fileID: 9125241232217048413, guid: a58a4fbd55045444aae2e216224b4ecd, type: 3}
-      propertyPath: m_Color.r
-      value: 0.45490196
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a58a4fbd55045444aae2e216224b4ecd, type: 3}
@@ -534,7 +518,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 20
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1075,7 +1059,7 @@ MonoBehaviour:
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 10
+    OrthographicSize: 20
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -1514,7 +1498,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1894980594
 Transform:
   m_ObjectHideFlags: 0
@@ -1924,8 +1908,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3547156444801734604, guid: 9fdcb3edb3d16c94fbc532d2c079df38, type: 3}
     - target: {fileID: 4962210372555457876, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
+      propertyPath: EnemyRate
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962210372555457876, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
       propertyPath: ScoreNumber
       value: 
       objectReference: {fileID: 1725848430}
+    - target: {fileID: 4962210372555457878, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
+      propertyPath: HealthDecrement
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
