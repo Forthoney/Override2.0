@@ -22,7 +22,7 @@ public class SceneControl : MonoBehaviour
     /// </summary>
     public void StartGame()
     {
-        SceneManager.LoadScene("MainGameScene");
+        SceneManager.LoadScene("UI Test");
     }
 
     /// <summary>
@@ -39,6 +39,8 @@ public class SceneControl : MonoBehaviour
     /// </summary>
     public void GameOver()
     {
+        // TODO reset deltatime scale back to 1 in case user self destructed from pause screen.
+        // TODO end score value through DontDestroyOnLoad
         SceneManager.LoadScene("GameOverScene");
     }
 
@@ -47,8 +49,8 @@ public class SceneControl : MonoBehaviour
     /// </summary>
     public void RestartGame()
     {
-        //Make sure to reset any objects in DontDestroyOnLoad
-        SceneManager.LoadScene("MainGameScene");
+        // TODO Make sure to reset/destroy any objects in DontDestroyOnLoad
+        SceneManager.LoadScene("UI Test");
     }
 
     /// <summary>
@@ -56,7 +58,15 @@ public class SceneControl : MonoBehaviour
     /// </summary>
     public void QuitToMain()
     {
-        //Make sure to destroy any objects in DontDestroyOnLoad
+        // TODO Make sure to destroy any objects in DontDestroyOnLoad
         SceneManager.LoadScene("StartScene");
+    }
+
+    /// <summary>
+    /// For Inputting pause through mouse button during pause.
+    /// </summary>
+    public void PauseButton()
+    {
+        InputController.Instance.Pausing ^= true;
     }
 }
