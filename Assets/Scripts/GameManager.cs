@@ -29,6 +29,9 @@ public class GameManager : MonoBehaviour
 
   public GameObject BaseShip;
 
+  private SceneControl scene;
+  private bool playerdestruction;
+
   void Awake()
   {
     Instance = this;
@@ -51,6 +54,8 @@ public class GameManager : MonoBehaviour
     Score = 0;
     timer = 0;
     EnemyShips = new List<GameObject>();
+    scene = new SceneControl();
+    playerdestruction = false;
   }
 
   // Update is called once per frame
@@ -71,17 +76,19 @@ public class GameManager : MonoBehaviour
       timer = 0;
     }
   }
+
   public void ShipDestroy(GameObject destroyedShip)
   {
-    if (GameObject.ReferenceEquals(destroyedShip, PlayerShip))
+    if (GameObject.ReferenceEquals(destroyedShip, PlayerShip) && !playerdestruction)
     {
-      // Handle player ship dying!
+      StartCoroutine(_playerDeathSequence());
+      Instantiate(deathParticleObject, destroyedShip.transform.position, Quaternion.identity);
     }
     else
     {
       if (GameObject.ReferenceEquals(destroyedShip, PlayerShip))
       {
-
+        
       }
       else
       {
@@ -98,6 +105,7 @@ public class GameManager : MonoBehaviour
     Score += add;
     // ScoreNumber.SetText(Score.ToString());
   }
+
   public void generateEnemy()
   {
     GameObject ship = Instantiate(BaseShip, generateEnemyCoords(), Quaternion.Euler(new Vector3(0, 0, 0)));
@@ -157,4 +165,14 @@ public class GameManager : MonoBehaviour
     }
     Time.timeScale = 1;
   }
+
+  IEnumerator _playerDeathSequence()
+    {
+        playerdestruction = true;
+        PlayerShip.GetComponent<SpriteRenderer>().enabled ^= true;
+        Time.timeScale = 0.5f;
+        yield return new WaitForSecondsRealtime(5);
+        Time.timeScale = 1;
+        scene.GameOver();
+    }
 }

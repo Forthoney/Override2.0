@@ -9,7 +9,7 @@ public class HealthBar : MonoBehaviour {
 	float _catchupVel;
 
 	void Update() {
-		if (_slider != null && _catchupSlider != null && _healthBar != null) {
+		if (_slider != null && _catchupSlider != null && _healthBar != null && GameManager.PlayerShip != null) {
 			ShipControlComponent Player = GameManager.PlayerShip.GetComponent<ShipControlComponent>();
 			GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, Player.ShipBody.MaxHealth * 16);
 			_slider.value = (float) Player.ShipBody.CurrHealth / Player.ShipBody.MaxHealth;

@@ -203,6 +203,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 680752423037851804, guid: a58a4fbd55045444aae2e216224b4ecd, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 680752423037851804, guid: a58a4fbd55045444aae2e216224b4ecd, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 680752423037851805, guid: a58a4fbd55045444aae2e216224b4ecd, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2616,6 +2624,22 @@ PrefabInstance:
       propertyPath: deathParticleObject
       value: 
       objectReference: {fileID: 7299727634646549584, guid: a19df24fe0fd10f42b0148d93ae060d4, type: 3}
+    - target: {fileID: 4962210372555457876, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
+      propertyPath: PauseUIObjects.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962210372555457876, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
+      propertyPath: PauseUIObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 1777047467}
+    - target: {fileID: 4962210372555457876, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
+      propertyPath: PauseUIObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 624096708}
+    - target: {fileID: 4962210372555457876, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
+      propertyPath: PauseUIObjects.Array.data[2]
+      value: 
+      objectReference: {fileID: 2008609754}
     - target: {fileID: 4962210372555457878, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
       propertyPath: HealthDecrement
       value: 0.2
