@@ -22,8 +22,7 @@ public class SceneControl : MonoBehaviour
     /// </summary>
     public void StartGame()
     {
-        Debug.Log("Test");
-        SceneManager.LoadScene("AssetsTest");
+        SceneManager.LoadScene("UI Test");
     }
 
     /// <summary>
@@ -40,6 +39,8 @@ public class SceneControl : MonoBehaviour
     /// </summary>
     public void GameOver()
     {
+        // TODO reset deltatime scale back to 1 in case user self destructed from pause screen.
+        // TODO end score value through DontDestroyOnLoad
         SceneManager.LoadScene("GameOverScene");
     }
 
@@ -48,8 +49,8 @@ public class SceneControl : MonoBehaviour
     /// </summary>
     public void RestartGame()
     {
-        //Make sure to reset any objects in DontDestroyOnLoad
-        SceneManager.LoadScene("AssetsTest");
+        // TODO Make sure to reset/destroy any objects in DontDestroyOnLoad
+        SceneManager.LoadScene("UI Test");
     }
 
     /// <summary>
@@ -57,7 +58,7 @@ public class SceneControl : MonoBehaviour
     /// </summary>
     public void QuitToMain()
     {
-        //Make sure to destroy any objects in DontDestroyOnLoad
+        // TODO Make sure to destroy any objects in DontDestroyOnLoad
         SceneManager.LoadScene("StartScene");
     }
 
