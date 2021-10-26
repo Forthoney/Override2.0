@@ -10,12 +10,11 @@ public class BasicBehaviour : EnemyBehaviour
   private float maxX;
   private float minY;
   private float maxY;
-  private float mapX = 30.0f;
-  private float mapY = 30.0f;
   private float radius;
   SpriteRenderer rend;
   float speed = 5;
-  float attackSpeed = 0.5f;
+  float attackSpeed = 0.3f;
+  float enemyAttackSpeedScalar = 0.1f;
   float timer = 0;
 
   public BasicBehaviour(ShipControlComponent enemyShip) : base(enemyShip)
@@ -31,8 +30,11 @@ public class BasicBehaviour : EnemyBehaviour
     minY = -vertExtent;
     maxY = vertExtent;
     rend = enemyShip.gameObject.GetComponent<SpriteRenderer>();
+
     // A sphere that fully encloses the bounding box.
     radius = rend.bounds.extents.magnitude;
+    timer += Random.Range(0, 0.3f);
+    attackSpeed = enemyShip.ShipWeapon.FireRate * enemyAttackSpeedScalar;
 
   }
 

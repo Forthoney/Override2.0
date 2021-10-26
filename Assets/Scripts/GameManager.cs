@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
   public static GameManager Instance = null;
 
   public static GameObject PlayerShip;
+  public GameObject deathParticleObject;
   public List<GameObject> EnemyShips;
 
   public TextMeshProUGUI ScoreNumber;
@@ -63,7 +64,7 @@ public class GameManager : MonoBehaviour
     timer += Time.deltaTime;
     if (timer > EnemyRate)
     {
-      for (int i = 0; i < (int)Random.Range(1, 3); i++)
+      for (int i = 0; i < (int)Random.Range(1, 4); i++)
       {
         generateEnemy();
       }
@@ -74,7 +75,7 @@ public class GameManager : MonoBehaviour
   {
     if (GameObject.ReferenceEquals(destroyedShip, PlayerShip))
     {
-
+      // Handle player ship dying!
     }
     else
     {
@@ -86,6 +87,7 @@ public class GameManager : MonoBehaviour
       {
         EnemyShips.Remove(destroyedShip);
         AddScore(100);
+        Instantiate(deathParticleObject, destroyedShip.transform.position, Quaternion.identity);
         Destroy(destroyedShip);
       }
     }
@@ -100,9 +102,8 @@ public class GameManager : MonoBehaviour
   {
     GameObject ship = Instantiate(BaseShip, generateEnemyCoords(), Quaternion.Euler(new Vector3(0, 0, 0)));
     // better way to randomly choose type from enum without casting int??
-    ShipBodyType bodyType = (ShipBodyType)Mathf.Round(Random.Range(0, 1));
-    Debug.Log(bodyType);
-    ShipWeaponType weaponType = (ShipWeaponType)Mathf.Round(Random.Range(0, 1));
+    ShipBodyType bodyType = (ShipBodyType)Mathf.Floor(Random.Range(0, 2));
+    ShipWeaponType weaponType = (ShipWeaponType)Mathf.Floor(Random.Range(0, 2));
     ShipControlComponent shipComponent = ship.GetComponent<ShipControlComponent>();
     shipComponent.setNewBodyFromType(bodyType);
     shipComponent.setNewWeaponFromType(weaponType);

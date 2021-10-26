@@ -14,7 +14,7 @@ public abstract class ShipWeapon
   protected string _bulletPrefab;
   protected Vector2 _spritePosOffset;
 
-  public string _weaponSprite { get; set; }
+  public string material { get; set; }
 
   // Constructor
   protected ShipWeapon(
@@ -24,7 +24,7 @@ public abstract class ShipWeapon
       GameObject fSource,
       string bPrefab,
       Vector2 sPosOffset,
-      string weaponSprite)
+      string weaponMaterial)
   {
     _damage = damage;
     _fireRate = fireRate;
@@ -33,7 +33,8 @@ public abstract class ShipWeapon
     _firingSource = fSource;
     _bulletPrefab = bPrefab;
     _spritePosOffset = sPosOffset;
-    _weaponSprite = weaponSprite;
+    material = weaponMaterial;
+    fSource.GetComponent<SpriteRenderer>().material = Resources.Load<Material>(material);
   }
 
   // Accessors

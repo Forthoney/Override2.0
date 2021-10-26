@@ -5,11 +5,8 @@ using UnityEngine;
 public class LaserWeapon : ShipWeapon
 {
   // Todo: define Laser stats; Nan for now to intentionally cause errors if used
-  public LaserWeapon(string bPrefab, Vector2 sPosOffset, GameObject fSource, string weaponSprite) :
-      base(float.NaN, float.NaN, float.NaN, fSource, bPrefab, sPosOffset, weaponSprite)
-  { }
   public LaserWeapon(string bPrefab, Vector2 sPosOffset, GameObject fSource) :
-      base(10, 2, 7, fSource, bPrefab, sPosOffset, "")
+      base(15, 1, 20, fSource, bPrefab, sPosOffset, "Materials/Gun Big Enemy")
   { }
 
   public override void Fire(bool isEnemyBullet)
@@ -21,5 +18,14 @@ public class LaserWeapon : ShipWeapon
     laser.GetComponent<BulletBehaviour>().isEnemyBullet = isEnemyBullet;
     laser.GetComponent<BulletBehaviour>().damage = _damage;
     laser.GetComponent<BulletBehaviour>().speed = _bulletSpeed;
+
+    // If this is a player bullet
+    if (!isEnemyBullet)
+    {
+      laser.GetComponent<BulletBehaviour>().speed *= 2;
+      ShockManager.Instance.StartShake(new Vector3(0, -0.5f, 0));
+      laser.GetComponent<SpriteRenderer>().color = Color.red;
+      laser.GetComponent<ParticleSystem>().startColor = Color.red;
+    }
   }
 }
