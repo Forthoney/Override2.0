@@ -22,7 +22,8 @@ public class SceneControl : MonoBehaviour
     /// </summary>
     public void StartGame()
     {
-        SceneManager.LoadScene("MainGameScene");
+        Debug.Log("Test");
+        SceneManager.LoadScene("AssetsTest");
     }
 
     /// <summary>
@@ -48,7 +49,7 @@ public class SceneControl : MonoBehaviour
     public void RestartGame()
     {
         //Make sure to reset any objects in DontDestroyOnLoad
-        SceneManager.LoadScene("MainGameScene");
+        SceneManager.LoadScene("AssetsTest");
     }
 
     /// <summary>
@@ -58,5 +59,13 @@ public class SceneControl : MonoBehaviour
     {
         //Make sure to destroy any objects in DontDestroyOnLoad
         SceneManager.LoadScene("StartScene");
+    }
+
+    /// <summary>
+    /// For Inputting pause through mouse button during pause.
+    /// </summary>
+    public void PauseButton()
+    {
+        InputController.Instance.Pausing ^= true;
     }
 }

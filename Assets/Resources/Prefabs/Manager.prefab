@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efb9d326d0534494b93ca2b558e143b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Instance: {fileID: 0}
 --- !u!114 &2017624565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,6 +276,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 86fa596f-72e2-499d-8aa4-81627950aed9
     m_ActionName: Gamplay Controls/Swap[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4962210370842590627}
+        m_TargetAssemblyTypeName: InputController, Assembly-CSharp
+        m_MethodName: OnPauseInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: cdb423b7-08f6-4977-bbf2-3c5bc2b9c79a
+    m_ActionName: Gamplay Controls/Pause[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gamplay Controls
@@ -299,6 +314,7 @@ MonoBehaviour:
   MouseScreenPos: {x: 0, y: 0}
   Firing: 0
   Swapping: 0
+  Pausing: 0
 --- !u!1 &4962210372555457879
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,5 +379,6 @@ MonoBehaviour:
   EnemyShips:
   - {fileID: 0}
   ScoreNumber: {fileID: 0}
+  PauseUIObjects: []
   EnemyRate: 0
   BaseShip: {fileID: 5999682469853266921, guid: 2e9743b014d2e4fabbaaf2d26e5bc128, type: 3}
