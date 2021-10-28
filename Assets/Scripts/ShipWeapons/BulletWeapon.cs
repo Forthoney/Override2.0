@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletWeapon : ShipWeapon
 {
   public BulletWeapon(string bPrefab, Vector2 sPosOffset, GameObject fSource) :
-      base(5, 3, 10, fSource, bPrefab, sPosOffset, "Materials/Gun Small Enemy")
+      base(1, 3, 10, fSource, bPrefab, sPosOffset, "Materials/Gun Small Enemy")
   { }
 
   public override void Fire(bool isEnemyBullet)
@@ -13,6 +13,8 @@ public class BulletWeapon : ShipWeapon
     // Load and instantiate bullet prefab from resource
     GameObject bullet = Object.Instantiate<GameObject>(Resources.Load<GameObject>(this._bulletPrefab),
       _firingSource.transform.position, _firingSource.transform.rotation);
+
+	  Debug.Log("Damage: " + _damage);
     // Instantiate bullet fields
     bullet.GetComponent<BulletBehaviour>().isEnemyBullet = isEnemyBullet;
     bullet.GetComponent<BulletBehaviour>().damage = _damage;

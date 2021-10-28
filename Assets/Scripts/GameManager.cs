@@ -82,7 +82,8 @@ public class GameManager : MonoBehaviour
     if (GameObject.ReferenceEquals(destroyedShip, PlayerShip) && !playerdestruction)
     {
       StartCoroutine(_playerDeathSequence());
-      Instantiate(deathParticleObject, destroyedShip.transform.position, Quaternion.identity);
+	  if (deathParticleObject != null)
+      	Instantiate(deathParticleObject, destroyedShip.transform.position, Quaternion.identity);
     }
     else
     {
@@ -94,7 +95,8 @@ public class GameManager : MonoBehaviour
       {
         EnemyShips.Remove(destroyedShip);
         AddScore(100);
-        Instantiate(deathParticleObject, destroyedShip.transform.position, Quaternion.identity);
+		if (deathParticleObject != null)
+        	Instantiate(deathParticleObject, destroyedShip.transform.position, Quaternion.identity);
         Destroy(destroyedShip);
       }
     }

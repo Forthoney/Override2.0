@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ShipControlComponent : MonoBehaviour
 {
+
+  public UnityEvent OnDamageTaken;
+  public UnityEvent OnDeath;
+
   // Backing fields
   private ShipBody _shipBody;
   private ShipWeapon _shipWeapon;
@@ -35,21 +40,23 @@ public class ShipControlComponent : MonoBehaviour
     // If this is an enemy ship, ask the behaviour to do things
     if (GameManager.PlayerShip != this.gameObject)
     {
-      _enemyBehaviour.doAction();
+      _enemyBehaviour?.doAction();
     }
   }
 
   public void takeDamage(float damage)
   {
-    if (GameManager.PlayerShip == this.gameObject)
-    {
-      Debug.Log("player hit");
-      _shipBody.CurrHealth = Mathf.FloorToInt(_shipBody.CurrHealth);
-    }
-    else
-    {
-      _shipBody.CurrHealth -= damage;
-    }
+    _shipBody.CurrHealth -= damage;
+
+    if (GameManager.PlayerShip == this.gameObject) {
+		Debug.Log("Player Hit");
+	  PlayerControl.Instance?.OnDamageTaken?.Invoke();
+	  if (_shipBody.CurrHealth <= 0) 
+	  	PlayerControl.Instance?.OnDeath?.Invoke();
+	}
+
+	OnDamageTaken?.Invoke();
+	if (_shipBody.CurrHealth <= 0) OnDeath?.Invoke();
   }
 
   // Accessors

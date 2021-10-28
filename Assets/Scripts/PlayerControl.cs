@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerControl : MonoBehaviour
 {
+	public static PlayerControl Instance;
 
   // This value should be read out of the ship body in the future
   public float speed;
@@ -17,6 +19,13 @@ public class PlayerControl : MonoBehaviour
 
   public float FreezeDurationOnSwap = 1f;
   public float HealthDecrement = 2f;
+
+  public UnityEvent OnDamageTaken;
+  public UnityEvent OnDeath;
+
+	private void Awake() {
+		Instance = this;
+	}
 
   // Start is called before the first frame update
   void Start()
@@ -32,7 +41,7 @@ public class PlayerControl : MonoBehaviour
 
     float attackSpeed = 1 / rateOfFire;
 
-    GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth -= HealthDecrement * Time.deltaTime;
+    // GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth -= HealthDecrement * Time.deltaTime;
 
     if (InputController.Instance.Firing && !_firingCooldown)
     {
