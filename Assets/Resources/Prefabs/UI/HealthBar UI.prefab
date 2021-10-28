@@ -97,6 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 208869609409147000}
   - component: {fileID: 208869609409147001}
+  - component: {fileID: 4680991700706526649}
   m_Layer: 5
   m_Name: HealthBar UI
   m_TagString: Untagged
@@ -136,6 +137,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac1557b448682488096a74da9adcc0ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Images:
+  - image: {fileID: 208869609638420828}
+    invert: 1
+    glow: 0
+    colorShift: 0
+  - image: {fileID: 208869609649040089}
+    invert: 1
+    glow: 1
+    colorShift: 1
+  - image: {fileID: 208869610098111125}
+    invert: 1
+    glow: 0
+    colorShift: 0
   _smoothTime: 0.2
   _healthBar: {fileID: 208869609649040089}
   _slider: {fileID: 208869610936414003}
@@ -172,6 +186,48 @@ MonoBehaviour:
     m_Mode: 1
     m_NumColorKeys: 5
     m_NumAlphaKeys: 2
+  EffectLength: 0.4
+  PulseBPM: 5
+  PulseIntensity: 2
+--- !u!114 &4680991700706526649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208869609409147003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ae9ef456a4a84a2abdc8db428ccb829, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnPlayerDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 208869610233270522}
+        m_TargetAssemblyTypeName: Shake, Assembly-CSharp
+        m_MethodName: AddTrauma
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 208869609409147001}
+        m_TargetAssemblyTypeName: HealthBar, Assembly-CSharp
+        m_MethodName: TriggerEffect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &208869609638420830
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,8 +285,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5254902}
+  m_Material: {fileID: 2100000, guid: aa72281c8d4f34ac7a9e4d2c0bed9f64, type: 2}
+  m_Color: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 0.5254902}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -304,8 +360,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.8207547, g: 0.12001601, b: 0.12001601, a: 1}
+  m_Material: {fileID: 2100000, guid: aa72281c8d4f34ac7a9e4d2c0bed9f64, type: 2}
+  m_Color: {r: 0.9245283, g: 0.17880027, b: 0.17880027, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -379,7 +435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: aa72281c8d4f34ac7a9e4d2c0bed9f64, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -407,7 +463,6 @@ GameObject:
   m_Component:
   - component: {fileID: 208869610233270469}
   - component: {fileID: 208869610233270522}
-  - component: {fileID: 208869610233270523}
   m_Layer: 5
   m_Name: Shake Pivot
   m_TagString: Untagged
@@ -456,33 +511,6 @@ MonoBehaviour:
   translationalOffsetMax: 10
   maxShakeAngle: 10
   NoiseSampleRate: 20
---- !u!114 &208869610233270523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 208869610233270468}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ae9ef456a4a84a2abdc8db428ccb829, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnPlayerDamage:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 208869610233270522}
-        m_TargetAssemblyTypeName: Shake, Assembly-CSharp
-        m_MethodName: AddTrauma
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 1
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &208869610936414013
 GameObject:
   m_ObjectHideFlags: 0
