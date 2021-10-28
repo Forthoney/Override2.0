@@ -203,6 +203,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 596437818}
     m_Modifications:
+    - target: {fileID: 616306232, guid: ebe7b7dd4e13c4f9faaac128cd7858b2, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 616306232, guid: ebe7b7dd4e13c4f9faaac128cd7858b2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 208869609409147000, guid: ebe7b7dd4e13c4f9faaac128cd7858b2, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -290,6 +298,22 @@ PrefabInstance:
     - target: {fileID: 208869609409147003, guid: ebe7b7dd4e13c4f9faaac128cd7858b2, type: 3}
       propertyPath: m_Name
       value: HealthBar UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 208869609638420831, guid: ebe7b7dd4e13c4f9faaac128cd7858b2, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 208869609638420831, guid: ebe7b7dd4e13c4f9faaac128cd7858b2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 208869609649040088, guid: ebe7b7dd4e13c4f9faaac128cd7858b2, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 208869609649040088, guid: ebe7b7dd4e13c4f9faaac128cd7858b2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebe7b7dd4e13c4f9faaac128cd7858b2, type: 3}
@@ -2389,7 +2413,7 @@ PrefabInstance:
       objectReference: {fileID: 2008609754}
     - target: {fileID: 4962210372555457878, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
       propertyPath: HealthDecrement
-      value: 0.2
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}

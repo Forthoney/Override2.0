@@ -41,7 +41,7 @@ public class PlayerControl : MonoBehaviour
 
     float attackSpeed = 1 / rateOfFire;
 
-    // GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth -= HealthDecrement * Time.deltaTime;
+    GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth -= HealthDecrement * Time.deltaTime;
 
     if (InputController.Instance.Firing && !_firingCooldown)
     {

@@ -7,7 +7,7 @@ public class HealthBar : MonoBehaviour {
 
 	[SerializeField] float _smoothTime = 2f;
 	[SerializeField] Image _healthBar;
-	[SerializeField] Slider _slider, _catchupSlider;
+	[SerializeField] Slider _slider, _catchupSlider, _effectSlider;
 	[SerializeField] Color _fullColor, _emptyColor;
 	[SerializeField] float _lengthMult = 16f;
 
@@ -36,7 +36,9 @@ public class HealthBar : MonoBehaviour {
 			GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, Player.ShipBody.MaxHealth * _lengthMult);
 			_slider.value = (float) Player.ShipBody.CurrHealth / Player.ShipBody.MaxHealth;
 			_catchupSlider.value = Mathf.SmoothDamp(_catchupSlider.value, _slider.value, ref _catchupVel, _smoothTime);
+			_effectSlider.value = _slider.value;
 			_healthBar.color = gradient.Evaluate(_slider.value);
+
 
 			// Effects
 			foreach (var info in Images) {
