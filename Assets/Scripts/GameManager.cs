@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     get => _score; set
     {
       _score = value;
-      ScoreNumber.SetText(_score.ToString());
+    //   ScoreNumber.SetText(_score.ToString());
     }
   }
   public GameObject[] PauseUIObjects;
@@ -36,10 +36,8 @@ public class GameManager : MonoBehaviour
   {
     Instance = this;
     PlayerShip = GameObject.FindWithTag("Player");
-    foreach (GameObject obj in PauseUIObjects)
-    {
-      obj.SetActive(false);
-    }
+	if (PauseUIObjects != null) foreach (GameObject obj in PauseUIObjects)
+	    obj.SetActive(false);
   }
 
   // This pool represents the ship part tiers. 
