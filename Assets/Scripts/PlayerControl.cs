@@ -18,6 +18,8 @@ public class PlayerControl : MonoBehaviour
   private Timer _firingCooldown;
   private Timer _hijackCooldown;
 
+  private bool _isDead = false;
+
   public float FreezeDurationOnSwap = 1f;
   public float HealthDecrement = 2f;
   public float HijackCooldownTime = 10f;
@@ -32,53 +34,49 @@ public class PlayerControl : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-
+      OnDeath.AddListener(die);
   }
 
   // Update is called once per frame
   void Update()
   {
-    rotateTowardsMouse();
-    movePlayer();
+      if (!_isDead) {
+            rotateTowardsMouse();
+            movePlayer();
 
-    float attackSpeed = 1 / rateOfFire;
+            float attackSpeed = 1 / rateOfFire;
 
-    if (GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth > 1f){
-      GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth -= HealthDecrement * Time.deltaTime;
-    }
+            GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth -= HealthDecrement * Time.deltaTime;
 
-    if (InputController.Instance.Firing && !_firingCooldown)
-    {
-      GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon.Fire(false);
-      _firingCooldown = new Timer((float)(1f / GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon.FireRate));
-      _firingCooldown.Start();
-    }
+            if (InputController.Instance.Firing && !_firingCooldown)
+            {
+            GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon.Fire(false);
+            _firingCooldown = new Timer((float)(1f / GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon.FireRate));
+            _firingCooldown.Start();
+            }
 
-    if (InputController.Instance.Swapping)
-    {
-      ShipControlComponent otherShip = null;
-      foreach (var ship in GameObject.FindObjectsOfType<ShipControlComponent>())
-      {
-        if (ship.gameObject != GameManager.PlayerShip)
-        {
-          if (otherShip == null ||
-            (InputController.Instance.MouseWorldPos - (Vector2)ship.transform.position).magnitude <
-            (InputController.Instance.MouseWorldPos - (Vector2)otherShip.transform.position).magnitude) otherShip = ship;
-        }
+            if (InputController.Instance.Swapping)
+            {
+            ShipControlComponent otherShip = null;
+            foreach (var ship in GameObject.FindObjectsOfType<ShipControlComponent>())
+            {
+                if (ship.gameObject != GameManager.PlayerShip)
+                {
+                if (otherShip == null ||
+                    (InputController.Instance.MouseWorldPos - (Vector2)ship.transform.position).magnitude <
+                    (InputController.Instance.MouseWorldPos - (Vector2)otherShip.transform.position).magnitude) otherShip = ship;
+                }
+            }
+            if (otherShip != null)
+            {
+              if(!_hijackCooldown) {
+                StartCoroutine(_hijack(otherShip));
+              }
+            }
+
+            InputController.Instance.Swapping = false;
+            }   
       }
-      if (otherShip != null)
-      { 
-        if (!_hijackCooldown) {
-          StartCoroutine(_hijack(otherShip));
-          _hijackCooldown = new Timer((float)(HijackCooldownTime));
-          _hijackCooldown.Start();
-        }
-      }
-
-      InputController.Instance.Swapping = false;
-    }
-
-    Debug.Log(_hijackCooldown.TimeLeft);
   }
 
   void rotateTowardsMouse()
@@ -121,4 +119,8 @@ public class PlayerControl : MonoBehaviour
     while (pause) yield return null;
     Time.timeScale = 1;
   }
+
+  void die() {
+    _isDead = true;
+    }
 }
