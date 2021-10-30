@@ -14,17 +14,19 @@ public class GameManager : MonoBehaviour
 
   public TextMeshProUGUI ScoreNumber;
   float _score;
+
   public float Score
   {
     get => _score; set
     {
       _score = value;
-    //   ScoreNumber.SetText(_score.ToString());
+      // ScoreNumber.SetText(_score.ToString());
     }
   }
   public GameObject[] PauseUIObjects;
 
   public float EnemyRate;
+  public float waveSize;
   private float timer;
 
   public GameObject BaseShip;
@@ -36,14 +38,19 @@ public class GameManager : MonoBehaviour
   {
     Instance = this;
     PlayerShip = GameObject.FindWithTag("Player");
-	if (PauseUIObjects != null) foreach (GameObject obj in PauseUIObjects)
-	    obj.SetActive(false);
+    if (PauseUIObjects != null) foreach (GameObject obj in PauseUIObjects)
+        obj.SetActive(false);
   }
 
-  // This pool represents the ship part tiers. 
+  // Thise pools represents the total pools of scriptable objects 
+  // parts have their tier associated with their type
   // parts in tier 0 are the worst, while parts with a higher tier are better
-  ShipBody[,] bodyPool = new ShipBody[,] { { } };
-  ShipWeapon[,] weaponPool = new ShipWeapon[,] { { } };
+  public ShipBody[] bodyPool = new ShipBody[] { };
+  public ShipWeapon[] weaponPool = new ShipWeapon[] { };
+
+  // These pools represent the pool of currently selectable parts. It grows as the game progresses. 
+  ShipBody[] spawnableBodies = new ShipBody[] { };
+  ShipWeapon[] spawnableWeapons = new ShipWeapon[] { };
 
 
   // Start is called before the first frame update
@@ -54,6 +61,7 @@ public class GameManager : MonoBehaviour
     EnemyShips = new List<GameObject>();
     scene = new SceneControl();
     playerdestruction = false;
+    waveSize = 2;
   }
 
   // Update is called once per frame
@@ -67,10 +75,8 @@ public class GameManager : MonoBehaviour
     timer += Time.deltaTime;
     if (timer > EnemyRate)
     {
-      for (int i = 0; i < (int)Random.Range(1, 4); i++)
-      {
-        generateEnemy();
-      }
+
+      generateWave();
       timer = 0;
     }
   }
@@ -80,21 +86,21 @@ public class GameManager : MonoBehaviour
     if (GameObject.ReferenceEquals(destroyedShip, PlayerShip) && !playerdestruction)
     {
       StartCoroutine(_playerDeathSequence());
-	  if (deathParticleObject != null)
-      	Instantiate(deathParticleObject, destroyedShip.transform.position, Quaternion.identity);
+      if (deathParticleObject != null)
+        Instantiate(deathParticleObject, destroyedShip.transform.position, Quaternion.identity);
     }
     else
     {
       if (GameObject.ReferenceEquals(destroyedShip, PlayerShip))
       {
-        
+
       }
       else
       {
         EnemyShips.Remove(destroyedShip);
         AddScore(100);
-		if (deathParticleObject != null)
-        	Instantiate(deathParticleObject, destroyedShip.transform.position, Quaternion.identity);
+        if (deathParticleObject != null)
+          Instantiate(deathParticleObject, destroyedShip.transform.position, Quaternion.identity);
         Destroy(destroyedShip);
       }
     }
@@ -106,17 +112,42 @@ public class GameManager : MonoBehaviour
     // ScoreNumber.SetText(Score.ToString());
   }
 
-  public void generateEnemy()
+  public void generateWave()
   {
-    GameObject ship = Instantiate(BaseShip, generateEnemyCoords(), Quaternion.Euler(new Vector3(0, 0, 0)));
-    // better way to randomly choose type from enum without casting int??
-    ShipBodyType bodyType = (ShipBodyType)Mathf.Floor(Random.Range(0, 2));
-    ShipWeaponType weaponType = (ShipWeaponType)Mathf.Floor(Random.Range(0, 2));
-    ShipControlComponent shipComponent = ship.GetComponent<ShipControlComponent>();
-    shipComponent.setNewBodyFromType(bodyType);
-    shipComponent.setNewWeaponFromType(weaponType);
-    shipComponent.EnemyBehaviour = new BasicBehaviour(shipComponent);
-    EnemyShips.Add(ship);
+    for (int i = 0; i < waveSize; i++)
+    {
+      GameObject ship = Instantiate(BaseShip, generateEnemyCoords(), Quaternion.Euler(new Vector3(0, 0, 0)));
+      // better way to randomly choose type from enum without casting int??
+      ShipBodyType bodyType = (ShipBodyType)Mathf.Floor(Random.Range(0, 2));
+      ShipWeaponType weaponType = (ShipWeaponType)Mathf.Floor(Random.Range(0, 2));
+      ShipControlComponent shipComponent = ship.GetComponent<ShipControlComponent>();
+      shipComponent.setNewBodyFromType(bodyType);
+      shipComponent.setNewWeaponFromType(weaponType);
+      shipComponent.EnemyBehaviour = new BasicBehaviour(shipComponent);
+      EnemyShips.Add(ship);
+    }
+  }
+
+  private void addRandomBodyToPool(int tier)
+  {
+
+  }
+
+  private void addRandomWeaponToPool(int tier)
+  {
+
+  }
+
+  private ShipBody getBodyFromPool()
+  {
+    System.Random random = new System.Random();
+    return spawnableBodies[random.Next(spawnableBodies.Length)];
+  }
+
+  private ShipWeapon getWeaponFromPool(int poolNum)
+  {
+    System.Random random = new System.Random();
+    return spawnableWeapons[random.Next(spawnableWeapons.Length)];
   }
 
   private Vector3 generateEnemyCoords()
@@ -167,12 +198,12 @@ public class GameManager : MonoBehaviour
   }
 
   IEnumerator _playerDeathSequence()
-    {
-        playerdestruction = true;
-        PlayerShip.GetComponent<SpriteRenderer>().enabled ^= true;
-        Time.timeScale = 0.5f;
-        yield return new WaitForSecondsRealtime(5);
-        Time.timeScale = 1;
-        scene.GameOver();
-    }
+  {
+    playerdestruction = true;
+    PlayerShip.GetComponent<SpriteRenderer>().enabled ^= true;
+    Time.timeScale = 0.5f;
+    yield return new WaitForSecondsRealtime(5);
+    Time.timeScale = 1;
+    scene.GameOver();
+  }
 }

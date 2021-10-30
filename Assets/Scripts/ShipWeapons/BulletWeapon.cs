@@ -14,7 +14,7 @@ public class BulletWeapon : ShipWeapon
     GameObject bullet = Object.Instantiate<GameObject>(Resources.Load<GameObject>(this._bulletPrefab),
       _firingSource.transform.position, _firingSource.transform.rotation);
 
-	  Debug.Log("Damage: " + _damage);
+    Debug.Log("Damage: " + _damage);
     // Instantiate bullet fields
     bullet.GetComponent<BulletBehaviour>().isEnemyBullet = isEnemyBullet;
     bullet.GetComponent<BulletBehaviour>().damage = _damage;

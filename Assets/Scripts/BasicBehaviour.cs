@@ -75,6 +75,8 @@ public class BasicBehaviour : EnemyBehaviour
     }
     else
     {
+      // We need to stay a certain distance away from each other
+      // To this end, we need to enforce some limit on the number of ships t hat can spawn at once.
 
       float min = Mathf.Min(Mathf.Min(rightDist, leftDist), Mathf.Min(topDist, botDist));
 
