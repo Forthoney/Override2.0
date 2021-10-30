@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
   public List<GameObject> EnemyShips;
 
   public TextMeshProUGUI ScoreNumber;
-  float _score;
+  private float _score;
   public float Score
   {
     get => _score; set
@@ -30,14 +30,21 @@ public class GameManager : MonoBehaviour
   public GameObject BaseShip;
 
   private SceneControl scene;
-  private bool playerdestruction;
+  private bool playerIsDestroyed;
 
   void Awake()
   {
     Instance = this;
     PlayerShip = GameObject.FindWithTag("Player");
-	if (PauseUIObjects != null) foreach (GameObject obj in PauseUIObjects)
-	    obj.SetActive(false);
+	  if (PauseUIObjects != null)
+    {
+      // If game is paused
+      foreach (GameObject obj in PauseUIObjects)
+      {
+        // Set everything to inactive
+        obj.SetActive(false);
+      }
+    }
   }
 
   // This pool represents the ship part tiers. 
@@ -53,7 +60,7 @@ public class GameManager : MonoBehaviour
     timer = 0;
     EnemyShips = new List<GameObject>();
     scene = new SceneControl();
-    playerdestruction = false;
+    playerIsDestroyed = false;
   }
 
   // Update is called once per frame
@@ -67,7 +74,7 @@ public class GameManager : MonoBehaviour
     timer += Time.deltaTime;
     if (timer > EnemyRate)
     {
-      for (int i = 0; i < (int)Random.Range(1, 4); i++)
+      for (int i = 0; i < (int) Random.Range(1, 4); i++)
       {
         generateEnemy();
       }
@@ -77,10 +84,10 @@ public class GameManager : MonoBehaviour
 
   public void ShipDestroy(GameObject destroyedShip)
   {
-    if (GameObject.ReferenceEquals(destroyedShip, PlayerShip) && !playerdestruction)
+    if (GameObject.ReferenceEquals(destroyedShip, PlayerShip) && !playerIsDestroyed)
     {
       StartCoroutine(_playerDeathSequence());
-	  if (deathParticleObject != null)
+	    if (deathParticleObject != null)
       	Instantiate(deathParticleObject, destroyedShip.transform.position, Quaternion.identity);
     }
     else
@@ -92,7 +99,7 @@ public class GameManager : MonoBehaviour
       else
       {
         EnemyShips.Remove(destroyedShip);
-        AddScore(100);
+        addScore(100);
 		if (deathParticleObject != null)
         	Instantiate(deathParticleObject, destroyedShip.transform.position, Quaternion.identity);
         Destroy(destroyedShip);
@@ -100,13 +107,13 @@ public class GameManager : MonoBehaviour
     }
   }
 
-  public void AddScore(float add)
+  private void addScore(float add)
   {
     Score += add;
     // ScoreNumber.SetText(Score.ToString());
   }
 
-  public void generateEnemy()
+  private void generateEnemy()
   {
     GameObject ship = Instantiate(BaseShip, generateEnemyCoords(), Quaternion.Euler(new Vector3(0, 0, 0)));
     // better way to randomly choose type from enum without casting int??
@@ -121,7 +128,7 @@ public class GameManager : MonoBehaviour
 
   private Vector3 generateEnemyCoords()
   {
-    CameraWallNum wall = (CameraWallNum)Mathf.FloorToInt(Random.Range(0, 4));
+    CameraWallNum wall = (CameraWallNum) Mathf.FloorToInt(Random.Range(0, 4));
 
     float borderOffset = 3;
 
@@ -151,16 +158,14 @@ public class GameManager : MonoBehaviour
   IEnumerator _pause()
   {
     Time.timeScale = 0;
-    foreach (GameObject obj in PauseUIObjects)
-    {
+    foreach (GameObject obj in PauseUIObjects) {
       obj.SetActive(true);
     }
 
     while (InputController.Instance.Pausing)
       yield return null;
 
-    foreach (GameObject obj in PauseUIObjects)
-    {
+    foreach (GameObject obj in PauseUIObjects) {
       obj.SetActive(false);
     }
     Time.timeScale = 1;
@@ -168,7 +173,8 @@ public class GameManager : MonoBehaviour
 
   IEnumerator _playerDeathSequence()
     {
-        playerdestruction = true;
+        playerIsDestroyed = true;
+        // TODO: stop player input
         PlayerShip.GetComponent<SpriteRenderer>().enabled ^= true;
         Time.timeScale = 0.5f;
         yield return new WaitForSecondsRealtime(5);
