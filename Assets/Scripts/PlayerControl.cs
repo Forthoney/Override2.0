@@ -122,7 +122,8 @@ public class PlayerControl : MonoBehaviour
     Time.timeScale = 1;
   }
 
-  void die() {
+  void die()
+  {
     _isDead = true;
-    }
+  }
 }
