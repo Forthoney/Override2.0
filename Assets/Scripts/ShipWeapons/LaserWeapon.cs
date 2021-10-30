@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BulletWeapon", menuName = "~/Combat/BulletWeapon", order = 0)]
 public class LaserWeapon : ShipWeapon
 {
-  // Todo: define Laser stats; Nan for now to intentionally cause errors if used
+  // TODO: define Laser stats; Nan for now to intentionally cause errors if used
   public LaserWeapon(GameObject bPrefab, Vector2 sPosOffset, GameObject fSource) :
       base(15, 1, 20, fSource, bPrefab, sPosOffset, "Materials/Gun Big Enemy")
   { }
