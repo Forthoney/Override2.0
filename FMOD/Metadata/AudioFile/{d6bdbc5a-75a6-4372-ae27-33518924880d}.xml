@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{d6bdbc5a-75a6-4372-ae27-33518924880d}">
+		<property name="assetPath">
+			<value>deathsoundmaybe.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>2.0945124716553289</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{035b6979-8cd9-4856-9be1-f29956e08210}</destination>
+		</relationship>
+	</object>
+</objects>
