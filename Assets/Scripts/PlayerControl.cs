@@ -16,9 +16,11 @@ public class PlayerControl : MonoBehaviour
   public Transform bullet;
 
   private Timer _firingCooldown;
+  private Timer _hijackCooldown;
 
   public float FreezeDurationOnSwap = 1f;
   public float HealthDecrement = 2f;
+  public float HijackCooldownTime = 10f;
 
   public UnityEvent OnDamageTaken;
   public UnityEvent OnDeath;
@@ -41,7 +43,9 @@ public class PlayerControl : MonoBehaviour
 
     float attackSpeed = 1 / rateOfFire;
 
-    GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth -= HealthDecrement * Time.deltaTime;
+    if (GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth > 1f){
+      GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth -= HealthDecrement * Time.deltaTime;
+    }
 
     if (InputController.Instance.Firing && !_firingCooldown)
     {
@@ -63,12 +67,18 @@ public class PlayerControl : MonoBehaviour
         }
       }
       if (otherShip != null)
-      {
-        StartCoroutine(_hijack(otherShip));
+      { 
+        if (!_hijackCooldown) {
+          StartCoroutine(_hijack(otherShip));
+          _hijackCooldown = new Timer((float)(HijackCooldownTime));
+          _hijackCooldown.Start();
+        }
       }
 
       InputController.Instance.Swapping = false;
     }
+
+    Debug.Log(_hijackCooldown.TimeLeft);
   }
 
   void rotateTowardsMouse()
