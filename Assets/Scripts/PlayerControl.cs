@@ -70,6 +70,8 @@ public class PlayerControl : MonoBehaviour
             if (otherShip != null)
             {
               if(!_hijackCooldown) {
+                _hijackCooldown = new Timer((float)(HijackCooldownTime));
+                _hijackCooldown.Start();
                 StartCoroutine(_hijack(otherShip));
               }
             }
