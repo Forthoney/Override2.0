@@ -48,7 +48,7 @@ TagManager:
   - name: Ships
     uniqueID: 3907422551
     locked: 0
-  - name: Vein
+  - name: VFX
     uniqueID: 1434215723
     locked: 0
   - name: UI

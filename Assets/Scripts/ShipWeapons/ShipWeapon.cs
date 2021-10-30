@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // A class which represents the weapon of a ship
-public abstract class ShipWeapon
+public abstract class ShipWeapon : ScriptableObject
 {
   // Backing fields
+  [SerializeField]
   protected float _damage;
+  [SerializeField]
   protected float _fireRate; // Attacks per second
+  [SerializeField]
   protected float _bulletSpeed;
   protected bool _isFiring;
   protected GameObject _firingSource;
-  protected string _bulletPrefab;
+  [SerializeField] 
+  protected GameObject _bulletPrefab;
+  [SerializeField]
   protected Vector2 _spritePosOffset;
 
   public string material { get; set; }
@@ -22,7 +27,7 @@ public abstract class ShipWeapon
       float fireRate,
       float bulletSpeed,
       GameObject fSource,
-      string bPrefab,
+      GameObject bPrefab,
       Vector2 sPosOffset,
       string weaponMaterial)
   {
@@ -58,7 +63,7 @@ public abstract class ShipWeapon
     get => _firingSource;
     set => _firingSource = value;
   }
-  public string BulletPrefab
+  public GameObject BulletPrefab
   {
     get => _bulletPrefab;
     set => _bulletPrefab = value;

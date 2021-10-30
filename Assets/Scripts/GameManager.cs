@@ -32,14 +32,21 @@ public class GameManager : MonoBehaviour
   public GameObject BaseShip;
 
   private SceneControl scene;
-  private bool playerdestruction;
+  private bool playerIsDestroyed;
 
   void Awake()
   {
     Instance = this;
     PlayerShip = GameObject.FindWithTag("Player");
-    if (PauseUIObjects != null) foreach (GameObject obj in PauseUIObjects)
+    if (PauseUIObjects != null)
+    {
+      // If game is paused
+      foreach (GameObject obj in PauseUIObjects)
+      {
+        // Set everything to inactive
         obj.SetActive(false);
+      }
+    }
   }
 
   // Thise pools represents the total pools of scriptable objects 
@@ -60,8 +67,7 @@ public class GameManager : MonoBehaviour
     timer = 0;
     EnemyShips = new List<GameObject>();
     scene = new SceneControl();
-    playerdestruction = false;
-    waveSize = 2;
+    playerIsDestroyed = false;
   }
 
   // Update is called once per frame
@@ -83,10 +89,10 @@ public class GameManager : MonoBehaviour
 
   public void ShipDestroy(GameObject destroyedShip)
   {
-    if (GameObject.ReferenceEquals(destroyedShip, PlayerShip) && !playerdestruction)
+    if (GameObject.ReferenceEquals(destroyedShip, PlayerShip) && !playerIsDestroyed)
     {
       StartCoroutine(_playerDeathSequence());
-      if (deathParticleObject != null)
+      if (deathParticleObject)
         Instantiate(deathParticleObject, destroyedShip.transform.position, Quaternion.identity);
     }
     else
@@ -98,15 +104,15 @@ public class GameManager : MonoBehaviour
       else
       {
         EnemyShips.Remove(destroyedShip);
-        AddScore(100);
-        if (deathParticleObject != null)
+        addScore(100);
+        if (deathParticleObject)
           Instantiate(deathParticleObject, destroyedShip.transform.position, Quaternion.identity);
         Destroy(destroyedShip);
       }
     }
   }
 
-  public void AddScore(float add)
+  private void addScore(float add)
   {
     Score += add;
     // ScoreNumber.SetText(Score.ToString());
@@ -199,7 +205,8 @@ public class GameManager : MonoBehaviour
 
   IEnumerator _playerDeathSequence()
   {
-    playerdestruction = true;
+    playerIsDestroyed = true;
+    // TODO: stop player input
     PlayerShip.GetComponent<SpriteRenderer>().enabled ^= true;
     Time.timeScale = 0.5f;
     yield return new WaitForSecondsRealtime(5);

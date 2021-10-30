@@ -11,20 +11,7 @@ public abstract class ShipBody
   protected float _speed;
   protected float _colliderRadius;
   protected float _accelerationLambda = 8f;
-
-  public string spritePath { get; set; }
-
-  // Constructor
-  protected ShipBody(float h, float s, float cr, float accelerationLambda, string sp)
-  {
-    _maxHealth = h;
-    _currHealth = h;
-    _speed = s;
-    _colliderRadius = cr;
-    _accelerationLambda = accelerationLambda;
-    spritePath = sp;
-  }
-
+  protected string _spritePath;
   // Accessors
   public float MaxHealth
   {
@@ -46,13 +33,28 @@ public abstract class ShipBody
     get => _accelerationLambda;
     set => _accelerationLambda = value;
   }
+  public string SpritePath
+  {
+    get => _spritePath;
+    set => _spritePath = value;
+  }
+
+  // Constructor
+  protected ShipBody(float h, float s, float cr, float accelerationLambda, string sp)
+  {
+    _maxHealth = h;
+    _currHealth = h;
+    _speed = s;
+    _colliderRadius = cr;
+    _accelerationLambda = accelerationLambda;
+    _spritePath = sp;
+  }
 
   // Important!
   public void move()
   {
     Vector2 vel = GameManager.PlayerShip.GetComponent<Rigidbody2D>().velocity;
-    GameManager.PlayerShip.GetComponent<Rigidbody2D>().velocity
-  = Vector2.Lerp(vel, InputController.Instance.Movement * _speed, 1 - Mathf.Exp(-AccelerationLambda * Time.deltaTime));
+    GameManager.PlayerShip.GetComponent<Rigidbody2D>().velocity =
+        Vector2.Lerp(vel, InputController.Instance.Movement * _speed, 1 - Mathf.Exp(-AccelerationLambda * Time.deltaTime));
   }
-
 }
