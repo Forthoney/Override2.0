@@ -101,24 +101,24 @@ public class ShipControlComponent : MonoBehaviour
   }
   public void setNewWeaponFromType(ShipWeaponType weaponType)
   {
-    switch (weaponType)
-    {
-      case ShipWeaponType.BulletWeapon:
-        {
-          _shipWeapon = new BulletWeapon("Prefabs/Bullet", new Vector2(0, 0), gameObject);
-          break;
-        }
-      case ShipWeaponType.LaserWeapon:
-        {
-          _shipWeapon = new LaserWeapon("Prefabs/Bullet", new Vector2(0, 0), gameObject);
-          break;
-        }
-      default:
-        {
-          Debug.LogWarning("Unknown ShipWeaponType passed to ShipControlComponent::setWeapon!");
-          _shipWeapon = new LaserWeapon("Prefabs/Bullet", new Vector2(0, 0), gameObject);
-          break;
-        }
-    }
+    // switch (weaponType)
+    // {
+    //   case ShipWeaponType.BulletWeapon:
+    //     {
+    //       _shipWeapon = new BulletWeapon("Prefabs/Bullet", new Vector2(0, 0), gameObject);
+    //       break;
+    //     }
+    //   case ShipWeaponType.LaserWeapon:
+    //     {
+    //       _shipWeapon = new LaserWeapon("Prefabs/Bullet", new Vector2(0, 0), gameObject);
+    //       break;
+    //     }
+    //   default:
+    //     {
+    //       Debug.LogWarning("Unknown ShipWeaponType passed to ShipControlComponent::setWeapon!");
+    //       _shipWeapon = new LaserWeapon("Prefabs/Bullet", new Vector2(0, 0), gameObject);
+    //       break;
+    //     }
+    // }
   }
 }

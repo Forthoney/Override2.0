@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2fc7e34b3e4b554a8aa47bacac7fbaa, type: 3}
+  m_Name: SlowWeapon
+  m_EditorClassIdentifier: 
+  _damage: 1
+  _fireRate: 2
+  _bulletSpeed: 3
+  _bulletPrefab: {fileID: 549320140095666336, guid: 582a299cb64424f429ab0b090c518c2b, type: 3}
+  _spritePosOffset: {x: 0, y: 0}
