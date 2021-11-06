@@ -116,6 +116,8 @@ public class PlayerControl : MonoBehaviour
 
     otherShip.ShipBody.CurrHealth = otherShip.ShipBody.MaxHealth;
 
+	FindObjectOfType<Override>()?.Trigger(GameManager.PlayerShip.transform.position, otherShip.transform.position);
+
     Destroy(GameManager.PlayerShip);
     GameManager.PlayerShip = otherShip.gameObject;
 
