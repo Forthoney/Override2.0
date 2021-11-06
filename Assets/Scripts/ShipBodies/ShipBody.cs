@@ -8,12 +8,17 @@ public class ShipBody : ScriptableObject
 {
   // Backing fields
   [SerializeField] protected float _maxHealth;
-  protected float _currHealth;
+  public float _currHealth = 3;
   [SerializeField] protected float _speed;
-  protected float _colliderRadius;
-  protected float _accelerationLambda = 8f;
-  protected string _spritePath;
+  [SerializeField] protected float _colliderRadius;
+  [SerializeField] protected float _accelerationLambda = 8f;
+  public Sprite _spritePath;
   [SerializeField] protected float tier;
+
+  void Awake()
+  {
+    CurrHealth = MaxHealth;
+  }
 
   // Accessors
   public float MaxHealth
@@ -36,7 +41,7 @@ public class ShipBody : ScriptableObject
     get => _accelerationLambda;
     set => _accelerationLambda = value;
   }
-  public string SpritePath
+  public Sprite SpritePath
   {
     get => _spritePath;
     set => _spritePath = value;
@@ -45,6 +50,7 @@ public class ShipBody : ScriptableObject
   // Copy constructor
   public ShipBody(ShipBody other)
   {
+
     _maxHealth = other.MaxHealth;
     _currHealth = other.CurrHealth;
     _speed = other.Speed;
@@ -61,7 +67,7 @@ public class ShipBody : ScriptableObject
     _speed = s;
     _colliderRadius = cr;
     _accelerationLambda = accelerationLambda;
-    _spritePath = sp;
+    _spritePath = Resources.Load<Sprite>(sp);
   }
 
   // Important!

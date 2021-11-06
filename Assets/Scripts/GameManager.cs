@@ -34,6 +34,17 @@ public class GameManager : MonoBehaviour
   private SceneControl scene;
   private bool playerIsDestroyed;
 
+  // Thise pools represents the total pools of scriptable objects 
+  // parts have their tier associated with their type
+  // parts in tier 0 are the worst, while parts with a higher tier are better
+  public ShipBody[] bodyPool = new ShipBody[] { };
+  public ShipWeapon[] weaponPool = new ShipWeapon[] { };
+
+  // These pools represent the pool of currently selectable parts. It grows as the game progresses. 
+  List<ShipBody> spawnableBodies = new List<ShipBody> { };
+  List<ShipWeapon> spawnableWeapons = new List<ShipWeapon> { };
+
+
   void Awake()
   {
     Instance = this;
@@ -47,18 +58,9 @@ public class GameManager : MonoBehaviour
         obj.SetActive(false);
       }
     }
+    addRandomBodyToPool(0);
+    addRandomWeaponToPool(0);
   }
-
-  // Thise pools represents the total pools of scriptable objects 
-  // parts have their tier associated with their type
-  // parts in tier 0 are the worst, while parts with a higher tier are better
-  public ShipBody[] bodyPool = new ShipBody[] { };
-  public ShipWeapon[] weaponPool = new ShipWeapon[] { };
-
-  // These pools represent the pool of currently selectable parts. It grows as the game progresses. 
-  List<ShipBody> spawnableBodies = new List<ShipBody> { };
-  List<ShipWeapon> spawnableWeapons = new List<ShipWeapon> { };
-
 
   // Start is called before the first frame update
   void Start()
@@ -66,7 +68,6 @@ public class GameManager : MonoBehaviour
     Score = 0;
     timer = 0;
     EnemyShips = new List<GameObject>();
-    scene = new SceneControl();
     playerIsDestroyed = false;
   }
 
@@ -120,8 +121,7 @@ public class GameManager : MonoBehaviour
 
   public void generateWave()
   {
-    addRandomBodyToPool(0);
-    addRandomWeaponToPool(0);
+
 
     for (int i = 0; i < waveSize; i++)
     {
@@ -130,6 +130,7 @@ public class GameManager : MonoBehaviour
       ShipControlComponent shipComponent = ship.GetComponent<ShipControlComponent>();
       shipComponent.ShipBody = getBodyFromPool();
       shipComponent.ShipWeapon = getWeaponFromPool();
+      shipComponent.ShipWeapon.FiringSource = ship;
       shipComponent.EnemyBehaviour = new BasicBehaviour(shipComponent);
       EnemyShips.Add(ship);
     }
@@ -154,16 +155,30 @@ public class GameManager : MonoBehaviour
     }
   }
 
-  private ShipBody getBodyFromPool()
+  public ShipBody getBodyFromPool()
   {
     System.Random random = new System.Random();
-    return spawnableBodies[random.Next(spawnableBodies.Count)];
+    if (spawnableWeapons.Count > 0)
+    {
+      return Instantiate(spawnableBodies[random.Next(spawnableBodies.Count)]);
+    }
+    else
+    {
+      return Instantiate(bodyPool[0]);
+    }
   }
 
-  private ShipWeapon getWeaponFromPool()
+  public ShipWeapon getWeaponFromPool()
   {
     System.Random random = new System.Random();
-    return spawnableWeapons[random.Next(spawnableWeapons.Count)];
+    if (spawnableWeapons.Count > 0)
+    {
+      return Instantiate(spawnableWeapons[random.Next(spawnableWeapons.Count)]);
+    }
+    else
+    {
+      return Instantiate(weaponPool[0]);
+    }
   }
 
   private Vector3 generateEnemyCoords()
