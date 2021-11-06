@@ -34,7 +34,9 @@ public class BasicBehaviour : EnemyBehaviour
     // A sphere that fully encloses the bounding box.
     radius = rend.bounds.extents.magnitude;
     timer += Random.Range(0, 0.3f);
-    attackSpeed = enemyShip.ShipWeapon.FireRate * enemyAttackSpeedScalar;
+	if (enemyShip.ShipWeapon != null) {
+    	attackSpeed = enemyShip.ShipWeapon.FireRate * enemyAttackSpeedScalar;
+	}
 
   }
 
