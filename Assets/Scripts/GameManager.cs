@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
   public static GameObject PlayerShip;
   public GameObject deathParticleObject;
+  public GameObject playerDeathParticleObject;
   public List<GameObject> EnemyShips;
 
   public TextMeshProUGUI ScoreNumber;
@@ -93,8 +94,6 @@ public class GameManager : MonoBehaviour
     if (GameObject.ReferenceEquals(destroyedShip, PlayerShip) && !playerIsDestroyed)
     {
       StartCoroutine(_playerDeathSequence());
-      if (deathParticleObject)
-        Instantiate(deathParticleObject, destroyedShip.transform.position, Quaternion.identity);
     }
     else
     {
@@ -232,6 +231,10 @@ public class GameManager : MonoBehaviour
   {
     playerIsDestroyed = true;
     // TODO: stop player input
+    if (playerDeathParticleObject)
+    {
+      Instantiate(playerDeathParticleObject, PlayerShip.transform.position, Quaternion.identity);
+    }
     PlayerShip.GetComponent<SpriteRenderer>().enabled ^= true;
     Time.timeScale = 0.5f;
     yield return new WaitForSecondsRealtime(5);
