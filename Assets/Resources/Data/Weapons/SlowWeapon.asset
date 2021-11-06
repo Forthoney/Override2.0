@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 1
   _fireRate: 2
-  _bulletSpeed: 3
+  _bulletSpeed: 8
   _bulletPrefab: {fileID: 549320140095666336, guid: 582a299cb64424f429ab0b090c518c2b, type: 3}
   _spritePosOffset: {x: 0, y: 0}
+  _tier: 0
