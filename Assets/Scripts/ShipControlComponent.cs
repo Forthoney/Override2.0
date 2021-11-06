@@ -48,15 +48,16 @@ public class ShipControlComponent : MonoBehaviour
   {
     _shipBody.CurrHealth -= damage;
 
-    if (GameManager.PlayerShip == this.gameObject) {
-		Debug.Log("Player Hit");
-	  PlayerControl.Instance?.OnDamageTaken?.Invoke();
-	  if (_shipBody.CurrHealth <= 0) 
-	  	PlayerControl.Instance?.OnDeath?.Invoke();
-	}
+    if (GameManager.PlayerShip == this.gameObject)
+    {
+      Debug.Log("Player Hit");
+      PlayerControl.Instance?.OnDamageTaken?.Invoke();
+      if (_shipBody.CurrHealth <= 0)
+        PlayerControl.Instance?.OnDeath?.Invoke();
+    }
 
-	OnDamageTaken?.Invoke();
-	if (_shipBody.CurrHealth <= 0) OnDeath?.Invoke();
+    OnDamageTaken?.Invoke();
+    if (_shipBody.CurrHealth <= 0) OnDeath?.Invoke();
   }
 
   // Accessors

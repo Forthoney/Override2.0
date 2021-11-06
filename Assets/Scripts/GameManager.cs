@@ -56,8 +56,8 @@ public class GameManager : MonoBehaviour
   public ShipWeapon[] weaponPool = new ShipWeapon[] { };
 
   // These pools represent the pool of currently selectable parts. It grows as the game progresses. 
-  ShipBody[] spawnableBodies = new ShipBody[] { };
-  ShipWeapon[] spawnableWeapons = new ShipWeapon[] { };
+  List<ShipBody> spawnableBodies = new List<ShipBody> { };
+  List<ShipWeapon> spawnableWeapons = new List<ShipWeapon> { };
 
 
   // Start is called before the first frame update
@@ -120,15 +120,16 @@ public class GameManager : MonoBehaviour
 
   public void generateWave()
   {
+    addRandomBodyToPool(0);
+    addRandomWeaponToPool(0);
+
     for (int i = 0; i < waveSize; i++)
     {
       GameObject ship = Instantiate(BaseShip, generateEnemyCoords(), Quaternion.Euler(new Vector3(0, 0, 0)));
       // better way to randomly choose type from enum without casting int??
-      ShipBodyType bodyType = (ShipBodyType)Mathf.Floor(Random.Range(0, 2));
-      ShipWeaponType weaponType = (ShipWeaponType)Mathf.Floor(Random.Range(0, 2));
       ShipControlComponent shipComponent = ship.GetComponent<ShipControlComponent>();
-      shipComponent.setNewBodyFromType(bodyType);
-      shipComponent.setNewWeaponFromType(weaponType);
+      shipComponent.ShipBody = getBodyFromPool();
+      shipComponent.ShipWeapon = getWeaponFromPool();
       shipComponent.EnemyBehaviour = new BasicBehaviour(shipComponent);
       EnemyShips.Add(ship);
     }
@@ -136,24 +137,33 @@ public class GameManager : MonoBehaviour
 
   private void addRandomBodyToPool(int tier)
   {
-
+    // TODO FIX
+    foreach (ShipBody body in bodyPool)
+    {
+      spawnableBodies.Add(body);
+    }
+    // spawnableBodies;
   }
 
   private void addRandomWeaponToPool(int tier)
   {
-
+    // TODO FIX
+    foreach (ShipWeapon weapon in weaponPool)
+    {
+      spawnableWeapons.Add(weapon);
+    }
   }
 
   private ShipBody getBodyFromPool()
   {
     System.Random random = new System.Random();
-    return spawnableBodies[random.Next(spawnableBodies.Length)];
+    return spawnableBodies[random.Next(spawnableBodies.Count)];
   }
 
-  private ShipWeapon getWeaponFromPool(int poolNum)
+  private ShipWeapon getWeaponFromPool()
   {
     System.Random random = new System.Random();
-    return spawnableWeapons[random.Next(spawnableWeapons.Length)];
+    return spawnableWeapons[random.Next(spawnableWeapons.Count)];
   }
 
   private Vector3 generateEnemyCoords()
