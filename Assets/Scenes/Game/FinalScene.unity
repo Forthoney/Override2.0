@@ -2431,5 +2431,9 @@ PrefabInstance:
       propertyPath: HealthDecrement
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 5589333400116251658, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
+      propertyPath: cType
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
