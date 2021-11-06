@@ -34,6 +34,17 @@ public class GameManager : MonoBehaviour
   private SceneControl scene;
   private bool playerIsDestroyed;
 
+  // Thise pools represents the total pools of scriptable objects 
+  // parts have their tier associated with their type
+  // parts in tier 0 are the worst, while parts with a higher tier are better
+  public ShipBody[] bodyPool = new ShipBody[] { };
+  public ShipWeapon[] weaponPool = new ShipWeapon[] { };
+
+  // These pools represent the pool of currently selectable parts. It grows as the game progresses. 
+  List<ShipBody> spawnableBodies = new List<ShipBody> { };
+  List<ShipWeapon> spawnableWeapons = new List<ShipWeapon> { };
+
+
   void Awake()
   {
     Instance = this;
@@ -47,18 +58,9 @@ public class GameManager : MonoBehaviour
         obj.SetActive(false);
       }
     }
+    addRandomBodyToPool(0);
+    addRandomWeaponToPool(0);
   }
-
-  // Thise pools represents the total pools of scriptable objects 
-  // parts have their tier associated with their type
-  // parts in tier 0 are the worst, while parts with a higher tier are better
-  public ShipBody[] bodyPool = new ShipBody[] { };
-  public ShipWeapon[] weaponPool = new ShipWeapon[] { };
-
-  // These pools represent the pool of currently selectable parts. It grows as the game progresses. 
-  ShipBody[] spawnableBodies = new ShipBody[] { };
-  ShipWeapon[] spawnableWeapons = new ShipWeapon[] { };
-
 
   // Start is called before the first frame update
   void Start()
@@ -66,7 +68,6 @@ public class GameManager : MonoBehaviour
     Score = 0;
     timer = 0;
     EnemyShips = new List<GameObject>();
-    scene = new SceneControl();
     playerIsDestroyed = false;
   }
 
@@ -120,15 +121,16 @@ public class GameManager : MonoBehaviour
 
   public void generateWave()
   {
+
+
     for (int i = 0; i < waveSize; i++)
     {
       GameObject ship = Instantiate(BaseShip, generateEnemyCoords(), Quaternion.Euler(new Vector3(0, 0, 0)));
       // better way to randomly choose type from enum without casting int??
-      ShipBodyType bodyType = (ShipBodyType)Mathf.Floor(Random.Range(0, 2));
-      ShipWeaponType weaponType = (ShipWeaponType)Mathf.Floor(Random.Range(0, 2));
       ShipControlComponent shipComponent = ship.GetComponent<ShipControlComponent>();
-      shipComponent.setNewBodyFromType(bodyType);
-      shipComponent.setNewWeaponFromType(weaponType);
+      shipComponent.ShipBody = getBodyFromPool();
+      shipComponent.ShipWeapon = getWeaponFromPool();
+      shipComponent.ShipWeapon.FiringSource = ship;
       shipComponent.EnemyBehaviour = new BasicBehaviour(shipComponent);
       EnemyShips.Add(ship);
     }
@@ -136,24 +138,47 @@ public class GameManager : MonoBehaviour
 
   private void addRandomBodyToPool(int tier)
   {
-
+    // TODO FIX
+    foreach (ShipBody body in bodyPool)
+    {
+      spawnableBodies.Add(body);
+    }
+    // spawnableBodies;
   }
 
   private void addRandomWeaponToPool(int tier)
   {
-
+    // TODO FIX
+    foreach (ShipWeapon weapon in weaponPool)
+    {
+      spawnableWeapons.Add(weapon);
+    }
   }
 
-  private ShipBody getBodyFromPool()
+  public ShipBody getBodyFromPool()
   {
     System.Random random = new System.Random();
-    return spawnableBodies[random.Next(spawnableBodies.Length)];
+    if (spawnableWeapons.Count > 0)
+    {
+      return Instantiate(spawnableBodies[random.Next(spawnableBodies.Count)]);
+    }
+    else
+    {
+      return Instantiate(bodyPool[0]);
+    }
   }
 
-  private ShipWeapon getWeaponFromPool(int poolNum)
+  public ShipWeapon getWeaponFromPool()
   {
     System.Random random = new System.Random();
-    return spawnableWeapons[random.Next(spawnableWeapons.Length)];
+    if (spawnableWeapons.Count > 0)
+    {
+      return Instantiate(spawnableWeapons[random.Next(spawnableWeapons.Count)]);
+    }
+    else
+    {
+      return Instantiate(weaponPool[0]);
+    }
   }
 
   private Vector3 generateEnemyCoords()

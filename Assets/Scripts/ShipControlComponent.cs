@@ -20,8 +20,7 @@ public class ShipControlComponent : MonoBehaviour
     SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
     // Debug.Log(_shipBody);
     // Debug.Log(_shipBody.spritePath);
-    var sprite = Resources.Load<Sprite>(_shipBody.SpritePath);
-    renderer.sprite = sprite;
+    renderer.sprite = _shipBody._spritePath;
   }
 
   // Update is called once per frame
@@ -48,15 +47,16 @@ public class ShipControlComponent : MonoBehaviour
   {
     _shipBody.CurrHealth -= damage;
 
-    if (GameManager.PlayerShip == this.gameObject) {
-		Debug.Log("Player Hit");
-	  PlayerControl.Instance?.OnDamageTaken?.Invoke();
-	  if (_shipBody.CurrHealth <= 0) 
-	  	PlayerControl.Instance?.OnDeath?.Invoke();
-	}
+    if (GameManager.PlayerShip == this.gameObject)
+    {
+      Debug.Log("Player Hit");
+      PlayerControl.Instance?.OnDamageTaken?.Invoke();
+      if (_shipBody.CurrHealth <= 0)
+        PlayerControl.Instance?.OnDeath?.Invoke();
+    }
 
-	OnDamageTaken?.Invoke();
-	if (_shipBody.CurrHealth <= 0) OnDeath?.Invoke();
+    OnDamageTaken?.Invoke();
+    if (_shipBody.CurrHealth <= 0) OnDeath?.Invoke();
   }
 
   // Accessors
@@ -79,25 +79,25 @@ public class ShipControlComponent : MonoBehaviour
   // Create a new ShipBody or ShipWeapon
   public void setNewBodyFromType(ShipBodyType bodyType)
   {
-    switch (bodyType)
-    {
-      case ShipBodyType.FastSquish:
-        {
-          _shipBody = new FastSquish();
-          break;
-        }
-      case ShipBodyType.SlowChunk:
-        {
-          _shipBody = new SlowChunk();
-          break;
-        }
-      default:
-        {
-          Debug.LogWarning("Unknown ShipBodyType passed to ShipControlComponent::setBody!");
-          _shipBody = new SlowChunk();
-          break;
-        }
-    }
+    // switch (bodyType)
+    // {
+    //   case ShipBodyType.FastSquish:
+    //     {
+    //       _shipBody = new FastSquish();
+    //       break;
+    //     }
+    //   case ShipBodyType.SlowChunk:
+    //     {
+    //       _shipBody = new SlowChunk();
+    //       break;
+    //     }
+    //   default:
+    //     {
+    //       Debug.LogWarning("Unknown ShipBodyType passed to ShipControlComponent::setBody!");
+    //       _shipBody = new SlowChunk();
+    //       break;
+    //     }
+    // }
   }
   public void setNewWeaponFromType(ShipWeaponType weaponType)
   {

@@ -59,7 +59,7 @@ MonoBehaviour:
   m_ImpulseDefinition:
     m_ImpulseChannel: 1
     m_RawSignal: {fileID: 11400000, guid: 1dfc2986656334f628bd11ae6b43db1d, type: 2}
-    m_AmplitudeGain: 1
+    m_AmplitudeGain: 0.5
     m_FrequencyGain: 1
     m_RepeatMode: 0
     m_Randomize: 1
@@ -70,18 +70,18 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 1
-          outSlope: 1
-          tangentMode: 34
+          inSlope: 2
+          outSlope: 2
+          tangentMode: 0
           weightedMode: 0
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
           time: 1
           value: 1
-          inSlope: 1
-          outSlope: 1
-          tangentMode: 34
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
           weightedMode: 0
           inWeight: 0
           outWeight: 0
@@ -94,34 +94,79 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: -1.1225573
-          outSlope: -1.1225573
-          tangentMode: 34
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
+          outWeight: 0
         - serializedVersion: 3
           time: 1
           value: 0
-          inSlope: -1.1225573
-          outSlope: -1.1225573
-          tangentMode: 34
+          inSlope: 0.11744002
+          outSlope: 0.11744002
+          tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0.10833335
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
       m_AttackTime: 0
-      m_SustainTime: 0.2
-      m_DecayTime: 0.7
-      m_ScaleWithImpact: 1
+      m_SustainTime: 0.05
+      m_DecayTime: 0.05
+      m_ScaleWithImpact: 0
       m_HoldForever: 0
     m_ImpactRadius: 100
     m_DirectionMode: 0
     m_DissipationMode: 2
     m_DissipationDistance: 1000
     m_PropagationSpeed: 343
+--- !u!1 &169161154683068003
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5490675335816365728}
+  - component: {fileID: 5589333400116251658}
+  m_Layer: 0
+  m_Name: Cursor Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5490675335816365728
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169161154683068003}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4962210370707467525}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5589333400116251658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169161154683068003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb0bca19153d1413b8af907c777e3653, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ArrowCursor: {fileID: 2800000, guid: 14f27a9cea2c44982beec097a6d3941c, type: 3}
+  CrosshairCursor: {fileID: 2800000, guid: ec2fb6b5f3a304484812c92f176c4b07, type: 3}
 --- !u!1 &4962210370707467526
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,6 +197,7 @@ Transform:
   - {fileID: 4962210372555457877}
   - {fileID: 4962210370842590625}
   - {fileID: 2017624564}
+  - {fileID: 5490675335816365728}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -363,7 +409,14 @@ MonoBehaviour:
   rateOfFire: 2
   bullet: {fileID: 549320140095666342, guid: 582a299cb64424f429ab0b090c518c2b, type: 3}
   FreezeDurationOnSwap: 1
-  HealthDecrement: 2
+  HealthDecrement: 0.05
+  HijackCooldownTime: 10
+  OnDamageTaken:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &4962210372555457876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,9 +429,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e60ad2efe0f54a59b093ea8e7c0d089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathParticleObject: {fileID: 7299727634646549584, guid: a19df24fe0fd10f42b0148d93ae060d4, type: 3}
   EnemyShips:
   - {fileID: 0}
   ScoreNumber: {fileID: 0}
-  PauseUIObjects: []
-  EnemyRate: 0
-  BaseShip: {fileID: 5999682469853266921, guid: 2e9743b014d2e4fabbaaf2d26e5bc128, type: 3}
+  PauseUIObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  EnemyRate: 6
+  waveSize: 2
+  BaseShip: {fileID: 3547156444801734604, guid: 9fdcb3edb3d16c94fbc532d2c079df38, type: 3}
+  bodyPool:
+  - {fileID: 11400000, guid: 7ff620aa3d0944745bc827e8907173cc, type: 2}
+  weaponPool:
+  - {fileID: 11400000, guid: cacf319db68ac427388694a549993112, type: 2}
+  - {fileID: 11400000, guid: d16b5c1f5e49b4e168c18d95ccf487fe, type: 2}

@@ -13,6 +13,8 @@ public abstract class ShipWeapon : ScriptableObject
   protected GameObject _firingSource;
   [SerializeField] protected GameObject _bulletPrefab;
   [SerializeField] protected Vector2 _spritePosOffset;
+
+  [SerializeField] protected float _tier;
   private string _material;
   // Accessors
   public float Damage
@@ -50,7 +52,20 @@ public abstract class ShipWeapon : ScriptableObject
     get => _material;
     set => _material = value;
   }
-  
+
+  // Copy constructor
+  public ShipWeapon(ShipWeapon other)
+  {
+    _damage = other.Damage;
+    _fireRate = other.FireRate;
+    _bulletSpeed = other._bulletSpeed;
+    _isFiring = other.IsFiring;
+    _firingSource = other.FiringSource;
+    _bulletPrefab = other.BulletPrefab;
+    _spritePosOffset = other.SpritePosOffset;
+    _material = other.Material;
+  }
+
   // Constructor
   protected ShipWeapon(
       float damage,

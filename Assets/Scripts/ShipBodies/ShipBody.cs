@@ -3,15 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // A class which represents the body of a ship
-public abstract class ShipBody
+[CreateAssetMenu(fileName = "ShipBody", menuName = "~/Combat/ShipBody", order = 1)]
+public class ShipBody : ScriptableObject
 {
   // Backing fields
-  protected float _maxHealth;
-  protected float _currHealth;
-  protected float _speed;
-  protected float _colliderRadius;
-  protected float _accelerationLambda = 8f;
-  protected string _spritePath;
+  [SerializeField] protected float _maxHealth;
+  public float _currHealth = 3;
+  [SerializeField] protected float _speed;
+  [SerializeField] protected float _colliderRadius;
+  [SerializeField] protected float _accelerationLambda = 8f;
+  public Sprite _spritePath;
+  [SerializeField] protected float tier;
+
+  void Awake()
+  {
+    CurrHealth = MaxHealth;
+  }
+
   // Accessors
   public float MaxHealth
   {
@@ -33,10 +41,22 @@ public abstract class ShipBody
     get => _accelerationLambda;
     set => _accelerationLambda = value;
   }
-  public string SpritePath
+  public Sprite SpritePath
   {
     get => _spritePath;
     set => _spritePath = value;
+  }
+
+  // Copy constructor
+  public ShipBody(ShipBody other)
+  {
+
+    _maxHealth = other.MaxHealth;
+    _currHealth = other.CurrHealth;
+    _speed = other.Speed;
+    _colliderRadius = other._colliderRadius;
+    _accelerationLambda = other._accelerationLambda;
+    _spritePath = other.SpritePath;
   }
 
   // Constructor
@@ -47,7 +67,7 @@ public abstract class ShipBody
     _speed = s;
     _colliderRadius = cr;
     _accelerationLambda = accelerationLambda;
-    _spritePath = sp;
+    _spritePath = Resources.Load<Sprite>(sp);
   }
 
   // Important!
