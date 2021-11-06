@@ -49,7 +49,7 @@ public class PlayerControl : MonoBehaviour
             if (GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth >= 1)
               GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth -= HealthDecrement * Time.deltaTime;
 
-            if (InputController.Instance.Firing && !_firingCooldown)
+            if (InputController.Instance.Firing && !_firingCooldown && GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon != null)
             {
             GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon.Fire(false);
             _firingCooldown = new Timer((float)(1f / GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon.FireRate));
