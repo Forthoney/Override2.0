@@ -600,8 +600,8 @@ MonoBehaviour:
   SwitchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: FMOD/FMOD.fspro
-  sourceBankPath: FMOD/Build
+  sourceProjectPath: FMOD2/FMOD2.fspro
+  sourceBankPath: FMOD2/Build
   SourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
@@ -676,7 +676,7 @@ MonoBehaviour:
   BoltUnitOptionsBuildPending: 0
   EnableErrorCallback: 0
   SharedLibraryUpdateStage: 0
-  SharedLibraryTimeSinceStart: 9229.7816974
+  SharedLibraryTimeSinceStart: 17252.381615018
   HideSetupWizard: 1
   Platforms:
   - {fileID: -7677387543282026121}

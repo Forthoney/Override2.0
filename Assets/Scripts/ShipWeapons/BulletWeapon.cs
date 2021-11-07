@@ -6,7 +6,7 @@ using UnityEngine;
 public class BulletWeapon : ShipWeapon
 {
   public BulletWeapon(GameObject bPrefab, Vector2 sPosOffset, GameObject fSource) :
-      base(1, 3, 10, fSource, bPrefab, sPosOffset, "Materials/Gun Small Enemy")
+      base(1, 3, 20, fSource, bPrefab, sPosOffset, "Materials/Gun Small Enemy")
   {}
 
   public override void Fire(bool isEnemyBullet)

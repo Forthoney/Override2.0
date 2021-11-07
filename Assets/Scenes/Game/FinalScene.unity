@@ -196,6 +196,63 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 43.241703, y: 0.9337616}
   m_EdgeRadius: 0
+--- !u!1001 &253928970
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7398476729755902891, guid: e351720df211b4fd1bd72e57f8fd1962, type: 3}
+      propertyPath: m_Name
+      value: Override
+      objectReference: {fileID: 0}
+    - target: {fileID: 7398476729755902892, guid: e351720df211b4fd1bd72e57f8fd1962, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7398476729755902892, guid: e351720df211b4fd1bd72e57f8fd1962, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7398476729755902892, guid: e351720df211b4fd1bd72e57f8fd1962, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7398476729755902892, guid: e351720df211b4fd1bd72e57f8fd1962, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7398476729755902892, guid: e351720df211b4fd1bd72e57f8fd1962, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7398476729755902892, guid: e351720df211b4fd1bd72e57f8fd1962, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7398476729755902892, guid: e351720df211b4fd1bd72e57f8fd1962, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7398476729755902892, guid: e351720df211b4fd1bd72e57f8fd1962, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7398476729755902892, guid: e351720df211b4fd1bd72e57f8fd1962, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7398476729755902892, guid: e351720df211b4fd1bd72e57f8fd1962, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7398476729755902892, guid: e351720df211b4fd1bd72e57f8fd1962, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e351720df211b4fd1bd72e57f8fd1962, type: 3}
 --- !u!1001 &398590116
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -680,7 +737,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: -1294800117
-  m_SortingOrder: 0
+  m_SortingOrder: 6
   m_TargetDisplay: 0
 --- !u!224 &596437818
 RectTransform:
@@ -2608,7 +2665,7 @@ PrefabInstance:
     - target: {fileID: 4962210372555457876, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
       propertyPath: deathParticleObject
       value: 
-      objectReference: {fileID: 7299727634646549584, guid: a19df24fe0fd10f42b0148d93ae060d4, type: 3}
+      objectReference: {fileID: 7440497295322247079, guid: 68327f160785f434585d6208c22d9897, type: 3}
     - target: {fileID: 4962210372555457876, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
       propertyPath: EnemyShips.Array.size
       value: 0
@@ -2617,6 +2674,10 @@ PrefabInstance:
       propertyPath: PauseUIObjects.Array.size
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4962210372555457876, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
+      propertyPath: playerDeathParticleObject
+      value: 
+      objectReference: {fileID: 1863911906802790616, guid: 533f0a3d1fee74e9987c6f58ace59e66, type: 3}
     - target: {fileID: 4962210372555457876, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
       propertyPath: PauseUIObjects.Array.data[0]
       value: 

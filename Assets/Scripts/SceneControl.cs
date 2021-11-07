@@ -22,7 +22,7 @@ public class SceneControl : MonoBehaviour
     /// </summary>
     public void StartGame()
     {
-        SceneManager.LoadScene("UI Test");
+        SceneManager.LoadScene("FinalScene");
     }
 
     /// <summary>
@@ -37,7 +37,7 @@ public class SceneControl : MonoBehaviour
     /// Transition from gameplay scene to game over scene when player dies.
     /// Transition from gameplay scene to game over scene when player manually gives up from pause.
     /// </summary>
-    public void GameOver()
+    public static void GameOver()
     {
         // TODO reset deltatime scale back to 1 in case user self destructed from pause screen.
         // TODO end score value through DontDestroyOnLoad
@@ -50,7 +50,7 @@ public class SceneControl : MonoBehaviour
     public void RestartGame()
     {
         // TODO Make sure to reset/destroy any objects in DontDestroyOnLoad
-        SceneManager.LoadScene("UI Test");
+        SceneManager.LoadScene("FinalScene");
     }
 
     /// <summary>
