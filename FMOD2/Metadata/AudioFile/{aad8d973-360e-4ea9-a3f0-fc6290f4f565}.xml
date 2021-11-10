@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.00.00">
 	<object class="AudioFile" id="{aad8d973-360e-4ea9-a3f0-fc6290f4f565}">
 		<property name="assetPath">
-			<value>deepspaceambience.wav</value>
+			<value>Official/deepspaceambience.wav</value>
 		</property>
 		<property name="isStreaming">
 			<value>true</value>

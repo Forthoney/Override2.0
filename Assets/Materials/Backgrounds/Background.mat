@@ -47,4 +47,5 @@ Material:
     m_Colors:
     - Vector2_0a8a077f80dd461885c13ecb840ccfc3: {r: 50, g: 20, b: 0, a: 0}
     - _BloomColor: {r: 0, g: 0, b: 0, a: 0}
+    - _Velocity: {r: 50, g: 5, b: 0, a: 0}
   m_BuildTextureStacks: []
