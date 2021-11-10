@@ -15,6 +15,6 @@ MonoBehaviour:
   _damage: 1
   _fireRate: 4
   _bulletSpeed: 16
-  _bulletPrefab: {fileID: 549320140095666336, guid: 582a299cb64424f429ab0b090c518c2b, type: 3}
+  _bulletPrefab: {fileID: 3637630408392106280, guid: 5db6aa6cfb713443d8a25a9c28d726d1, type: 3}
   _spritePosOffset: {x: 0, y: 0}
   _tier: 0
