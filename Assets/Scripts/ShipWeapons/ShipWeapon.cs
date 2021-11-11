@@ -11,10 +11,8 @@ public abstract class ShipWeapon : ScriptableObject
   [SerializeField] protected float _bulletSpeed;
   protected bool _isFiring;
   protected GameObject _firingSource;
-  protected GameObject _firingEffect;
   [SerializeField] protected GameObject _bulletPrefab;
   [SerializeField] protected Vector2 _spritePosOffset;
-  [SerializeField] protected GameObject _shootEffectPrefab;
 
   [SerializeField] protected float _tier;
   private string _material;
@@ -37,13 +35,7 @@ public abstract class ShipWeapon : ScriptableObject
   public GameObject FiringSource
   {
     get => _firingSource;
-    set {
-		bool load = false;
-		if (_firingSource != value)
-			load = true;
-		_firingSource = value;
-		if (load) LoadFiringSource();
-	}
+    set => _firingSource = value;
   }
   public GameObject BulletPrefab
   {
@@ -59,10 +51,6 @@ public abstract class ShipWeapon : ScriptableObject
   {
     get => _material;
     set => _material = value;
-  }
-  public GameObject ShootEffectPrefab {
-	  get => _shootEffectPrefab;
-	  set => _shootEffectPrefab = value;
   }
 
   // Copy constructor
@@ -101,12 +89,4 @@ public abstract class ShipWeapon : ScriptableObject
 
   // Important! must be overridden in derived class
   public abstract void Fire(bool isEnemyBullet);
-
-  public void LoadFiringSource() {
-	  if (FiringSource != null) {
-		GameObject eff = Instantiate<GameObject>(ShootEffectPrefab, FiringSource.transform);
-		eff.transform.SetParent(FiringSource.transform);
-		_firingEffect = eff;
-	  }
-  }
 }
