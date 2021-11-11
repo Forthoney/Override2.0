@@ -15,7 +15,7 @@ public abstract class ShipWeapon : ScriptableObject
   [SerializeField] protected Vector2 _spritePosOffset;
 
   [SerializeField] protected float _tier;
-  private string _material;
+  [SerializeField] protected Material _material;
   // Accessors
   public float Damage
   {
@@ -47,7 +47,7 @@ public abstract class ShipWeapon : ScriptableObject
     get => _spritePosOffset;
     set => _spritePosOffset = value;
   }
-  public string Material
+  public Material Material
   {
     get => _material;
     set => _material = value;
@@ -74,7 +74,7 @@ public abstract class ShipWeapon : ScriptableObject
       GameObject fSource,
       GameObject bPrefab,
       Vector2 sPosOffset,
-      string weaponMaterial)
+      Material weaponMaterial)
   {
     _damage = damage;
     _fireRate = fireRate;
@@ -84,7 +84,7 @@ public abstract class ShipWeapon : ScriptableObject
     _bulletPrefab = bPrefab;
     _spritePosOffset = sPosOffset;
     _material = weaponMaterial;
-    fSource.GetComponent<SpriteRenderer>().material = Resources.Load<Material>(weaponMaterial);
+    fSource.GetComponent<SpriteRenderer>().material = weaponMaterial;
   }
 
   // Important! must be overridden in derived class

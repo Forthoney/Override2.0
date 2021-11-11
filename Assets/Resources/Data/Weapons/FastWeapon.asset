@@ -18,3 +18,4 @@ MonoBehaviour:
   _bulletPrefab: {fileID: 549320140095666336, guid: 582a299cb64424f429ab0b090c518c2b, type: 3}
   _spritePosOffset: {x: 0, y: 0}
   _tier: 0
+  _material: {fileID: 2100000, guid: 7d7fd3c2b90e02b43a3b227c09df19c9, type: 2}

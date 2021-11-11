@@ -21,6 +21,7 @@ public class ShipControlComponent : MonoBehaviour
     // Debug.Log(_shipBody);
     // Debug.Log(_shipBody.spritePath);
     renderer.sprite = _shipBody._spritePath;
+    renderer.material = _shipWeapon.Material;
   }
 
   // Update is called once per frame

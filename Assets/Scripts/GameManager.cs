@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
   void Awake()
   {
     Instance = this;
-    PlayerShip = GameObject.FindWithTag("Player");
+    PlayerShip = null;
     if (PauseUIObjects != null)
     {
       // If game is paused
@@ -79,6 +79,9 @@ public class GameManager : MonoBehaviour
     {
       StartCoroutine(_pause());
     }
+
+    // if we have no player ship, the game should not be running
+    if (PlayerShip == null) return;
 
     timer += Time.deltaTime;
     if (timer > EnemyRate)
@@ -120,7 +123,6 @@ public class GameManager : MonoBehaviour
 
   public void generateWave()
   {
-
 
     for (int i = 0; i < waveSize; i++)
     {
