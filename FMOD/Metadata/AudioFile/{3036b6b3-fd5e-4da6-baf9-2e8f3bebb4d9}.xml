@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{3036b6b3-fd5e-4da6-baf9-2e8f3bebb4d9}">
+		<property name="assetPath">
+			<value>deepspaceambience.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>240.12226757369615</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{035b6979-8cd9-4856-9be1-f29956e08210}</destination>
+		</relationship>
+	</object>
+</objects>

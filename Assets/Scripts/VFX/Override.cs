@@ -1,5 +1,4 @@
 using UnityEngine;
-using FMODUnity;
 using System.Collections.Generic;
 
 public class Override : MonoBehaviour {
@@ -16,7 +15,6 @@ public class Override : MonoBehaviour {
 			}
 			eff.system.Play();
 		}
-		GetComponent<StudioEventEmitter>()?.Play();
 	}
 
 	[System.Serializable]

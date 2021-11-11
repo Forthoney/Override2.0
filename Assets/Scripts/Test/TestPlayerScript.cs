@@ -7,5 +7,6 @@ public class TestPlayerScript : MonoBehaviour
     Debug.Log(GameManager.Instance.getBodyFromPool());
     GetComponent<ShipControlComponent>().ShipBody = GameManager.Instance.getBodyFromPool();
     GetComponent<ShipControlComponent>().ShipWeapon = GameManager.Instance.getWeaponFromPool();
+    GetComponent<ShipControlComponent>().ShipWeapon.FiringSource = gameObject;
   }
 }

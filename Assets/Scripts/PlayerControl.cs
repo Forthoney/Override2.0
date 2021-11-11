@@ -49,22 +49,6 @@ public class PlayerControl : MonoBehaviour
             if (GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth >= 1)
               GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth -= HealthDecrement * Time.deltaTime;
 
-			if (_hijackCooldown) {
-				float percentage = 100f * _hijackCooldown.TimeLeft / HijackCooldownTime;
-				//Debug.Log(percentage);
-				if (percentage > 50f) {
-					GameManager.PlayerShip.GetComponent<SpriteRenderer>().material.SetFloat("_Intensity", 0.4f * Mathf.Sin(Mathf.PI / HijackCooldownTime * 10f * Time.time) + 0.6f);
-				}
-				//halfway done with cooldown
-				else if (percentage > 15f) {
-					GameManager.PlayerShip.GetComponent<SpriteRenderer>().material.SetFloat("_Intensity", 0.4f * Mathf.Sin(Mathf.PI / HijackCooldownTime * 30f * Time.time) + 0.6f);
-				} else {
-					GameManager.PlayerShip.GetComponent<SpriteRenderer>().material.SetFloat("_Intensity", 0.3f * Mathf.Sin(Mathf.PI / HijackCooldownTime * 60f * Time.time) + 0.7f);
-				}
-			} else {
-				GameManager.PlayerShip.GetComponent<SpriteRenderer>().material.SetFloat("_Intensity", 1f);
-			}
-
             if (InputController.Instance.Firing && !_firingCooldown && GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon != null)
             {
             GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon.Fire(false);
