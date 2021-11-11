@@ -15,6 +15,7 @@ public abstract class ShipWeapon : ScriptableObject
   [SerializeField] protected GameObject _bulletPrefab;
   [SerializeField] protected Vector2 _spritePosOffset;
   [SerializeField] protected GameObject _shootEffectPrefab;
+  [SerializeField] protected GameObject _shootEffectHitPrefab;
 
   [SerializeField] protected float _tier;
   private string _material;
@@ -63,6 +64,10 @@ public abstract class ShipWeapon : ScriptableObject
   public GameObject ShootEffectPrefab {
 	  get => _shootEffectPrefab;
 	  set => _shootEffectPrefab = value;
+  }
+  public GameObject ShootEffectHitPrefab {
+	  get => _shootEffectHitPrefab;
+	  set => _shootEffectHitPrefab = value;
   }
 
   // Copy constructor

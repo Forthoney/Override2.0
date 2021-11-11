@@ -18,6 +18,7 @@ public class BulletWeapon : ShipWeapon
     bullet.GetComponent<BulletBehaviour>().isEnemyBullet = isEnemyBullet;
     bullet.GetComponent<BulletBehaviour>().damage = _damage;
     bullet.GetComponent<BulletBehaviour>().speed = _bulletSpeed;
+    bullet.GetComponent<BulletBehaviour>().OnHitEffect = ShootEffectHitPrefab;
 
 	_firingEffect?.GetComponent<ParticleCombo>()?.Play();
 
