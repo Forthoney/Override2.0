@@ -85,7 +85,6 @@ public class ShipControlComponent : MonoBehaviour
 	public void InitShip() {
 		if (!_initiated) {
 			ShipWeapon.FiringSource = FiringSource == null ? gameObject : FiringSource;
-			Debug.Log(FiringSource);
 			_initiated = true;
 		}
 	}
