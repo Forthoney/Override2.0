@@ -131,8 +131,9 @@ public class GameManager : MonoBehaviour
       ShipControlComponent shipComponent = ship.GetComponent<ShipControlComponent>();
       shipComponent.ShipBody = getBodyFromPool();
       shipComponent.ShipWeapon = getWeaponFromPool();
-      shipComponent.ShipWeapon.FiringSource = ship;
+    //   shipComponent.ShipWeapon.FiringSource = ship; => not necessarily the case that bullets comes out of the center of the ship. 
       shipComponent.EnemyBehaviour = new BasicBehaviour(shipComponent);
+		shipComponent.InitShip();
       EnemyShips.Add(ship);
     }
   }

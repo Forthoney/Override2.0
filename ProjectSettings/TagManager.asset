@@ -51,6 +51,9 @@ TagManager:
   - name: Ships
     uniqueID: 3907422551
     locked: 0
+  - name: Projectile
+    uniqueID: 3534219897
+    locked: 0
   - name: VFX
     uniqueID: 1434215723
     locked: 0

@@ -14,6 +14,8 @@ public class ShipControlComponent : MonoBehaviour
   private ShipWeapon _shipWeapon;
   private EnemyBehaviour _enemyBehaviour;
 
+  public GameObject FiringSource;
+
   // Start is called before the first frame update
   void Start()
   {
@@ -22,6 +24,7 @@ public class ShipControlComponent : MonoBehaviour
     // Debug.Log(_shipBody.spritePath);
     renderer.sprite = _shipBody._spritePath;
     renderer.material = _shipWeapon.Material;
+    InitShip();
   }
 
   // Update is called once per frame
@@ -75,6 +78,18 @@ public class ShipControlComponent : MonoBehaviour
   {
     get { return _enemyBehaviour; }
     set { _enemyBehaviour = value; }
+  }
+
+
+  bool _initiated = false;
+  // Run once when Ship is created, after ShipBody and ShipWeapon have been loaded, or immediately on start
+  public void InitShip()
+  {
+    if (!_initiated)
+    {
+      ShipWeapon.FiringSource = FiringSource == null ? gameObject : FiringSource;
+      _initiated = true;
+    }
   }
 
   // Create a new ShipBody or ShipWeapon

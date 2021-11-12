@@ -16,12 +16,14 @@ public class BulletBehaviour : MonoBehaviour
     get; set;
   }
 
+  public GameObject OnHitEffect {get; set;}
+
   public bool isEnemyBullet;
 
   // Update is called once per frame
   void Update()
   {
-    transform.position += transform.rotation * Vector2.up * speed * Time.deltaTime;
+    transform.position += transform.right * speed * Time.deltaTime;
   }
 
   void OnTriggerEnter2D(Collider2D other)
@@ -30,7 +32,7 @@ public class BulletBehaviour : MonoBehaviour
     {
       if (other.gameObject == GameManager.PlayerShip)
       {
-        other.gameObject.GetComponent<ShipControlComponent>().takeDamage(damage);
+        other.gameObject.GetComponent<ShipControlComponent>()?.takeDamage(damage);
 
         this.Die();
       }
@@ -39,7 +41,7 @@ public class BulletBehaviour : MonoBehaviour
     {
       if (other.gameObject != GameManager.PlayerShip)
       {
-        other.gameObject.GetComponent<ShipControlComponent>().takeDamage(damage);
+        other.gameObject.GetComponent<ShipControlComponent>()?.takeDamage(damage);
         ShockManager.Instance.StartShake(new Vector3(0, -2, 0));
         this.Die();
       }
@@ -55,6 +57,8 @@ public class BulletBehaviour : MonoBehaviour
 
   public void Die()
   {
+	if (OnHitEffect != null)
+		ParticleUtils.EmitOnce(OnHitEffect, transform);
     Destroy(gameObject);
   }
 
