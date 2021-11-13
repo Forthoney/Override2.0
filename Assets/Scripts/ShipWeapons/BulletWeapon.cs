@@ -20,19 +20,23 @@ public class BulletWeapon : ShipWeapon
     bullet.GetComponent<BulletBehaviour>().speed = _bulletSpeed;
     bullet.GetComponent<BulletBehaviour>().OnHitEffect = ShootEffectHitPrefab;
 
-	_firingEffect?.GetComponent<ParticleCombo>()?.Play();
+    _firingEffect?.GetComponent<ParticleCombo>()?.Play();
 
     // If this is a player bullet
     if (!isEnemyBullet)
     {
-			bullet.GetComponent<BulletBehaviour>().speed *= 2;
-			ShockManager.Instance.StartShake(new Vector3(0, -0.5f, 0));
-			if (bullet.GetComponentInChildren<SpriteRenderer>() != null)
-				bullet.GetComponentInChildren<SpriteRenderer>().color = Color.red;
-			if (bullet.GetComponentInChildren<ParticleSystem>() != null) {
-				ParticleSystem.MinMaxGradient col = bullet.GetComponentInChildren<ParticleSystem>().main.startColor;
-				col.color = Color.red;
-			}
-		}
-	}
+      bullet.GetComponent<BulletBehaviour>().speed *= 2;
+      ShockManager.Instance.StartShake(new Vector3(0, -0.5f, 0));
+      if (bullet.GetComponentInChildren<SpriteRenderer>() != null)
+        bullet.GetComponentInChildren<SpriteRenderer>().color = Color.red;
+
+      TrailRenderer trail = bullet.GetComponentInChildren<TrailRenderer>();
+      Gradient gradient = new Gradient();
+      gradient.SetKeys(
+          new GradientColorKey[] { new GradientColorKey(Color.red, 0.0f), new GradientColorKey(Color.red, 1.0f) },
+          new GradientAlphaKey[] { new GradientAlphaKey(0.5f, 0.0f), new GradientAlphaKey(0, 1.0f) }
+      );
+      trail.colorGradient = gradient;
+    }
+  }
 }

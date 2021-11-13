@@ -27,9 +27,9 @@ public class GameManager : MonoBehaviour
   public List<GameObject> EnemyShips;
 
   public TextMeshProUGUI ScoreNumber;
-  float _score;
+  static float _score;
 
-  public float Score
+  public static float Score
   {
     get => _score; set
     {

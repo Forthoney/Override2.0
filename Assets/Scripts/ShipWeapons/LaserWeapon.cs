@@ -26,7 +26,13 @@ public class LaserWeapon : ShipWeapon
       laser.GetComponent<BulletBehaviour>().speed *= 2;
       ShockManager.Instance.StartShake(new Vector3(0, -0.5f, 0));
       laser.GetComponent<SpriteRenderer>().color = Color.red;
-      laser.GetComponent<ParticleSystem>().startColor = Color.red;
+      TrailRenderer trail = laser.GetComponentInChildren<TrailRenderer>();
+      Gradient gradient = new Gradient();
+      gradient.SetKeys(
+          new GradientColorKey[] { new GradientColorKey(Color.red, 0.0f), new GradientColorKey(Color.red, 1.0f) },
+          new GradientAlphaKey[] { new GradientAlphaKey(1, 0.0f), new GradientAlphaKey(1, 1.0f) }
+      );
+      trail.colorGradient = gradient;
     }
   }
 }
