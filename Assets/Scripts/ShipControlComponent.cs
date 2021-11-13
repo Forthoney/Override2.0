@@ -15,15 +15,13 @@ public class ShipControlComponent : MonoBehaviour
   private EnemyBehaviour _enemyBehaviour;
 
   public GameObject FiringSource;
+  public SpriteRenderer OutlineSprite;
 
   // Start is called before the first frame update
   void Start()
   {
-    SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
     // Debug.Log(_shipBody);
     // Debug.Log(_shipBody.spritePath);
-    renderer.sprite = _shipBody._spritePath;
-    renderer.material = _shipWeapon.Material;
     InitShip();
   }
 
@@ -81,11 +79,18 @@ public class ShipControlComponent : MonoBehaviour
   // Run once when Ship is created, after ShipBody and ShipWeapon have been loaded, or immediately on start
   public void InitShip()
   {
-    if (!_initiated)
-    {
-      ShipWeapon.FiringSource = FiringSource == null ? gameObject : FiringSource;
-      _initiated = true;
-    }
+    if (!_initiated) {
+		ShipWeapon.FiringSource = FiringSource == null ? gameObject : FiringSource;
+		_initiated = true;
+		SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+		if (renderer != null) {
+			renderer.sprite = _shipBody._spritePath;
+			renderer.material = _shipWeapon.Material;
+		}
+		if (OutlineSprite != null) {
+			OutlineSprite.sprite = _shipBody._outlineSprite;
+		}
+	}
   }
 
 

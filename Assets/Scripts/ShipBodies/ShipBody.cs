@@ -13,8 +13,9 @@ public class ShipBody : ScriptableObject
   [SerializeField] protected float _colliderRadius;
   [SerializeField] protected float _accelerationLambda;
   [SerializeField] protected float _toZeroAccelerationLambdaModifier;
-  public Sprite _spritePath;
+  public Sprite _spritePath, _outlineSprite;
   [SerializeField] protected float tier;
+
 
   void Awake()
   {
@@ -52,6 +53,11 @@ public class ShipBody : ScriptableObject
     get => _spritePath;
     set => _spritePath = value;
   }
+  public Sprite OutlineSprite
+  {
+    get => _outlineSprite;
+    set => _outlineSprite = value;
+  }
 
   // Important!
   public void move()
@@ -68,4 +74,5 @@ public class ShipBody : ScriptableObject
     GameManager.PlayerShip.GetComponent<Rigidbody2D>().velocity =
       Vector2.Lerp(currVel, targetVel, 1 - Mathf.Exp(-_accelerationLambda * otherDirectionBonus * Time.deltaTime));
   }
+
 }

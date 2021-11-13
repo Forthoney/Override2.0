@@ -54,6 +54,8 @@ public class GameManager : MonoBehaviour
   public ShipBody[] bodyPool = new ShipBody[] { };
   public ShipWeapon[] weaponPool = new ShipWeapon[] { };
 
+
+
   // These pools represent the pool of currently selectable parts. It grows as the game progresses. 
   List<ShipBody> spawnableBodies = new List<ShipBody> { };
   List<ShipWeapon> spawnableWeapons = new List<ShipWeapon> { };
@@ -146,7 +148,7 @@ public class GameManager : MonoBehaviour
       shipComponent.ShipBody = getBodyFromPool();
       shipComponent.ShipWeapon = getWeaponFromPool();
       //   shipComponent.ShipWeapon.FiringSource = ship; => not necessarily the case that bullets comes out of the center of the ship. 
-      shipComponent.EnemyBehaviour = new FollowBehaviour(shipComponent);
+      shipComponent.EnemyBehaviour = getBehaviourFromPool(shipComponent);
       shipComponent.InitShip();
       EnemyShips.Add(ship);
     }
@@ -259,4 +261,15 @@ public class GameManager : MonoBehaviour
     Time.timeScale = 1;
     SceneControl.GameOver();
   }
+
+  private EnemyBehaviour getBehaviourFromPool(ShipControlComponent shipControlComponent)
+  {
+    System.Random random = new System.Random();
+    EnemyBehaviour[] behaviourPool = new EnemyBehaviour[] { new FollowBehaviour(shipControlComponent), new BasicBehaviour(shipControlComponent) };
+
+    return behaviourPool[random.Next(behaviourPool.Length)];
+  }
+
+
+
 }
