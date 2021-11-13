@@ -14972,7 +14972,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5499576060514413935, guid: de8d7c4f8262b47abbc6c9abdd389d6f, type: 3}
       propertyPath: looping
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5499576060514413935, guid: de8d7c4f8262b47abbc6c9abdd389d6f, type: 3}
       propertyPath: lengthInSec
@@ -15120,7 +15120,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5499576060514413935, guid: de8d7c4f8262b47abbc6c9abdd389d6f, type: 3}
       propertyPath: VelocityModule.speedModifier.minMaxState
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5499576060514413935, guid: de8d7c4f8262b47abbc6c9abdd389d6f, type: 3}
       propertyPath: SubModule.subEmitters.Array.data[0].emitter
