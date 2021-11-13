@@ -17,6 +17,7 @@ public class PlayerControl : MonoBehaviour
 
   private Timer _firingCooldown;
   private Timer _hijackCooldown;
+  private float _swapMaxDistFromMouse = 5f; // FIXME: magic number was arbitrarily selected (it works ofc)
 
   private bool _isDead = false;
 
@@ -81,28 +82,40 @@ public class PlayerControl : MonoBehaviour
         _firingCooldown.Start();
       }
 
+      // Handle swapping
       if (InputController.Instance.Swapping)
       {
-        ShipControlComponent otherShip = null;
-        foreach (var ship in GameObject.FindObjectsOfType<ShipControlComponent>())
+        // Prepare stuff
+        ShipControlComponent swapTargetShip = null;
+        float swapTargetShipDist = float.PositiveInfinity;
+        Vector2 mouseWorldPos = InputController.Instance.MouseWorldPos;
+
+        // Iterate over all ships to find a ship to swap to
+        foreach (var currShip in GameObject.FindObjectsOfType<ShipControlComponent>())
         {
-          if (ship.gameObject != GameManager.PlayerShip)
+          // If it isn't the player's ship
+          if (currShip.gameObject != GameManager.PlayerShip)
           {
-            if (otherShip == null ||
-                (InputController.Instance.MouseWorldPos - (Vector2)ship.transform.position).magnitude <
-                (InputController.Instance.MouseWorldPos - (Vector2)otherShip.transform.position).magnitude) otherShip = ship;
-          }
-        }
-        if (otherShip != null)
-        {
-          if (!_hijackCooldown)
-          {
-            _hijackCooldown = new Timer((float)(HijackCooldownTime));
-            _hijackCooldown.Start();
-            StartCoroutine(_hijack(otherShip));
+            float currDist = (mouseWorldPos - (Vector2) currShip.transform.position).magnitude;
+            if (currDist < swapTargetShipDist && currDist < _swapMaxDistFromMouse)
+            {
+              swapTargetShipDist = currDist;
+              swapTargetShip = currShip;
+            }
           }
         }
 
+        // If another ship to swap to was found
+        if (swapTargetShip != null)
+        {
+          if (!_hijackCooldown) // FIXME? consider tradeoffs of moving cooldown check to "handle swapping" if
+          {
+            _hijackCooldown = new Timer((float)(HijackCooldownTime));
+            _hijackCooldown.Start();
+            StartCoroutine(_hijack(swapTargetShip));
+          }
+        }
+        
         InputController.Instance.Swapping = false;
       }
     }
@@ -110,8 +123,8 @@ public class PlayerControl : MonoBehaviour
 
   void rotateTowardsMouse()
   {
-    Vector3 mousePos = InputController.Instance.MouseWorldPos;
-    Vector3 playerToMouse = mousePos - GameManager.PlayerShip.transform.position;
+    Vector3 mouseWorldPos = InputController.Instance.MouseWorldPos;
+    Vector3 playerToMouse = mouseWorldPos - GameManager.PlayerShip.transform.position;
     float angle = Mathf.Atan2(playerToMouse.y, playerToMouse.x) * Mathf.Rad2Deg;
     if (Time.deltaTime != 0)
       GameManager.PlayerShip.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
@@ -124,9 +137,9 @@ public class PlayerControl : MonoBehaviour
 
   void instantiateBullet()
   {
-    Vector3 mousePos = InputController.Instance.MouseWorldPos;
+    Vector3 mouseWorldPos = InputController.Instance.MouseWorldPos;
 
-    Vector3 playerToMouse = mousePos - GameManager.PlayerShip.transform.position;
+    Vector3 playerToMouse = mouseWorldPos - GameManager.PlayerShip.transform.position;
     float angle = Mathf.Atan2(playerToMouse.y, playerToMouse.x) * Mathf.Rad2Deg;
 
     playerToMouse = playerToMouse.normalized;
@@ -134,18 +147,18 @@ public class PlayerControl : MonoBehaviour
     Instantiate(bullet, GameManager.PlayerShip.transform.position + playerToMouse, Quaternion.Euler(new Vector3(0, 0, angle - 90)));
   }
 
-  IEnumerator _hijack(ShipControlComponent otherShip)
+  IEnumerator _hijack(ShipControlComponent swapTargetShip)
   {
     Time.timeScale = 0;
     TimerUnscaled pause = new TimerUnscaled(FreezeDurationOnSwap);
     pause.Start();
 
-    otherShip.ShipBody.CurrHealth = otherShip.ShipBody.MaxHealth;
+    swapTargetShip.ShipBody.CurrHealth = swapTargetShip.ShipBody.MaxHealth;
 
-    FindObjectOfType<Override>()?.Trigger(GameManager.PlayerShip.transform.position, otherShip.transform.position);
+    FindObjectOfType<Override>()?.Trigger(GameManager.PlayerShip.transform.position, swapTargetShip.transform.position);
 
     Destroy(GameManager.PlayerShip);
-    GameManager.PlayerShip = otherShip.gameObject;
+    GameManager.PlayerShip = swapTargetShip.gameObject;
 
     while (pause) yield return null;
     Time.timeScale = 1;
