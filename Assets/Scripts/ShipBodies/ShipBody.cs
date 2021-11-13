@@ -11,7 +11,8 @@ public class ShipBody : ScriptableObject
   public float _currHealth = 3;
   [SerializeField] protected float _speed;
   [SerializeField] protected float _colliderRadius;
-  [SerializeField] protected float _accelerationLambda = 8f;
+  [SerializeField] protected float _accelerationLambda;
+  [SerializeField] protected float _toZeroAccelerationLambdaModifier;
   public Sprite _spritePath;
   [SerializeField] protected float tier;
 
@@ -41,40 +42,30 @@ public class ShipBody : ScriptableObject
     get => _accelerationLambda;
     set => _accelerationLambda = value;
   }
+  public float ToZeroAccelerationLambdaModifier
+  {
+    get => _toZeroAccelerationLambdaModifier;
+    set => _toZeroAccelerationLambdaModifier = value;
+  }
   public Sprite SpritePath
   {
     get => _spritePath;
     set => _spritePath = value;
   }
 
-  // Copy constructor
-  public ShipBody(ShipBody other)
-  {
-
-    _maxHealth = other.MaxHealth;
-    _currHealth = other.CurrHealth;
-    _speed = other.Speed;
-    _colliderRadius = other._colliderRadius;
-    _accelerationLambda = other._accelerationLambda;
-    _spritePath = other.SpritePath;
-  }
-
-  // Constructor
-  protected ShipBody(float h, float s, float cr, float accelerationLambda, string sp)
-  {
-    _maxHealth = h;
-    _currHealth = h;
-    _speed = s;
-    _colliderRadius = cr;
-    _accelerationLambda = accelerationLambda;
-    _spritePath = Resources.Load<Sprite>(sp);
-  }
-
   // Important!
   public void move()
   {
-    Vector2 vel = GameManager.PlayerShip.GetComponent<Rigidbody2D>().velocity;
+    Vector2 currVel = GameManager.PlayerShip.GetComponent<Rigidbody2D>().velocity;
+    Vector2 targetVel = InputController.Instance.Movement * _speed;
+
+    // Different acceleration bonuses for different inputs
+    float otherDirectionBonus = 
+      targetVel == Vector2.zero ? 
+      _toZeroAccelerationLambdaModifier : // When decelerating to zero (no player input)
+      Mathf.Max(2 * (-Vector2.Dot(currVel.normalized, targetVel.normalized) + 1), 1); // When actively accelerating in opposite direction
+    
     GameManager.PlayerShip.GetComponent<Rigidbody2D>().velocity =
-        Vector2.Lerp(vel, InputController.Instance.Movement * _speed, 1 - Mathf.Exp(-AccelerationLambda * Time.deltaTime));
+      Vector2.Lerp(currVel, targetVel, 1 - Mathf.Exp(-_accelerationLambda * otherDirectionBonus * Time.deltaTime));
   }
 }
