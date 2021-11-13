@@ -29,7 +29,7 @@ public class ShipControlComponent : MonoBehaviour
   void Update()
   {
     // Check if ship body has zero health
-    if (_shipBody.CurrHealth < 0)
+    if (_shipBody.CurrHealth <= 0)
     {
       GameManager.Instance.ShipDestroy(gameObject);
     }
