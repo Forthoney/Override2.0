@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DiamondBullet
+  m_Controller: {fileID: 9100000, guid: 486b60a1eb0de4961a14dc6cf75f19f7, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 8aee65b2a4810448488cc557759063e2, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 8aee65b2a4810448488cc557759063e2, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 99be3bcd90ee7403197b9247a9f2c30d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 8d1f05e0ca7e849098fcb0a03a775d19, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: bc1b7cc86ab014f569e27a2101da8592, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: bc1b7cc86ab014f569e27a2101da8592, type: 2}

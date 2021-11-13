@@ -803,7 +803,7 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
     arc:
-      value: 120
+      value: 360
       mode: 0
       spread: 0
       speed:
@@ -4879,7 +4879,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3617953601488723711
 Transform:
   m_ObjectHideFlags: 0
@@ -9735,7 +9735,7 @@ GameObject:
   - component: {fileID: 2251775157083537517}
   - component: {fileID: 3225688236385380528}
   m_Layer: 0
-  m_Name: RoundBulletHit
+  m_Name: RBulletHit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
