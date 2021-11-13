@@ -80,18 +80,18 @@ public class ShipControlComponent : MonoBehaviour
   public void InitShip()
   {
     if (!_initiated) {
-		ShipWeapon.FiringSource = FiringSource == null ? gameObject : FiringSource;
-		_initiated = true;
-		SpriteRenderer renderer = GetComponent<SpriteRenderer>();
-		if (renderer != null) {
-			renderer.sprite = _shipBody._spritePath;
-			renderer.material = _shipWeapon.Material;
-		}
-		if (OutlineSprite != null) {
-			OutlineSprite.sprite = _shipBody._outlineSprite;
-		}
-	}
+      ShipWeapon.FiringSource = FiringSource == null ? gameObject : FiringSource;
+      _initiated = true;
+      SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+      if (renderer != null)
+      {
+        renderer.sprite = _shipBody._spritePath;
+        renderer.material = _shipWeapon.Material;
+      }
+      if (OutlineSprite != null)
+      {
+        OutlineSprite.sprite = _shipBody._outlineSprite;
+      }
+	  }
   }
-
-
 }

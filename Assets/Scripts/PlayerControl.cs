@@ -121,13 +121,14 @@ public class PlayerControl : MonoBehaviour
     }
   }
 
+  // Tell the ship body to rotate towards the mouse
   void rotateTowardsMouse()
   {
-    Vector3 mouseWorldPos = InputController.Instance.MouseWorldPos;
-    Vector3 playerToMouse = mouseWorldPos - GameManager.PlayerShip.transform.position;
-    float angle = Mathf.Atan2(playerToMouse.y, playerToMouse.x) * Mathf.Rad2Deg;
-    if (Time.deltaTime != 0)
-      GameManager.PlayerShip.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+    Vector2 mouseWorldPos = InputController.Instance.MouseWorldPos;
+    Vector2 currPos = GameManager.PlayerShip.GetComponent<Rigidbody2D>().position;
+    Vector2 direction = (mouseWorldPos - currPos).normalized;
+
+    GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.rotateTowardsWorldPos(GameManager.PlayerShip, mouseWorldPos);
   }
 
   void movePlayer()

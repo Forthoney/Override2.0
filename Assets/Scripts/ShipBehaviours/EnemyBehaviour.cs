@@ -25,9 +25,7 @@ public abstract class EnemyBehaviour
 
     protected void rotateTowardsPlayer()
     {
-        Vector3 thisToPlayer = GameManager.PlayerShip.transform.position - enemyShip.gameObject.transform.position;
-        float angle = Mathf.Atan2(thisToPlayer.y, thisToPlayer.x) * Mathf.Rad2Deg;
-        enemyShip.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+      enemyShip.ShipBody.rotateTowardsWorldPos(enemyShip.gameObject, GameManager.PlayerShip.transform.position);
     }
 
     protected void fireWeapon()
