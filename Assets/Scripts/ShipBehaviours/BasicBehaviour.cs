@@ -5,17 +5,12 @@ using UnityEngine;
 
 public class BasicBehaviour : EnemyBehaviour
 {
-
-  private float minX;
-  private float maxX;
-  private float minY;
-  private float maxY;
-  private float radius;
-  SpriteRenderer rend;
-  float speed = 5;
-  float attackSpeed = 0.3f;
-  float enemyAttackSpeedScalar = 0.1f;
-  float timer = 0;
+    private float minX;
+    private float maxX;
+    private float minY;
+    private float maxY;
+    private float radius;
+    SpriteRenderer rend;
 
   public BasicBehaviour(ShipControlComponent enemyShip) : base(enemyShip)
   {
@@ -33,23 +28,10 @@ public class BasicBehaviour : EnemyBehaviour
 
     // A sphere that fully encloses the bounding box.
     radius = rend.bounds.extents.magnitude;
-    timer += Random.Range(0, 0.3f);
-	if (enemyShip.ShipWeapon != null) {
-    	attackSpeed = enemyShip.ShipWeapon.FireRate * enemyAttackSpeedScalar;
-	}
-
   }
 
   public override void doAction()
   {
-
-    // FOLLOWS PLAYER BEHAVIOR
-    // Vector3 playerShip = GameManager.PlayerShip.transform.position;
-    // Vector3 enemyToOrigin = playerShip - enemyShip.gameObject.transform.position;
-    // float angle = Mathf.Atan2(enemyToOrigin.y, enemyToOrigin.x) * Mathf.Rad2Deg;
-    // enemyShip.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
-    // enemyShip.gameObject.transform.position += 0.03f * Vector3.Normalize(enemyToOrigin);
-
     Vector2 playerPos = enemyShip.gameObject.transform.position;
 
     float topDist, botDist, leftDist, rightDist;
@@ -59,6 +41,7 @@ public class BasicBehaviour : EnemyBehaviour
     botDist = Mathf.Abs(playerPos.y - maxY);
     topDist = Mathf.Abs(playerPos.y - minY);
 
+    // Fly into view once spaawned outside of camera
     if (playerPos.x > maxX - radius)
     {
       moveLeft();
@@ -75,14 +58,11 @@ public class BasicBehaviour : EnemyBehaviour
     {
       moveUp();
     }
+    // Fly around the edge of the view
     else
     {
-      // We need to stay a certain distance away from each other
-      // To this end, we need to enforce some limit on the number of ships t hat can spawn at once.
-
       float min = Mathf.Min(Mathf.Min(rightDist, leftDist), Mathf.Min(topDist, botDist));
 
-      // TODO: more robust movement that doesnt assume the enemies are spawned on the edge 
       if (min == rightDist)
       {
         moveDown();
@@ -102,17 +82,7 @@ public class BasicBehaviour : EnemyBehaviour
     }
 
     rotateTowardsPlayer();
-
-    if (timer >= 1 / attackSpeed)
-    {
-      enemyShip.ShipWeapon.Fire(true);
-      timer = 0;
-    }
-    else
-    {
-      timer += Time.deltaTime;
-    }
-
+    fireWeapon();
   }
 
   private void moveRight()
@@ -128,20 +98,10 @@ public class BasicBehaviour : EnemyBehaviour
   private void moveUp()
   {
     enemyShip.gameObject.transform.position += new Vector3(0, -1) * Time.deltaTime * speed;
-
   }
 
   private void moveDown()
   {
     enemyShip.gameObject.transform.position += new Vector3(0, 1) * Time.deltaTime * speed;
   }
-
-  private void rotateTowardsPlayer()
-  {
-    Vector3 thisToPlayer = GameManager.PlayerShip.transform.position - enemyShip.gameObject.transform.position;
-    float angle = Mathf.Atan2(thisToPlayer.y, thisToPlayer.x) * Mathf.Rad2Deg;
-    enemyShip.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
-  }
-
-
 }
