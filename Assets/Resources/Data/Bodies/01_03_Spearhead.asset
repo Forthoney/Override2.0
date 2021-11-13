@@ -15,6 +15,7 @@ MonoBehaviour:
   _maxHealth: 5
   _currHealth: 5
   _speed: 21
+  _rotationSpeed: 360
   _colliderRadius: 0
   _accelerationLambda: 12
   _toZeroAccelerationLambdaModifier: 0.7
