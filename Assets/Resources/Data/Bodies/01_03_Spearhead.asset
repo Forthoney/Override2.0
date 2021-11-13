@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90bcd3af73dd3b34caeb0057be18bb14, type: 3}
-  m_Name: FastBody
+  m_Name: 01_03_Spearhead
   m_EditorClassIdentifier: 
-  _maxHealth: 3
-  _currHealth: 3
-  _speed: 16
+  _maxHealth: 5
+  _currHealth: 5
+  _speed: 21
   _colliderRadius: 0
-  _accelerationLambda: 8
-  _toZeroAccelerationLambdaModifier: 0.4
-  _spritePath: {fileID: 21300000, guid: 5dd5e9fd91002e54d97d5f531c35edcd, type: 3}
-  _outlineSprite: {fileID: 21300000, guid: 5c25865c7f0cf430c98082108d0e5cda, type: 3}
+  _accelerationLambda: 12
+  _toZeroAccelerationLambdaModifier: 0
+  _spritePath: {fileID: 21300000, guid: 6a1d91fadc3724814bc7c48c188ac6b2, type: 3}
+  _outlineSprite: {fileID: 21300000, guid: ccaeae5dc52b84bafb370681994d9fd2, type: 3}
   tier: 0
