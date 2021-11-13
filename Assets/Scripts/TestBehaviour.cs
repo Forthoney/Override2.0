@@ -9,8 +9,6 @@ public class TestBehaviour : MonoBehaviour
   {
     ShipControlComponent enemyShipControl = gameObject.GetComponent<ShipControlComponent>();
     BasicBehaviour enemyBehaviour = new BasicBehaviour(enemyShipControl);
-    enemyShipControl.setNewBodyFromType(ShipBodyType.SlowChunk);
-    enemyShipControl.setNewWeaponFromType(ShipWeaponType.BulletWeapon);
     enemyShipControl.EnemyBehaviour = enemyBehaviour;
   }
 

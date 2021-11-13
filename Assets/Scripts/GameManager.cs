@@ -8,7 +8,20 @@ public class GameManager : MonoBehaviour
 {
   public static GameManager Instance = null;
 
-  public static GameObject PlayerShip;
+  private static GameObject _playerShip;
+  public static GameObject PlayerShip
+  {
+    get { return _playerShip; }
+    set
+    {
+      _playerShip = value;
+      _playerShip.GetComponent<SpriteRenderer>().color = Color.red;
+    }
+
+
+  }
+
+
   public GameObject deathParticleObject;
   public GameObject playerDeathParticleObject;
   public List<GameObject> EnemyShips;
@@ -49,7 +62,7 @@ public class GameManager : MonoBehaviour
   void Awake()
   {
     Instance = this;
-    PlayerShip = null;
+    _playerShip = null;
     if (PauseUIObjects != null)
     {
       // If game is paused
@@ -126,15 +139,15 @@ public class GameManager : MonoBehaviour
 
     for (int i = 0; i < waveSize; i++)
     {
-		Debug.Log(BaseShip);
+      Debug.Log(BaseShip);
       GameObject ship = Instantiate<GameObject>(BaseShip, generateEnemyCoords(), Quaternion.identity);
       // better way to randomly choose type from enum without casting int??
       ShipControlComponent shipComponent = ship.GetComponent<ShipControlComponent>();
       shipComponent.ShipBody = getBodyFromPool();
       shipComponent.ShipWeapon = getWeaponFromPool();
-    //   shipComponent.ShipWeapon.FiringSource = ship; => not necessarily the case that bullets comes out of the center of the ship. 
+      //   shipComponent.ShipWeapon.FiringSource = ship; => not necessarily the case that bullets comes out of the center of the ship. 
       shipComponent.EnemyBehaviour = new BasicBehaviour(shipComponent);
-		shipComponent.InitShip();
+      shipComponent.InitShip();
       EnemyShips.Add(ship);
     }
   }

@@ -36,10 +36,6 @@ public class ShipControlComponent : MonoBehaviour
       GameManager.Instance.ShipDestroy(gameObject);
     }
 
-    // TEMPORARY: change color of ship based on fraction of health
-    float hFrac = _shipBody.CurrHealth / _shipBody.MaxHealth;
-    gameObject.GetComponent<SpriteRenderer>().color = new Color(1, hFrac, hFrac);
-
     // If this is an enemy ship, ask the behaviour to do things
     if (GameManager.PlayerShip != this.gameObject)
     {
@@ -92,49 +88,5 @@ public class ShipControlComponent : MonoBehaviour
     }
   }
 
-  // Create a new ShipBody or ShipWeapon
-  public void setNewBodyFromType(ShipBodyType bodyType)
-  {
-    // switch (bodyType)
-    // {
-    //   case ShipBodyType.FastSquish:
-    //     {
-    //       _shipBody = new FastSquish();
-    //       break;
-    //     }
-    //   case ShipBodyType.SlowChunk:
-    //     {
-    //       _shipBody = new SlowChunk();
-    //       break;
-    //     }
-    //   default:
-    //     {
-    //       Debug.LogWarning("Unknown ShipBodyType passed to ShipControlComponent::setBody!");
-    //       _shipBody = new SlowChunk();
-    //       break;
-    //     }
-    // }
-  }
-  public void setNewWeaponFromType(ShipWeaponType weaponType)
-  {
-    // switch (weaponType)
-    // {
-    //   case ShipWeaponType.BulletWeapon:
-    //     {
-    //       _shipWeapon = new BulletWeapon("Prefabs/Bullet", new Vector2(0, 0), gameObject);
-    //       break;
-    //     }
-    //   case ShipWeaponType.LaserWeapon:
-    //     {
-    //       _shipWeapon = new LaserWeapon("Prefabs/Bullet", new Vector2(0, 0), gameObject);
-    //       break;
-    //     }
-    //   default:
-    //     {
-    //       Debug.LogWarning("Unknown ShipWeaponType passed to ShipControlComponent::setWeapon!");
-    //       _shipWeapon = new LaserWeapon("Prefabs/Bullet", new Vector2(0, 0), gameObject);
-    //       break;
-    //     }
-    // }
-  }
+
 }
