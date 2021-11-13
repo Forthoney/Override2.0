@@ -54,6 +54,8 @@ public class GameManager : MonoBehaviour
   public ShipBody[] bodyPool = new ShipBody[] { };
   public ShipWeapon[] weaponPool = new ShipWeapon[] { };
 
+  public EnemyBehaviour[] behaviourPool = new EnemyBehaviour[] { };
+
   // These pools represent the pool of currently selectable parts. It grows as the game progresses. 
   List<ShipBody> spawnableBodies = new List<ShipBody> { };
   List<ShipWeapon> spawnableWeapons = new List<ShipWeapon> { };
@@ -259,4 +261,14 @@ public class GameManager : MonoBehaviour
     Time.timeScale = 1;
     SceneControl.GameOver();
   }
+
+  private EnemyBehaviour getBehaviourFromPool()
+  {
+    System.Random random = new System.Random();
+
+    return behaviourPool[random.Next(behaviourPool.Length)];
+  }
+
+
+
 }
