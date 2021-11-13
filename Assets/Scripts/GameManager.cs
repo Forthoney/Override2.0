@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour
       shipComponent.ShipBody = getBodyFromPool();
       shipComponent.ShipWeapon = getWeaponFromPool();
       //   shipComponent.ShipWeapon.FiringSource = ship; => not necessarily the case that bullets comes out of the center of the ship. 
-      shipComponent.EnemyBehaviour = new BasicBehaviour(shipComponent);
+      shipComponent.EnemyBehaviour = new FollowBehaviour(shipComponent);
       shipComponent.InitShip();
       EnemyShips.Add(ship);
     }
