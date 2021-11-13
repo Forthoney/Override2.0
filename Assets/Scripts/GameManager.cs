@@ -54,12 +54,9 @@ public class GameManager : MonoBehaviour
   public ShipBody[] bodyPool = new ShipBody[] { };
   public ShipWeapon[] weaponPool = new ShipWeapon[] { };
 
-
-
   // These pools represent the pool of currently selectable parts. It grows as the game progresses. 
   List<ShipBody> spawnableBodies = new List<ShipBody> { };
   List<ShipWeapon> spawnableWeapons = new List<ShipWeapon> { };
-
 
   void Awake()
   {
@@ -141,7 +138,6 @@ public class GameManager : MonoBehaviour
 
     for (int i = 0; i < waveSize; i++)
     {
-      Debug.Log(BaseShip);
       GameObject ship = Instantiate<GameObject>(BaseShip, generateEnemyCoords(), Quaternion.identity);
       // better way to randomly choose type from enum without casting int??
       ShipControlComponent shipComponent = ship.GetComponent<ShipControlComponent>();
@@ -269,7 +265,4 @@ public class GameManager : MonoBehaviour
 
     return behaviourPool[random.Next(behaviourPool.Length)];
   }
-
-
-
 }
