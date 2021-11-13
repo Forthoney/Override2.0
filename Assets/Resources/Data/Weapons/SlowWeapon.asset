@@ -15,9 +15,9 @@ MonoBehaviour:
   _damage: 3
   _fireRate: 1.025
   _bulletSpeed: 8
-  _bulletPrefab: {fileID: 3637630408392106280, guid: 5db6aa6cfb713443d8a25a9c28d726d1, type: 3}
+  _bulletPrefab: {fileID: 1104760769780649360, guid: 245b7302c7db74ac6b6920c5d4a73141, type: 3}
   _spritePosOffset: {x: 0, y: 0}
-  _shootEffectPrefab: {fileID: 4870883522907922192, guid: 88bfe2e6c825e47e4bee70a61ada8d0e, type: 3}
-  _shootEffectHitPrefab: {fileID: 6906376240121617889, guid: 1035f0b8d683f48edbaad8f49dcf2c68, type: 3}
+  _shootEffectPrefab: {fileID: 4870883522907922192, guid: 5bd5acb6dcf604751814fed7b51fd508, type: 3}
+  _shootEffectHitPrefab: {fileID: 6906376240121617889, guid: 6bb9abd95bc9c44448e7a501689db1e4, type: 3}
   _tier: 0
   _material: {fileID: 2100000, guid: ba879a104a15f472bac8356d3f565103, type: 2}

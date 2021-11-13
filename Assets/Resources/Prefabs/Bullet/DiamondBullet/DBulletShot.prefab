@@ -9738,7 +9738,7 @@ GameObject:
   - component: {fileID: 4870883522907922190}
   - component: {fileID: 4870883522907922193}
   m_Layer: 0
-  m_Name: RoundBulletShot
+  m_Name: DBulletShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9753,7 +9753,7 @@ Transform:
   m_GameObject: {fileID: 4870883522907922192}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_Children:
   - {fileID: 2977488774551765536}
   - {fileID: 4870883521837625739}
