@@ -17,7 +17,7 @@ MonoBehaviour:
   _speed: 25
   _colliderRadius: 0
   _accelerationLambda: 14
-  _toZeroAccelerationLambdaModifier: 0
+  _toZeroAccelerationLambdaModifier: 0.4
   _spritePath: {fileID: 21300000, guid: cddba7f1a2b0240c4a7f98768711e845, type: 3}
   _outlineSprite: {fileID: 21300000, guid: 09f52d7c535674af8aaf126ecae89276, type: 3}
   tier: 0
