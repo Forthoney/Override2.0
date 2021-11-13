@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 
   }
 
-
+  System.Random random = new System.Random();
   public GameObject deathParticleObject;
   public GameObject playerDeathParticleObject;
   public List<GameObject> EnemyShips;
@@ -171,7 +171,7 @@ public class GameManager : MonoBehaviour
 
   public ShipBody getBodyFromPool()
   {
-    System.Random random = new System.Random();
+
     if (spawnableWeapons.Count > 0)
     {
       return Instantiate(spawnableBodies[random.Next(spawnableBodies.Count)]);
@@ -184,7 +184,6 @@ public class GameManager : MonoBehaviour
 
   public ShipWeapon getWeaponFromPool()
   {
-    System.Random random = new System.Random();
     if (spawnableWeapons.Count > 0)
     {
       return Instantiate(spawnableWeapons[random.Next(spawnableWeapons.Count)]);
@@ -260,7 +259,6 @@ public class GameManager : MonoBehaviour
 
   private EnemyBehaviour getBehaviourFromPool(ShipControlComponent shipControlComponent)
   {
-    System.Random random = new System.Random();
     EnemyBehaviour[] behaviourPool = new EnemyBehaviour[] { new FollowBehaviour(shipControlComponent), new BasicBehaviour(shipControlComponent) };
 
     return behaviourPool[random.Next(behaviourPool.Length)];
