@@ -260,14 +260,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 680752423037851804, guid: a58a4fbd55045444aae2e216224b4ecd, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 680752423037851804, guid: a58a4fbd55045444aae2e216224b4ecd, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 680752423037851805, guid: a58a4fbd55045444aae2e216224b4ecd, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -316,18 +308,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SB SG Ship (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 680752423037851807, guid: a58a4fbd55045444aae2e216224b4ecd, type: 3}
-      propertyPath: m_Layer
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 9125241232217048413, guid: a58a4fbd55045444aae2e216224b4ecd, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9125241232217048413, guid: a58a4fbd55045444aae2e216224b4ecd, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.data[1]
-      value: -327581857
-      objectReference: {fileID: 0}
+    - target: {fileID: 3300885309948887128, guid: a58a4fbd55045444aae2e216224b4ecd, type: 3}
+      propertyPath: startBody
+      value: 
+      objectReference: {fileID: 11400000, guid: 7ff620aa3d0944745bc827e8907173cc, type: 2}
+    - target: {fileID: 3300885309948887128, guid: a58a4fbd55045444aae2e216224b4ecd, type: 3}
+      propertyPath: startWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: cacf319db68ac427388694a549993112, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a58a4fbd55045444aae2e216224b4ecd, type: 3}
 --- !u!1 &454501514
