@@ -139,7 +139,7 @@ public class GameManager : MonoBehaviour
 
     for (int i = 0; i < waveSize; i++)
     {
-		Debug.Log(BaseShip);
+      Debug.Log(BaseShip);
       GameObject ship = Instantiate<GameObject>(BaseShip, generateEnemyCoords(), Quaternion.identity);
       // better way to randomly choose type from enum without casting int??
       ShipControlComponent shipComponent = ship.GetComponent<ShipControlComponent>();
