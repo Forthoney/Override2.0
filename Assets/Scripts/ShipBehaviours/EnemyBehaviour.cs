@@ -10,7 +10,7 @@ public abstract class EnemyBehaviour
     protected float attackSpeed;
 
     private float speedMod = 0.5f;
-    private float attackSpeedMod = 0.1f;
+    private float attackSpeedMod = 0.2f;
 
     private float fireTimer = 0;
 

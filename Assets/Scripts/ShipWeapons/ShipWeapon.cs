@@ -9,6 +9,7 @@ public abstract class ShipWeapon : ScriptableObject
   [SerializeField] protected float _damage;
   [SerializeField] protected float _fireRate; // Attacks per second
   [SerializeField] protected float _bulletSpeed;
+
   protected bool _isFiring;
   protected GameObject _firingSource;
   protected GameObject _firingEffect;
@@ -19,6 +20,7 @@ public abstract class ShipWeapon : ScriptableObject
 
   [SerializeField] protected float _tier;
   [SerializeField] protected Material _material;
+
   // Accessors
   public float Damage
   {
@@ -68,40 +70,6 @@ public abstract class ShipWeapon : ScriptableObject
   public GameObject ShootEffectHitPrefab {
 	  get => _shootEffectHitPrefab;
 	  set => _shootEffectHitPrefab = value;
-  }
-
-  // Copy constructor
-  public ShipWeapon(ShipWeapon other)
-  {
-    _damage = other.Damage;
-    _fireRate = other.FireRate;
-    _bulletSpeed = other._bulletSpeed;
-    _isFiring = other.IsFiring;
-    _firingSource = other.FiringSource;
-    _bulletPrefab = other.BulletPrefab;
-    _spritePosOffset = other.SpritePosOffset;
-    _material = other.Material;
-  }
-
-  // Constructor
-  protected ShipWeapon(
-      float damage,
-      float fireRate,
-      float bulletSpeed,
-      GameObject fSource,
-      GameObject bPrefab,
-      Vector2 sPosOffset,
-      Material weaponMaterial)
-  {
-    _damage = damage;
-    _fireRate = fireRate;
-    _bulletSpeed = bulletSpeed;
-    _isFiring = false;
-    _firingSource = fSource;
-    _bulletPrefab = bPrefab;
-    _spritePosOffset = sPosOffset;
-    _material = weaponMaterial;
-    fSource.GetComponent<SpriteRenderer>().material = weaponMaterial;
   }
 
   // Important! must be overridden in derived class
