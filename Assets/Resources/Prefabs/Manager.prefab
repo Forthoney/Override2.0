@@ -431,10 +431,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e60ad2efe0f54a59b093ea8e7c0d089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathParticleObject: {fileID: 7299727634646549584, guid: a19df24fe0fd10f42b0148d93ae060d4, type: 3}
-  playerDeathParticleObject: {fileID: 0}
-  EnemyShips:
-  - {fileID: 0}
+  deathParticleObject: {fileID: 7440497295322247079, guid: 68327f160785f434585d6208c22d9897, type: 3}
+  playerDeathParticleObject: {fileID: 1863911906802790616, guid: 533f0a3d1fee74e9987c6f58ace59e66, type: 3}
+  EnemyShips: []
   ScoreNumber: {fileID: 0}
   PauseUIObjects:
   - {fileID: 0}
@@ -445,6 +444,20 @@ MonoBehaviour:
   BaseShip: {fileID: 3547156444801734604, guid: 9fdcb3edb3d16c94fbc532d2c079df38, type: 3}
   bodyPool:
   - {fileID: 11400000, guid: 7ff620aa3d0944745bc827e8907173cc, type: 2}
+  - {fileID: 11400000, guid: 8a3142a19ca229f47a38d2d38304cea7, type: 2}
+  - {fileID: 11400000, guid: 5f72e5ce8e78040eeae2d6d0d7baf7b7, type: 2}
+  - {fileID: 11400000, guid: 732db857fc9bb41f79c6893c7c1c94c3, type: 2}
+  - {fileID: 11400000, guid: 8995982e2874744178e4c7b035d3590f, type: 2}
+  - {fileID: 11400000, guid: 3da522844ba1e4cfaaf0c063a271d476, type: 2}
+  - {fileID: 11400000, guid: 2f0ab1befe47847d992094aeb5e0cf3c, type: 2}
+  - {fileID: 11400000, guid: ef4062f178f194efba2ec28cc7333c75, type: 2}
+  - {fileID: 11400000, guid: dad1213a0099f44c0b9d2b53c0ab66eb, type: 2}
+  - {fileID: 11400000, guid: 3efd9f862b129421fb8af08ff1fa87ce, type: 2}
+  - {fileID: 11400000, guid: 366537d87d63d4dda817807070334129, type: 2}
+  - {fileID: 11400000, guid: e09d3b229903e4686b46d923df0cd53a, type: 2}
+  - {fileID: 11400000, guid: 708bb7278ddcf4b6fbdad36b7e77220c, type: 2}
+  - {fileID: 11400000, guid: cc064cea9ccda4219b7f831466f809e2, type: 2}
+  - {fileID: 11400000, guid: e663a8048240b4fc4abb7df7cca2f992, type: 2}
   weaponPool:
   - {fileID: 11400000, guid: cacf319db68ac427388694a549993112, type: 2}
   - {fileID: 11400000, guid: d16b5c1f5e49b4e168c18d95ccf487fe, type: 2}

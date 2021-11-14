@@ -2474,6 +2474,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4962210372555457876, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
+      propertyPath: weaponPool.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962210372555457876, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
       propertyPath: bodyPool.Array.data[1]
       value: 
       objectReference: {fileID: 11400000, guid: 8a3142a19ca229f47a38d2d38304cea7, type: 2}
@@ -2529,6 +2533,26 @@ PrefabInstance:
       propertyPath: bodyPool.Array.data[14]
       value: 
       objectReference: {fileID: 11400000, guid: e663a8048240b4fc4abb7df7cca2f992, type: 2}
+    - target: {fileID: 4962210372555457876, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
+      propertyPath: weaponPool.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962210372555457876, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
+      propertyPath: weaponPool.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962210372555457876, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
+      propertyPath: weaponPool.Array.data[4]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962210372555457876, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
+      propertyPath: weaponPool.Array.data[5]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962210372555457876, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
+      propertyPath: weaponPool.Array.data[6]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4962210372555457876, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
       propertyPath: PauseUIObjects.Array.size
       value: 3

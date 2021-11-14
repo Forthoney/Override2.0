@@ -20,4 +20,4 @@ MonoBehaviour:
   _shootEffectPrefab: {fileID: 4870883522907922192, guid: 5bd5acb6dcf604751814fed7b51fd508, type: 3}
   _shootEffectHitPrefab: {fileID: 6906376240121617889, guid: 6bb9abd95bc9c44448e7a501689db1e4, type: 3}
   _tier: 0
-  _material: {fileID: 2100000, guid: ba879a104a15f472bac8356d3f565103, type: 2}
+  _material: {fileID: 2100000, guid: 4ce4a49b4d83c6f4ab34885f07e75e7a, type: 2}
