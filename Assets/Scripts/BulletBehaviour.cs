@@ -4,23 +4,21 @@ using UnityEngine;
 
 public class BulletBehaviour : MonoBehaviour
 {
-
   // Set by the ship weapon after spawn
-  public float speed
-  {
-    get; set;
-  }
-
+  public bool isEnemyBullet;
   public float damage
   {
     get; set;
   }
+  public float speed
+  {
+    get; set;
+  }
+  public GameObject OnHitEffect 
+  {
+    get; set;
+  }
 
-  public GameObject OnHitEffect {get; set;}
-
-  public bool isEnemyBullet;
-
-  // Update is called once per frame
   void Update()
   {
     transform.position += transform.right * speed * Time.deltaTime;

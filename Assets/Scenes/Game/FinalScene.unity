@@ -2107,6 +2107,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1033453683912643986, guid: b174fd44ee2d7674dbe4f162041be0c9, type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4020394817066210426, guid: b174fd44ee2d7674dbe4f162041be0c9, type: 3}
       propertyPath: m_Camera
       value: 

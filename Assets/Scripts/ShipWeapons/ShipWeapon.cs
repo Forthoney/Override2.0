@@ -32,6 +32,11 @@ public abstract class ShipWeapon : ScriptableObject
     get => _fireRate;
     set => _fireRate = value;
   }
+  public float BulletSpeed
+  {
+    get => _bulletSpeed;
+    set => _bulletSpeed = value;
+  }
   public bool IsFiring
   {
     get => _isFiring;

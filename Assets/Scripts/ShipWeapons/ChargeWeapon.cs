@@ -2,9 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "BulletWeapon", menuName = "~/Combat/BulletWeapon", order = 0)]
-public class LaserWeapon : ShipWeapon
+[CreateAssetMenu(fileName = "ChargeWeapon", menuName = "~/Combat/Weapons/ChargeWeapon", order = 1)]
+public class ChargeWeapon : ShipWeapon
 {
+  [SerializeField] private float _maxChargeTime;
+  [SerializeField] private float _maxChargeDamageMod;
+  [SerializeField] private float _maxChargeSpeedMod;
+
+  private float _chargedTIme;
+
   public override void Fire(bool isEnemyBullet)
   {
     // Load and instantiate bullet prefab from resource

@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "BulletWeapon", menuName = "~/Combat/Weapons/BulletWeapon", order = 0)]
-public class BulletWeapon : ShipWeapon
+[CreateAssetMenu(fileName = "ShotgunWeapon", menuName = "~/Combat/Weapons/ShotgunWeapon", order = 2)]
+public class ShotgunWeapon : ShipWeapon
 {
   public override void Fire(bool isEnemyBullet)
   {
