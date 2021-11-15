@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90bcd3af73dd3b34caeb0057be18bb14, type: 3}
   m_Name: 01_04_Tank
   m_EditorClassIdentifier: 
-  _maxHealth: 12
-  _currHealth: 12
+  _maxHealth: 9
+  _currHealth: 9
   _speed: 6
   _rotationSpeed: 90
   _colliderRadius: 0

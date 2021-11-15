@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9764a62788d197b4a805c34bf736f909, type: 3}
+  m_Name: ShotgunWeapon
+  m_EditorClassIdentifier: 
+  _damage: 1
+  _fireRate: 1
+  _bulletSpeed: 20
+  _bulletPrefab: {fileID: 4217884717191485884, guid: 04db96e127381714ab8ec154ba61d8d2, type: 3}
+  _spritePosOffset: {x: 0, y: 0}
+  _shootEffectPrefab: {fileID: 4870883522907922192, guid: 88bfe2e6c825e47e4bee70a61ada8d0e, type: 3}
+  _shootEffectHitPrefab: {fileID: 6906376240121617889, guid: 1035f0b8d683f48edbaad8f49dcf2c68, type: 3}
+  _tier: 0
+  _material: {fileID: 2100000, guid: 001221dbcfddf834e95549e9fc9f019c, type: 2}
+  numBulletsInShot: 12
+  spreadAngleInterval: 3.5
+  startSpreadAngle: -30

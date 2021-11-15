@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour
   public float waveSize;
   private float timer;
 
+  private float currWaveSize = 0;
+
   public GameObject BaseShip;
 
   private SceneControl scene;
@@ -80,6 +82,7 @@ public class GameManager : MonoBehaviour
   {
     Score = 0;
     timer = 0;
+    currWaveSize = 1;
     EnemyShips = new List<GameObject>();
     playerIsDestroyed = false;
   }
@@ -135,8 +138,7 @@ public class GameManager : MonoBehaviour
 
   public void generateWave()
   {
-
-    for (int i = 0; i < waveSize; i++)
+    for (int i = 0; i < currWaveSize; i++)
     {
       GameObject ship = Instantiate<GameObject>(BaseShip, generateEnemyCoords(), Quaternion.identity);
       // better way to randomly choose type from enum without casting int??
@@ -147,6 +149,10 @@ public class GameManager : MonoBehaviour
       shipComponent.EnemyBehaviour = getBehaviourFromPool(shipComponent);
       shipComponent.InitShip();
       EnemyShips.Add(ship);
+    }
+    if (currWaveSize < waveSize)
+    {
+      currWaveSize++;
     }
   }
 

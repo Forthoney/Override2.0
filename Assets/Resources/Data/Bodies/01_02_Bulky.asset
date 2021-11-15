@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90bcd3af73dd3b34caeb0057be18bb14, type: 3}
   m_Name: 01_02_Bulky
   m_EditorClassIdentifier: 
-  _maxHealth: 8
-  _currHealth: 8
+  _maxHealth: 6
+  _currHealth: 6
   _speed: 10
   _rotationSpeed: 180
   _colliderRadius: 0

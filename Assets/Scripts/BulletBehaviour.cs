@@ -14,7 +14,7 @@ public class BulletBehaviour : MonoBehaviour
   {
     get; set;
   }
-  public GameObject OnHitEffect 
+  public GameObject OnHitEffect
   {
     get; set;
   }
@@ -46,17 +46,10 @@ public class BulletBehaviour : MonoBehaviour
     }
   }
 
-
-  // TODO: add animation
-  public void playDieAnimation()
-  {
-
-  }
-
   public void Die()
   {
-	if (OnHitEffect != null)
-		ParticleUtils.EmitOnce(OnHitEffect, transform);
+    if (OnHitEffect != null)
+      ParticleUtils.EmitOnce(OnHitEffect, transform);
     Destroy(gameObject);
   }
 
