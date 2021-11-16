@@ -23,7 +23,9 @@ public class OverrideButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
   // Update is called once per frame
   void Update()
   {
-    if (ishovered && startShip != null)
+    if (startShip == null) return;
+
+    if (ishovered)
     {
       Debug.Log("Hovering");
       SpriteRenderer sprite = startShip.GetComponent<SpriteRenderer>();
