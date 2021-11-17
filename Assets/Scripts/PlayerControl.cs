@@ -78,6 +78,7 @@ public class PlayerControl : MonoBehaviour
       if (InputController.Instance.Firing && !_firingCooldown && GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon != null)
       {
         GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon.Fire(false);
+		GameManager.PlayerShip.GetComponent<Animator>()?.SetTrigger("AttackRecovery");
         _firingCooldown = new Timer((float)(1f / GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon.FireRate));
         _firingCooldown.Start();
       }

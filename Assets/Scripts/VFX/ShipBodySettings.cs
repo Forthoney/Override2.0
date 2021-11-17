@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
+using System.Reflection;
 
 public class ShipBodySettings : MonoBehaviour {
 
 	public ShipControlComponent SCC { get; private set; }
 	public SpriteRenderer Sprite, Outline;
+	public Light2D OutlineLight;
 
 	void Awake() {
 		SCC = GetComponent<ShipControlComponent>();
@@ -43,8 +46,9 @@ public class ShipBodySettings : MonoBehaviour {
 	public void SetColor(Color primary, Color secondary) {
 		Sprite?.material?.SetColor("_GlowColor", primary);
 		Sprite?.material?.SetColor("_GlowColor2", secondary);
-
 		Outline?.material?.SetColor("_GlowColor", primary);
+		if (OutlineLight != null)
+			OutlineLight.color = primary;
 	}
 	public void ToggleDisplay(bool on) {
 		Sprite.enabled = false;
@@ -57,5 +61,9 @@ public class ShipBodySettings : MonoBehaviour {
 		}
 		if (Outline != null)
 			Outline.sprite = outlineSprite;
+		if (OutlineLight != null && OutlineLight.lightType == UnityEngine.Experimental.Rendering.Universal.Light2D.LightType.Sprite) {
+			FieldInfo _LightCookieSprite =  typeof( Light2D ).GetField( "m_LightCookieSprite", BindingFlags.NonPublic | BindingFlags.Instance );
+			_LightCookieSprite.SetValue(OutlineLight, outlineSprite);
+		}
 	}
 }

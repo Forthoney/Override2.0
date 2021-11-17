@@ -7,8 +7,9 @@ public class ParticleCombo : MonoBehaviour {
 	}
 
 	public void Stop() {
-		foreach (Transform child in transform)
-			child.GetComponent<ParticleSystem>()?.Stop();
+		foreach (Transform child in transform) {
+			child.GetComponent<ParticleSystem>()?.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+		}
 	}
 
 	public void PlayOnce() {
