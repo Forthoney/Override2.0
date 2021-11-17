@@ -256,9 +256,17 @@ public class GameManager : MonoBehaviour
 	PlayerShip.GetComponent<ShipBodySettings>().ToggleDisplay(false);
     Time.timeScale = 0.33f;
     Debug.Log("SUCK IT");
-    yield return new WaitForSecondsRealtime(5);
+    yield return new WaitForSecondsRealtime(4);
+
+	TransitionCanvasController controller = FindObjectOfType<TransitionCanvasController>();
+	if (controller == null)
+		controller.StartHide();
+	else
+    	SceneControl.GameOver();
+
+    yield return new WaitForSecondsRealtime(1);
     Time.timeScale = 1;
-    SceneControl.GameOver();
+
   }
 
   private EnemyBehaviour getBehaviourFromPool(ShipControlComponent shipControlComponent)
