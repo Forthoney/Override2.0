@@ -25,7 +25,7 @@ public class FollowBehaviour : EnemyBehaviour
         maxX = horzExtent;
         minY = -vertExtent;
         maxY = vertExtent;
-        rend = enemyShip.gameObject.GetComponent<SpriteRenderer>();
+        rend = enemyShip.GetComponent<ShipBodySettings>().Sprite;
 
         // A sphere that fully encloses the bounding box.
         radius = rend.bounds.extents.magnitude;

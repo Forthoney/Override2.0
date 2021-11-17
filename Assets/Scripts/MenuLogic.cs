@@ -31,6 +31,7 @@ public class MenuLogic : MonoBehaviour
   public void onClick()
   {
     GameManager.PlayerShip = GameObject.FindWithTag("Player");
+    GameManager.PlayerShip?.GetComponent<ShipBodySettings>().SetDefaultColor();
     animator.SetTrigger("Started");
   }
 

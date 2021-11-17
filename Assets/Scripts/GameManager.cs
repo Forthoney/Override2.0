@@ -15,10 +15,8 @@ public class GameManager : MonoBehaviour
     set
     {
       _playerShip = value;
-      _playerShip.GetComponent<SpriteRenderer>().color = Color.red;
+	  _playerShip?.GetComponent<ShipBodySettings>().SetDefaultColor();
     }
-
-
   }
 
   System.Random random = new System.Random();
@@ -255,7 +253,7 @@ public class GameManager : MonoBehaviour
     {
       Instantiate(playerDeathParticleObject, PlayerShip.transform.position, Quaternion.identity);
     }
-    PlayerShip.GetComponent<SpriteRenderer>().enabled ^= true;
+	PlayerShip.GetComponent<ShipBodySettings>().ToggleDisplay(false);
     Time.timeScale = 0.33f;
     Debug.Log("SUCK IT");
     yield return new WaitForSecondsRealtime(5);

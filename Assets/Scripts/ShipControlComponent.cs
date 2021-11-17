@@ -15,7 +15,6 @@ public class ShipControlComponent : MonoBehaviour
   private EnemyBehaviour _enemyBehaviour;
 
   public GameObject FiringSource;
-  public SpriteRenderer OutlineSprite;
 
   // Start is called before the first frame update
   void Start()
@@ -47,7 +46,6 @@ public class ShipControlComponent : MonoBehaviour
 
     if (GameManager.PlayerShip == this.gameObject)
     {
-      Debug.Log("Player Hit");
       PlayerControl.Instance?.OnDamageTaken?.Invoke();
       if (_shipBody.CurrHealth <= 0)
         PlayerControl.Instance?.OnDeath?.Invoke();
@@ -76,22 +74,21 @@ public class ShipControlComponent : MonoBehaviour
 
 
   bool _initiated = false;
-  // Run once when Ship is created, after ShipBody and ShipWeapon have been loaded, or immediately on start
-  public void InitShip()
-  {
-    if (!_initiated) {
-      ShipWeapon.FiringSource = FiringSource == null ? gameObject : FiringSource;
-      _initiated = true;
-      SpriteRenderer renderer = GetComponent<SpriteRenderer>();
-      if (renderer != null)
-      {
-        renderer.sprite = _shipBody._spritePath;
-        renderer.material = _shipWeapon.Material;
-      }
-      if (OutlineSprite != null)
-      {
-        OutlineSprite.sprite = _shipBody._outlineSprite;
-      }
-	  }
-  }
+	// Run once when Ship is created, after ShipBody and ShipWeapon have been loaded, or immediately on start
+	public void InitShip() {
+		if (!_initiated) {
+			ShipWeapon.FiringSource = FiringSource == null ? gameObject : FiringSource;
+			_initiated = true;
+
+			ShipBodySettings bodySetting = GetComponent<ShipBodySettings>();
+			if (bodySetting != null) {
+				if (bodySetting.Sprite != null) {
+					bodySetting.Sprite.sprite = _shipBody._spritePath;
+					bodySetting.Sprite.material = _shipWeapon.Material;
+				}
+				if (bodySetting.Outline != null)
+					bodySetting.Outline.sprite = _shipBody._outlineSprite;
+			}
+		}
+	}
 }
