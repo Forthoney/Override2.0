@@ -259,7 +259,7 @@ public class GameManager : MonoBehaviour
     yield return new WaitForSecondsRealtime(4);
 
 	TransitionCanvasController controller = FindObjectOfType<TransitionCanvasController>();
-	if (controller == null)
+	if (controller != null)
 		controller.StartHide();
 	else
     	SceneControl.GameOver();
