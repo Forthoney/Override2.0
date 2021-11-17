@@ -50,4 +50,12 @@ public class ShipBodySettings : MonoBehaviour {
 		Sprite.enabled = false;
 		Outline.enabled = false;
 	}
+	public void InitShipBody(Sprite bodySprite, Material bodyMaterial, Sprite outlineSprite) {
+		if (Sprite != null) {
+			Sprite.sprite = bodySprite;
+			Sprite.material = bodyMaterial;
+		}
+		if (Outline != null)
+			Outline.sprite = outlineSprite;
+	}
 }

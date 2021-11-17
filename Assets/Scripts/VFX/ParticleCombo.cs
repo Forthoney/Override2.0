@@ -6,6 +6,11 @@ public class ParticleCombo : MonoBehaviour {
 			child.GetComponent<ParticleSystem>()?.Play();
 	}
 
+	public void Stop() {
+		foreach (Transform child in transform)
+			child.GetComponent<ParticleSystem>()?.Stop();
+	}
+
 	public void PlayOnce() {
 		Play();
 		float maxDuration = 0;

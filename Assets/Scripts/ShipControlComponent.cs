@@ -79,16 +79,9 @@ public class ShipControlComponent : MonoBehaviour
 		if (!_initiated) {
 			ShipWeapon.FiringSource = FiringSource == null ? gameObject : FiringSource;
 			_initiated = true;
-
-			ShipBodySettings bodySetting = GetComponent<ShipBodySettings>();
-			if (bodySetting != null) {
-				if (bodySetting.Sprite != null) {
-					bodySetting.Sprite.sprite = _shipBody._spritePath;
-					bodySetting.Sprite.material = _shipWeapon.Material;
-				}
-				if (bodySetting.Outline != null)
-					bodySetting.Outline.sprite = _shipBody._outlineSprite;
-			}
+			GetComponent<ShipBodySettings>()?.InitShipBody(_shipBody._spritePath, _shipWeapon.Material, _shipBody._outlineSprite);
 		}
 	}
+
+	public void Fire() => ShipWeapon?.Fire(GameManager.PlayerShip != gameObject);
 }

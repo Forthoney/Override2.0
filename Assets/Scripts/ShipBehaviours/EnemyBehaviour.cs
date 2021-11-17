@@ -32,7 +32,9 @@ public abstract class EnemyBehaviour
     {
         if (fireTimer >= 1 / attackSpeed)
         {
-            enemyShip.ShipWeapon.Fire(true);
+            // enemyShip.ShipWeapon.Fire(true);
+			// We now trigger the animation instead
+			enemyShip.GetComponent<Animator>()?.SetTrigger("Attack");
             fireTimer = 0;
         }
         else
