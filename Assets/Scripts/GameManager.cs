@@ -247,26 +247,33 @@ public class GameManager : MonoBehaviour
 
   IEnumerator _playerDeathSequence()
   {
+    // Set player is destroyed to true
     playerIsDestroyed = true;
-    // TODO: stop player input
-    if (playerDeathParticleObject)
-    {
-      Instantiate(playerDeathParticleObject, PlayerShip.transform.position, Quaternion.identity);
-    }
-	PlayerShip.GetComponent<ShipBodySettings>().ToggleDisplay(false);
-    Time.timeScale = 0.33f;
+
+    // Display important console message
     Debug.Log("SUCK IT");
+
+    // Start slow-motion
+    Time.timeScale = 0.33f;
+    // Instantiate particles
+    Instantiate(playerDeathParticleObject, PlayerShip.transform.position, Quaternion.identity);
+    // Hide all visible parts of the ship
+    PlayerShip.GetComponent<ShipBodySettings>().ToggleDisplay(false);
+    // Wait for some time
     yield return new WaitForSecondsRealtime(4);
-
-	TransitionCanvasController controller = FindObjectOfType<TransitionCanvasController>();
-	if (controller != null)
-		controller.StartHide();
-	else
-    	SceneControl.GameOver();
-
-    yield return new WaitForSecondsRealtime(1);
+    // End slow motion
     Time.timeScale = 1;
 
+    // Next...
+    TransitionCanvasController controller = FindObjectOfType<TransitionCanvasController>();
+    if (controller != null)
+    {
+      controller.StartHide();
+    }
+    else
+    {
+      SceneControl.GameOver();
+    }
   }
 
   private EnemyBehaviour getBehaviourFromPool(ShipControlComponent shipControlComponent)
