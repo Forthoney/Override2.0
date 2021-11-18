@@ -469,6 +469,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7398476729950146818, guid: e351720df211b4fd1bd72e57f8fd1962, type: 3}
+      propertyPath: Event
+      value: event:/SFX/Player/Override2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e351720df211b4fd1bd72e57f8fd1962, type: 3}
 --- !u!1 &454501514

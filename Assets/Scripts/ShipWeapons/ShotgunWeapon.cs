@@ -14,6 +14,7 @@ public class ShotgunWeapon : ShipWeapon
 
   public override void Fire(bool isEnemyBullet)
   {
+	base.Fire(isEnemyBullet);
     List<GameObject> bullets = new List<GameObject>();
 
     for (int i = 0; i < numBulletsInShot; i++)

@@ -21,3 +21,4 @@ MonoBehaviour:
   _shootEffectHitPrefab: {fileID: 6906376240121617889, guid: 1035f0b8d683f48edbaad8f49dcf2c68, type: 3}
   _tier: 0
   _material: {fileID: 2100000, guid: 64d00b2141c5bdd4487a16441d321bd2, type: 2}
+  attackSound: event:/SFX/Weapon/LightBulletShot

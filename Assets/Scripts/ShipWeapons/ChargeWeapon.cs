@@ -13,6 +13,7 @@ public class ChargeWeapon : ShipWeapon
 
   public override void Fire(bool isEnemyBullet)
   {
+	  base.Fire(isEnemyBullet);
     // Load and instantiate bullet prefab from resource
     GameObject laser = Instantiate(this._bulletPrefab, _firingSource.transform.position, _firingSource.transform.rotation);
 

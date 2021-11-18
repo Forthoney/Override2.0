@@ -7,6 +7,7 @@ public class SplitWeapon : ShipWeapon
 {
   public override void Fire(bool isEnemyBullet)
   {
+	base.Fire(isEnemyBullet);
     // Load and instantiate bullet prefab from resource
     GameObject bullet = Instantiate(this._bulletPrefab, _firingSource.transform.position, _firingSource.transform.rotation);
 

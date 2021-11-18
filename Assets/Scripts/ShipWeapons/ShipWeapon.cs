@@ -21,6 +21,8 @@ public abstract class ShipWeapon : ScriptableObject
   [SerializeField] protected float _tier;
   [SerializeField] protected Material _material;
 
+  [SerializeField, FMODUnity.EventRef] protected string attackSound;
+
   // Accessors
   public float Damage
   {
@@ -78,7 +80,10 @@ public abstract class ShipWeapon : ScriptableObject
   }
 
   // Important! must be overridden in derived class
-  public abstract void Fire(bool isEnemyBullet);
+  public virtual void Fire(bool isEnemyBullet) {
+	if (attackSound != null && attackSound.Length > 0)
+		FMOD_Thuleanx.AudioManager.Instance?.PlayOneShot(attackSound);
+  }
 
   public void LoadFiringSource() {
 	  if (FiringSource != null) {

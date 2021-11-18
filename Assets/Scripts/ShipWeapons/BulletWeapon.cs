@@ -7,6 +7,7 @@ public class BulletWeapon : ShipWeapon
 {
   public override void Fire(bool isEnemyBullet)
   {
+	  base.Fire(isEnemyBullet);
     // Load and instantiate bullet prefab from resource
     GameObject bullet = Instantiate(this._bulletPrefab, _firingSource.transform.position, _firingSource.transform.rotation);
 
@@ -25,6 +26,7 @@ public class BulletWeapon : ShipWeapon
       ShockManager.Instance.StartShake(new Vector3(0, -0.5f, 0));
       if (bullet.GetComponentInChildren<SpriteRenderer>() != null)
         bullet.GetComponentInChildren<SpriteRenderer>().color = Color.red;
+
 
       TrailRenderer trail = bullet.GetComponentInChildren<TrailRenderer>();
       Gradient gradient = new Gradient();
