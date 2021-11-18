@@ -13,7 +13,7 @@ public class FloatingText : TMP_Mesh_Manipulation
 	{
 		base.Update();
 		int p = 0;
-		Vector3 offset = Wobble(Time.time + p++);
+		Vector3 offset = Wobble(Time.unscaledTime + p++);
 
 		for (int i = 0; i < textMesh.textInfo.characterCount; i++) {
 			TMP_CharacterInfo c = textMesh.textInfo.characterInfo[i];

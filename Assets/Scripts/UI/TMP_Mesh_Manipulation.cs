@@ -16,6 +16,11 @@ public class TMP_Mesh_Manipulation : MonoBehaviour
 		rectTransform = GetComponentInChildren<RectTransform>();
 	}
 
+	void OnEnable() {
+		mesh = textMesh.mesh;
+		vertices = mesh.vertices;
+	}
+
 	public virtual void Update()
 	{
 		textMesh.ForceMeshUpdate();

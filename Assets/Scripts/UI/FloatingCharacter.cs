@@ -13,13 +13,13 @@ public class FloatingCharacter : TMP_Mesh_Manipulation
 	{
 		base.Update();
 		int p = 0;
-		Vector3 offset = Wobble(Time.time + p++);
+		Vector3 offset = Wobble(Time.unscaledTime + p++);
 
 		for (int i = 0; i < textMesh.textInfo.characterCount; i++) {
 			TMP_CharacterInfo c = textMesh.textInfo.characterInfo[i];
 			if (c.character == ' ') {
 			} else {
-				offset = Wobble(Time.time + p++);
+				offset = Wobble(Time.unscaledTime+ p++);
 				int index = c.vertexIndex;
 				for (int j = 0; j < 4; j++)
 					vertices[index + j] = vertices[index + j] + offset * WoobleScale;
