@@ -170,7 +170,4 @@ public class PlayerControl : MonoBehaviour
   {
     _isDead = true;
   }
-
-
-
 }

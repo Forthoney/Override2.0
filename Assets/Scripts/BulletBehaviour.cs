@@ -46,6 +46,7 @@ public class BulletBehaviour : MonoBehaviour
     }
   }
 
+  // Called when the bullet dies
   public void Die()
   {
     if (OnHitEffect != null)

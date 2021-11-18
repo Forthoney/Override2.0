@@ -48,7 +48,9 @@ public class ShipControlComponent : MonoBehaviour
     {
       PlayerControl.Instance?.OnDamageTaken?.Invoke();
       if (_shipBody.CurrHealth <= 0)
-        PlayerControl.Instance?.OnDeath?.Invoke();
+      {
+        PlayerControl.Instance.OnDeath.Invoke();
+      }
     }
 
     OnDamageTaken?.Invoke();
