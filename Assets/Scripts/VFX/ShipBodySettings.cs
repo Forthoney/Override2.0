@@ -50,9 +50,12 @@ public class ShipBodySettings : MonoBehaviour {
 		if (OutlineLight != null)
 			OutlineLight.color = primary;
 	}
-	public void ToggleDisplay(bool on) {
-		Sprite.enabled = false;
-		Outline.enabled = false;
+	public void ToggleDisplay(bool displayOn) {
+		Sprite.enabled = displayOn;
+		Outline.enabled = displayOn;
+		OutlineLight.enabled = displayOn;
+    // FIXME: hide the ship's point light; BAD CODE but it works for now 
+    SCC.gameObject.GetComponentInChildren<Light2D>().enabled = displayOn;
 	}
 	public void InitShipBody(Sprite bodySprite, Material bodyMaterial, Sprite outlineSprite) {
 		if (Sprite != null) {
