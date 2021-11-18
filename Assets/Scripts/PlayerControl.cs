@@ -25,8 +25,8 @@ public class PlayerControl : MonoBehaviour
   public float HealthDecrement = 2f;
   public float HijackCooldownTime = 10f;
 
-  public UnityEvent OnDamageTaken;
-  public UnityEvent OnDeath;
+  public UnityEvent OnDamageTaken = new UnityEvent();
+  public UnityEvent OnDeath = new UnityEvent();
 
   private void Awake()
   {
