@@ -17,6 +17,8 @@ public class ShipBody : ScriptableObject
   public Sprite _spritePath, _outlineSprite; // FIXME: why public?
   [SerializeField] protected float tier;
 
+  [FMODUnity.EventRef] public string hitSound;
+
 
   void Awake()
   {

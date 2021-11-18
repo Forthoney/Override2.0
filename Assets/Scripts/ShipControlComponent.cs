@@ -52,8 +52,11 @@ public class ShipControlComponent : MonoBehaviour
         PlayerControl.Instance.OnDeath.Invoke();
       }
     }
-
     OnDamageTaken?.Invoke();
+
+	// PlayDeathSound
+	if (ShipBody.hitSound != null && ShipBody.hitSound.Length > 0) FMOD_Thuleanx.AudioManager.Instance?.PlayOneShot(ShipBody.hitSound);
+
     if (_shipBody.CurrHealth <= 0) OnDeath?.Invoke();
   }
 

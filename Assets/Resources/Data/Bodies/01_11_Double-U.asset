@@ -22,3 +22,4 @@ MonoBehaviour:
   _spritePath: {fileID: 21300000, guid: 33aca9a694c114385939ecf9483967f5, type: 3}
   _outlineSprite: {fileID: 21300000, guid: 829f3640d9582450ebaafde5e9e6fcdd, type: 3}
   tier: 0
+  hitSound: event:/SFX/Body/HitEffect

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="EncodableAsset" id="{97b52d25-bdd6-4088-acf5-20fc1e553992}">
+		<property name="assetPath">
+			<value>CC0/Wet Towel/</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{df97c5e6-3293-4ce9-9b7b-4bd47171f88c}</destination>
+		</relationship>
+	</object>
+</objects>
