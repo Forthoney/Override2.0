@@ -61,6 +61,12 @@ public class ShipBody : ScriptableObject
   }
 
   // Important! For PLAYER's movement
+  public void zeroVelocity()
+  {
+    GameManager.PlayerShip.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+  }
+
+  // Important! For PLAYER's movement
   public void move()
   {
     Vector2 currVel = GameManager.PlayerShip.GetComponent<Rigidbody2D>().velocity;

@@ -42,84 +42,95 @@ public class PlayerControl : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    if (!_isDead && GameManager.PlayerShip != null)
+    // Check for player's ship's null-ness
+    if (GameManager.PlayerShip == null)
     {
-      rotateTowardsMouse();
-      movePlayer();
+      return;
+    }
 
-      float attackSpeed = 1 / rateOfFire;
+    // Check for player's dead-ness
+    if (_isDead)
+    {
+       GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.zeroVelocity();
+    }
 
-      if (GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth >= 1)
-        GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth -= HealthDecrement * Time.deltaTime;
+    // Change rotation and velocity
+    rotateTowardsMouse();
+    movePlayer();
 
-      if (_hijackCooldown)
+    float attackSpeed = 1 / rateOfFire;
+
+    if (GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth >= 1)
+      GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth -= HealthDecrement * Time.deltaTime;
+
+    if (_hijackCooldown)
+    {
+      float percentage = 100f * _hijackCooldown.TimeLeft / HijackCooldownTime;
+      //Debug.Log(percentage);
+      if (percentage > 50f)
       {
-        float percentage = 100f * _hijackCooldown.TimeLeft / HijackCooldownTime;
-        //Debug.Log(percentage);
-        if (percentage > 50f)
-        {
-          GameManager.PlayerShip.GetComponent<ShipBodySettings>()?.Sprite?.material.SetFloat("_Intensity", 0.4f * Mathf.Sin(Mathf.PI / HijackCooldownTime * 10f * Time.time) + 0.6f);
-        }
-        //halfway done with cooldown
-        else if (percentage > 15f)
-        {
-          GameManager.PlayerShip.GetComponent<ShipBodySettings>()?.Sprite?.material.SetFloat("_Intensity", 0.4f * Mathf.Sin(Mathf.PI / HijackCooldownTime * 30f * Time.time) + 0.6f);
-        }
-        else
-        {
-          GameManager.PlayerShip.GetComponent<ShipBodySettings>()?.Sprite?.material.SetFloat("_Intensity", 0.3f * Mathf.Sin(Mathf.PI / HijackCooldownTime * 60f * Time.time) + 0.7f);
-        }
+        GameManager.PlayerShip.GetComponent<ShipBodySettings>()?.Sprite?.material.SetFloat("_Intensity", 0.4f * Mathf.Sin(Mathf.PI / HijackCooldownTime * 10f * Time.time) + 0.6f);
+      }
+      //halfway done with cooldown
+      else if (percentage > 15f)
+      {
+        GameManager.PlayerShip.GetComponent<ShipBodySettings>()?.Sprite?.material.SetFloat("_Intensity", 0.4f * Mathf.Sin(Mathf.PI / HijackCooldownTime * 30f * Time.time) + 0.6f);
       }
       else
       {
-        GameManager.PlayerShip.GetComponent<ShipBodySettings>()?.Sprite?.material.SetFloat("_Intensity", 1f);
-      }
-
-      if (InputController.Instance.Firing && !_firingCooldown && GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon != null)
-      {
-        GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon.Fire(false);
-		GameManager.PlayerShip.GetComponent<Animator>()?.SetTrigger("AttackRecovery");
-        _firingCooldown = new Timer((float)(1f / GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon.FireRate));
-        _firingCooldown.Start();
-      }
-
-      // Handle swapping
-      if (InputController.Instance.Swapping)
-      {
-        // Prepare stuff
-        ShipControlComponent swapTargetShip = null;
-        float swapTargetShipDist = float.PositiveInfinity;
-        Vector2 mouseWorldPos = InputController.Instance.MouseWorldPos;
-
-        // Iterate over all ships to find a ship to swap to
-        foreach (var currShip in GameObject.FindObjectsOfType<ShipControlComponent>())
-        {
-          // If it isn't the player's ship
-          if (currShip.gameObject != GameManager.PlayerShip)
-          {
-            float currDist = (mouseWorldPos - (Vector2) currShip.transform.position).magnitude;
-            if (currDist < swapTargetShipDist && currDist < _swapMaxDistFromMouse)
-            {
-              swapTargetShipDist = currDist;
-              swapTargetShip = currShip;
-            }
-          }
-        }
-
-        // If another ship to swap to was found
-        if (swapTargetShip != null)
-        {
-          if (!_hijackCooldown) // FIXME? consider tradeoffs of moving cooldown check to "handle swapping" if
-          {
-            _hijackCooldown = new Timer((float)(HijackCooldownTime));
-            _hijackCooldown.Start();
-            StartCoroutine(_hijack(swapTargetShip));
-          }
-        }
-        
-        InputController.Instance.Swapping = false;
+        GameManager.PlayerShip.GetComponent<ShipBodySettings>()?.Sprite?.material.SetFloat("_Intensity", 0.3f * Mathf.Sin(Mathf.PI / HijackCooldownTime * 60f * Time.time) + 0.7f);
       }
     }
+    else
+    {
+      GameManager.PlayerShip.GetComponent<ShipBodySettings>()?.Sprite?.material.SetFloat("_Intensity", 1f);
+    }
+
+    if (InputController.Instance.Firing && !_firingCooldown && GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon != null)
+    {
+      GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon.Fire(false);
+  GameManager.PlayerShip.GetComponent<Animator>()?.SetTrigger("AttackRecovery");
+      _firingCooldown = new Timer((float)(1f / GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon.FireRate));
+      _firingCooldown.Start();
+    }
+
+    // Handle swapping
+    if (InputController.Instance.Swapping)
+    {
+      // Prepare stuff
+      ShipControlComponent swapTargetShip = null;
+      float swapTargetShipDist = float.PositiveInfinity;
+      Vector2 mouseWorldPos = InputController.Instance.MouseWorldPos;
+
+      // Iterate over all ships to find a ship to swap to
+      foreach (var currShip in GameObject.FindObjectsOfType<ShipControlComponent>())
+      {
+        // If it isn't the player's ship
+        if (currShip.gameObject != GameManager.PlayerShip)
+        {
+          float currDist = (mouseWorldPos - (Vector2) currShip.transform.position).magnitude;
+          if (currDist < swapTargetShipDist && currDist < _swapMaxDistFromMouse)
+          {
+            swapTargetShipDist = currDist;
+            swapTargetShip = currShip;
+          }
+        }
+      }
+
+      // If another ship to swap to was found
+      if (swapTargetShip != null)
+      {
+        if (!_hijackCooldown) // FIXME? consider tradeoffs of moving cooldown check to "handle swapping" if
+        {
+          _hijackCooldown = new Timer((float)(HijackCooldownTime));
+          _hijackCooldown.Start();
+          StartCoroutine(_hijack(swapTargetShip));
+        }
+      }
+      
+      InputController.Instance.Swapping = false;
+    }
+    
   }
 
   // Tell the ship body to rotate towards the mouse
