@@ -430,6 +430,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7959052260835463318}
+        m_TargetAssemblyTypeName: AudioTrauma, Assembly-CSharp
+        m_MethodName: AddTrauma
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDeath:
     m_PersistentCalls:
       m_Calls:
@@ -504,6 +516,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3911009758407336869}
   - component: {fileID: 6493362925475408526}
+  - component: {fileID: 7959052260835463318}
   m_Layer: 0
   m_Name: Audio Manager
   m_TagString: Untagged
@@ -537,3 +550,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fffcbc6771404b2fb6239fc88741f04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7959052260835463318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8771957955823318760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f076a6224c2164534b52ee167766eb95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recovery: 0.2
