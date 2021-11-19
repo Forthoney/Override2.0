@@ -67,7 +67,8 @@ namespace FMOD_Thuleanx {
 			Master.setVolume(amt);
 		}
 		public void PlayOneShot(string soundRef) {
-			FMODUnity.RuntimeManager.PlayOneShot(soundRef);
+			if (soundRef != null && soundRef.Length > 0)
+				FMODUnity.RuntimeManager.PlayOneShot(soundRef);
 		}
 
 		public FMOD.Studio.EventInstance GetInstance(string soundRef) {

@@ -6,6 +6,7 @@ public class ShipBodySettings : MonoBehaviour {
 
 	public ShipControlComponent SCC { get; private set; }
 	public SpriteRenderer Sprite, Outline;
+	public SpriteMask SpriteMask;
 	public Light2D OutlineLight;
 
 	void Awake() {
@@ -62,8 +63,8 @@ public class ShipBodySettings : MonoBehaviour {
 			Sprite.sprite = bodySprite;
 			Sprite.material = bodyMaterial;
 		}
-		if (Outline != null)
-			Outline.sprite = outlineSprite;
+		if (SpriteMask != null) 		SpriteMask.sprite = bodySprite;
+		if (Outline != null)			Outline.sprite = outlineSprite;
 		if (OutlineLight != null && OutlineLight.lightType == UnityEngine.Experimental.Rendering.Universal.Light2D.LightType.Sprite) {
 			FieldInfo _LightCookieSprite =  typeof( Light2D ).GetField( "m_LightCookieSprite", BindingFlags.NonPublic | BindingFlags.Instance );
 			_LightCookieSprite.SetValue(OutlineLight, outlineSprite);

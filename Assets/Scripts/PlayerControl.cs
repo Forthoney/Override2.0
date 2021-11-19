@@ -16,6 +16,7 @@ public class PlayerControl : MonoBehaviour
   public Transform bullet;
 
   private Timer _firingCooldown;
+  bool _hijackCooldownStopped = true;
   private Timer _hijackCooldown;
   private float _swapMaxDistFromMouse = 5f; // FIXME: magic number was arbitrarily selected (it works ofc)
 
@@ -24,6 +25,9 @@ public class PlayerControl : MonoBehaviour
   public float FreezeDurationOnSwap = 1f;
   public float HealthDecrement = 2f;
   public float HijackCooldownTime = 10f;
+
+	[FMODUnity.EventRef, SerializeField]
+	string HijackCooldownEnd;
 
   public UnityEvent OnDamageTaken = new UnityEvent();
   public UnityEvent OnDeath = new UnityEvent();
@@ -84,6 +88,10 @@ public class PlayerControl : MonoBehaviour
     else
     {
       GameManager.PlayerShip.GetComponent<ShipBodySettings>()?.Sprite?.material.SetFloat("_Intensity", 1f);
+	  if (!_hijackCooldownStopped) {
+		  OnHijackCooldownEnd();
+		  _hijackCooldownStopped = true;
+	  }
     }
 
     if (InputController.Instance.Firing && !_firingCooldown && GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon != null)
@@ -124,6 +132,7 @@ public class PlayerControl : MonoBehaviour
         {
           _hijackCooldown = new Timer((float)(HijackCooldownTime));
           _hijackCooldown.Start();
+		  _hijackCooldownStopped = false;
           StartCoroutine(_hijack(swapTargetShip));
         }
       }
@@ -175,6 +184,11 @@ public class PlayerControl : MonoBehaviour
 
     while (pause) yield return null;
     Time.timeScale = 1;
+  }
+
+  void OnHijackCooldownEnd() {
+	GameManager.PlayerShip.GetComponent<Animator>()?.SetTrigger("Shine");
+	FMOD_Thuleanx.AudioManager.Instance?.PlayOneShot(HijackCooldownEnd);
   }
 
   void die()

@@ -42,22 +42,24 @@ public class ShipControlComponent : MonoBehaviour
 
   public void takeDamage(float damage)
   {
-    _shipBody.CurrHealth -= damage;
+	  if (_shipBody.CurrHealth >= 0) {
+		_shipBody.CurrHealth -= damage;
 
-    if (GameManager.PlayerShip == this.gameObject)
-    {
-      PlayerControl.Instance?.OnDamageTaken?.Invoke();
-      if (_shipBody.CurrHealth <= 0)
-      {
-        PlayerControl.Instance.OnDeath.Invoke();
-      }
-    }
-    OnDamageTaken?.Invoke();
+		if (GameManager.PlayerShip == this.gameObject)
+		{
+		PlayerControl.Instance?.OnDamageTaken?.Invoke();
+		if (_shipBody.CurrHealth <= 0)
+		{
+			PlayerControl.Instance.OnDeath.Invoke();
+		}
+		}
+		OnDamageTaken?.Invoke();
 
-	// PlayDeathSound
-	if (ShipBody.hitSound != null && ShipBody.hitSound.Length > 0) FMOD_Thuleanx.AudioManager.Instance?.PlayOneShot(ShipBody.hitSound);
+		// PlayDeathSound
+		if (ShipBody.hitSound != null && ShipBody.hitSound.Length > 0) FMOD_Thuleanx.AudioManager.Instance?.PlayOneShot(ShipBody.hitSound);
 
-    if (_shipBody.CurrHealth <= 0) OnDeath?.Invoke();
+		if (_shipBody.CurrHealth <= 0) OnDeath?.Invoke();
+	  }
   }
 
   // Accessors
