@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{db63c2b3-1910-40d6-9ea0-1aaea3617780}">
+		<property name="assetPath">
+			<value>CC0/Misc/Card_Swipe_02.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.1490702947845805</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{df97c5e6-3293-4ce9-9b7b-4bd47171f88c}</destination>
+		</relationship>
+	</object>
+</objects>

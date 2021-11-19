@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{ca87ef2d-00fa-4188-8b48-306a3465890b}">
+		<property name="assetPath">
+			<value>turn_stove_on_01.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.52077097505668934</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{df97c5e6-3293-4ce9-9b7b-4bd47171f88c}</destination>
+		</relationship>
+	</object>
+</objects>

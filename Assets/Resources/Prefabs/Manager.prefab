@@ -374,6 +374,7 @@ GameObject:
   - component: {fileID: 4962210372555457877}
   - component: {fileID: 4962210372555457878}
   - component: {fileID: 4962210372555457876}
+  - component: {fileID: 354213070}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -413,12 +414,37 @@ MonoBehaviour:
   FreezeDurationOnSwap: 1
   HealthDecrement: 0.05
   HijackCooldownTime: 10
+  HijackCooldownEnd: event:/SFX/Player/CooldownFinish
   OnDamageTaken:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 354213070}
+        m_TargetAssemblyTypeName: FMODAudioOneshotEmitter, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDeath:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 354213070}
+        m_TargetAssemblyTypeName: FMODAudioOneshotEmitter, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4962210372555457876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -439,28 +465,35 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   EnemyRate: 6
   waveSize: 2
   BaseShip: {fileID: 3547156444801734604, guid: 9fdcb3edb3d16c94fbc532d2c079df38, type: 3}
   bodyPool:
   - {fileID: 11400000, guid: 7ff620aa3d0944745bc827e8907173cc, type: 2}
   - {fileID: 11400000, guid: 8a3142a19ca229f47a38d2d38304cea7, type: 2}
-  - {fileID: 11400000, guid: 5f72e5ce8e78040eeae2d6d0d7baf7b7, type: 2}
   - {fileID: 11400000, guid: 732db857fc9bb41f79c6893c7c1c94c3, type: 2}
-  - {fileID: 11400000, guid: 8995982e2874744178e4c7b035d3590f, type: 2}
-  - {fileID: 11400000, guid: 3da522844ba1e4cfaaf0c063a271d476, type: 2}
-  - {fileID: 11400000, guid: 2f0ab1befe47847d992094aeb5e0cf3c, type: 2}
-  - {fileID: 11400000, guid: ef4062f178f194efba2ec28cc7333c75, type: 2}
-  - {fileID: 11400000, guid: dad1213a0099f44c0b9d2b53c0ab66eb, type: 2}
-  - {fileID: 11400000, guid: 3efd9f862b129421fb8af08ff1fa87ce, type: 2}
-  - {fileID: 11400000, guid: 366537d87d63d4dda817807070334129, type: 2}
-  - {fileID: 11400000, guid: e09d3b229903e4686b46d923df0cd53a, type: 2}
-  - {fileID: 11400000, guid: 708bb7278ddcf4b6fbdad36b7e77220c, type: 2}
-  - {fileID: 11400000, guid: cc064cea9ccda4219b7f831466f809e2, type: 2}
-  - {fileID: 11400000, guid: e663a8048240b4fc4abb7df7cca2f992, type: 2}
   weaponPool:
   - {fileID: 11400000, guid: cacf319db68ac427388694a549993112, type: 2}
   - {fileID: 11400000, guid: d16b5c1f5e49b4e168c18d95ccf487fe, type: 2}
+  - {fileID: 11400000, guid: eeebfcfbd9b9408449829dd339b017a7, type: 2}
+--- !u!114 &354213070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4962210372555457879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2420fbd5ba73464c91527b82a582c8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BankReferences:
+  - event:/SFX/Player/DamageTaken
+  - event:/SFX/Player/Death
 --- !u!1 &8771957955823318760
 GameObject:
   m_ObjectHideFlags: 0

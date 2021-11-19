@@ -47,11 +47,11 @@ public class ShipControlComponent : MonoBehaviour
 
 		if (GameManager.PlayerShip == this.gameObject)
 		{
-		PlayerControl.Instance?.OnDamageTaken?.Invoke();
-		if (_shipBody.CurrHealth <= 0)
-		{
-			PlayerControl.Instance.OnDeath.Invoke();
-		}
+			PlayerControl.Instance?.OnDamageTaken?.Invoke();
+			if (_shipBody.CurrHealth <= 0)
+			{
+				PlayerControl.Instance.OnDeath.Invoke();
+			}
 		}
 		OnDamageTaken?.Invoke();
 
