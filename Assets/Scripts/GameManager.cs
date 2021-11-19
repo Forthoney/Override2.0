@@ -121,8 +121,10 @@ public class GameManager : MonoBehaviour
       {
         EnemyShips.Remove(destroyedShip);
         addScore(100);
-        if (deathParticleObject)
-          Instantiate(deathParticleObject, destroyedShip.transform.position, Quaternion.identity);
+        if (deathParticleObject) {
+			ParticleUtils.EmitOnce(deathParticleObject, destroyedShip.transform.position, Quaternion.identity);
+        //   Instantiate(deathParticleObject, destroyedShip.transform.position, Quaternion.identity);
+		}
         Destroy(destroyedShip);
       }
     }

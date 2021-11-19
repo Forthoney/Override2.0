@@ -457,7 +457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e60ad2efe0f54a59b093ea8e7c0d089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathParticleObject: {fileID: 7440497295322247079, guid: 68327f160785f434585d6208c22d9897, type: 3}
+  deathParticleObject: {fileID: 2253281979690468049, guid: e17ab4c415c814c4d92cb6cb43877251, type: 3}
   playerDeathParticleObject: {fileID: 1863911906802790616, guid: 533f0a3d1fee74e9987c6f58ace59e66, type: 3}
   EnemyShips: []
   ScoreNumber: {fileID: 0}
