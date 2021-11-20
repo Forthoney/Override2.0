@@ -50,9 +50,10 @@ public class InputController : MonoBehaviour
     }
 
 	public void OnSwapInput(InputAction.CallbackContext context) {
-		if (context.performed)
-      Swapping = new Timer(InputBufferTime);
+		if (context.performed) {
+			Swapping = new Timer(InputBufferTime);
 			Swapping.Start();
+		}
 	}
 
   public void OnSearchInput(InputAction.CallbackContext context) {
