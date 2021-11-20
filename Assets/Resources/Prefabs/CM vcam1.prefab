@@ -489,9 +489,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DespawnOnTrigger, Assembly-CSharp
-        m_MethodName: TriggerDespawn
+      - m_Target: {fileID: 210559227}
+        m_TargetAssemblyTypeName: LerpOutOnTrigger, Assembly-CSharp
+        m_MethodName: LerpOut
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -837,9 +837,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f369d701e9f463487c923d08395033, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 10
+  delay: 4
   Displacement: {x: 0, y: -236.7}
-  duration: 5
+  duration: 1
 --- !u!1001 &4038071272805949442
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -982,6 +982,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3104308411765844532}
     m_Modifications:
+    - target: {fileID: 4359155891090502066, guid: d118a3bfe43f64ba5a481a8f50bc16bf, type: 3}
+      propertyPath: m_Name
+      value: Arrow
+      objectReference: {fileID: 0}
+    - target: {fileID: 6543688100192016535, guid: d118a3bfe43f64ba5a481a8f50bc16bf, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 12.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6543688100192016535, guid: d118a3bfe43f64ba5a481a8f50bc16bf, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 8.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8208864254492979775, guid: d118a3bfe43f64ba5a481a8f50bc16bf, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -18.38684
@@ -1093,6 +1105,10 @@ PrefabInstance:
     - target: {fileID: 8208864255940749846, guid: d118a3bfe43f64ba5a481a8f50bc16bf, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8208864255965573319, guid: d118a3bfe43f64ba5a481a8f50bc16bf, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d118a3bfe43f64ba5a481a8f50bc16bf, type: 3}
