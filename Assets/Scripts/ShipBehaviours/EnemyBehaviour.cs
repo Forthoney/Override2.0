@@ -30,10 +30,11 @@ public abstract class EnemyBehaviour
 
     protected void fireWeapon()
     {
-        if (fireTimer >= 1 / attackSpeed)
+        if (fireTimer >= 1 / attackSpeed && !enemyShip.AwaitingFiring)
         {
             // enemyShip.ShipWeapon.Fire(true);
 			// We now trigger the animation instead
+			enemyShip.AwaitingFiring = true;
 			enemyShip.GetComponent<Animator>()?.SetTrigger("Attack");
             fireTimer = 0;
         }

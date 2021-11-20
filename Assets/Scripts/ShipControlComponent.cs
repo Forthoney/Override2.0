@@ -90,5 +90,9 @@ public class ShipControlComponent : MonoBehaviour
 		}
 	}
 
-	public void Fire() => ShipWeapon?.Fire(GameManager.PlayerShip != gameObject);
+	public bool AwaitingFiring = false;
+	public void Fire() {
+		AwaitingFiring = false;
+		ShipWeapon?.Fire(GameManager.PlayerShip != gameObject);
+	} 
 }
