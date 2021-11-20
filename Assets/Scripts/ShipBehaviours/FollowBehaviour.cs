@@ -12,10 +12,12 @@ public class FollowBehaviour : EnemyBehaviour
 
     private followState state;
 
+    private float playerBoundRadMin;
+    private float playerBoundRadMax;
     private float playerBoundRadius;
     private float pauseTimer = 0;
     private float pauseTimeMin;
-    private float pauseTImeMax;
+    private float pauseTimeMax;
 
 
     public FollowBehaviour(ShipControlComponent enemyShip) : base(enemyShip)
@@ -23,9 +25,13 @@ public class FollowBehaviour : EnemyBehaviour
         this.enemyShip = enemyShip;
 
         state = followState.Follow;
-        playerBoundRadius = 5;
+
+        playerBoundRadMin = 5f;
+        playerBoundRadMax = 10f;
+        playerBoundRadius = Random.Range(playerBoundRadMin, playerBoundRadMax);
+
         pauseTimeMin = 2;
-        pauseTImeMax = 4;
+        pauseTimeMax = 4;
     }
 
     public override void doAction()
@@ -41,14 +47,14 @@ public class FollowBehaviour : EnemyBehaviour
 
         if (state == followState.Pause && pauseTimer > pauseTimeMin)
         {
-            if (pauseTimer >= pauseTImeMax)
-                state = followState.Pause;
+            if (pauseTimer >= pauseTimeMax)
+                state = followState.Follow;
             else
             {
                 float stateChangeChance = Mathf.Lerp(.3f, .9f,
-                    (pauseTImeMax - pauseTimeMin)/(pauseTimer-pauseTimeMin));
+                    (pauseTimeMax - pauseTimeMin)/(pauseTimer-pauseTimeMin));
                 state = Random.Range(0f, 1f) < stateChangeChance ?
-                    followState.Pause : followState.Follow;
+                    followState.Follow : followState.Pause;
             }
         }
 
