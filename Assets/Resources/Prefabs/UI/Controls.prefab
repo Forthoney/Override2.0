@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 8536614366674224981}
   - component: {fileID: 4196105428134549911}
   m_Layer: 5
-  m_Name: Outline (1)
+  m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,7 +49,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 14.600121, y: 15.8}
+  m_AnchoredPosition: {x: 12.5, y: 11}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8536614366674224981
@@ -322,7 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 23b391a369c8b44fcaa4877c797dd21f, type: 2}
-  m_Color: {r: 0.9176471, g: 0.20392159, b: 0.14117648, a: 1}
+  m_Color: {r: 0.9176471, g: 0.19607843, b: 0.13725491, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
