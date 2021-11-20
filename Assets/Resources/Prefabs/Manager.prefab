@@ -420,6 +420,7 @@ MonoBehaviour:
   HealthDecrement: 0.05
   HijackCooldownTime: 10
   HijackCooldownEnd: event:/SFX/Player/CooldownFinish
+  HijackFail: event:/SFX/GUI/HijackFail
   OnDamageTaken:
     m_PersistentCalls:
       m_Calls:
