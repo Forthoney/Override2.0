@@ -283,10 +283,10 @@ RectTransform:
   m_Father: {fileID: 4038071273136327580}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 43.8, y: 77.6}
-  m_SizeDelta: {x: 375.8, y: 100.7}
+  m_AnchorMin: {x: 0.1465949, y: 0.2488578}
+  m_AnchorMax: {x: 0.57875884, y: 1}
+  m_AnchoredPosition: {x: 9.099976, y: 36.40001}
+  m_SizeDelta: {x: 149.2, y: -225.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4038071273639719394
 CanvasRenderer:
@@ -316,7 +316,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: VERRIDE
+  m_text: '
+
+
+    VERRIDE'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 990e13a9c3d982c40b0f7aefcdce03a4, type: 2}
   m_sharedMaterial: {fileID: 7391958735505179806, guid: 990e13a9c3d982c40b0f7aefcdce03a4, type: 2}
@@ -350,7 +353,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 3

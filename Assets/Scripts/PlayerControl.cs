@@ -236,11 +236,13 @@ public class PlayerControl : MonoBehaviour
     }
   }
 
+  // Move the player back in the bounds if they leave
   private void LateUpdate()
   {
+    if (GameManager.PlayerShip == null) return;
     Vector2 screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-    float objectWidth = GameManager.PlayerShip.GetComponentInChildren<SpriteRenderer>().bounds.extents.x; //extents = size of width / 2
-    float objectHeight = GameManager.PlayerShip.GetComponentInChildren<SpriteRenderer>().bounds.extents.y; //extents = size of height / 2
+    float objectWidth = GameManager.PlayerShip.GetComponent<ShipBodySettings>().Outline.bounds.extents.x; //extents = size of width / 2
+    float objectHeight = GameManager.PlayerShip.GetComponent<ShipBodySettings>().Outline.bounds.extents.y; //extents = size of height / 2
     Vector3 viewPos = GameManager.PlayerShip.transform.position;
     viewPos.x = Mathf.Clamp(viewPos.x, screenBounds.x * -1 + objectWidth, screenBounds.x - objectWidth);
     viewPos.y = Mathf.Clamp(viewPos.y, screenBounds.y * -1 + objectHeight, screenBounds.y - objectHeight);
