@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FastWeapon
   m_EditorClassIdentifier: 
   _damage: 1
-  _fireRate: 4.1
+  _fireRate: 4.05
   _bulletSpeed: 16
   _bulletPrefab: {fileID: 4217884717191485884, guid: d9478cf83480e4fdca29c087cdc6c742, type: 3}
   _spritePosOffset: {x: 0, y: 0}

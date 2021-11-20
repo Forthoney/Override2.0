@@ -9,8 +9,8 @@ public abstract class EnemyBehaviour
     protected float speed;
     protected float attackSpeed;
 
-    private float speedMod = 0.5f;
-    private float attackSpeedMod = 0.2f;
+    private float speedMod = 0.33f; // FIXME: one day, move into separate thing which considers all buffs
+    private float attackSpeedMod = 0.2f; // FIXME: one day, move into separate thing which considers all buffs
 
     private float fireTimer = 0;
 
