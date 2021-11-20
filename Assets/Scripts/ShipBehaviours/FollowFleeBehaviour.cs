@@ -59,11 +59,12 @@ public class FollowFleeBehaviour : EnemyBehaviour
     public override void doAction()
     {
         Vector2 playerPos = GameManager.PlayerShip.transform.position;
+        Vector2 enemyPos = enemyShip.transform.position;
 
         float xDiff, yDiff;
 
-        xDiff = playerPos.x - enemyShip.gameObject.transform.position.x;
-        yDiff = playerPos.y - enemyShip.gameObject.transform.position.y;
+        xDiff = playerPos.x - enemyPos.x;
+        yDiff = playerPos.y - enemyPos.y;
 
         Vector3 followDirection = new Vector3(xDiff, yDiff);
 
@@ -95,10 +96,10 @@ public class FollowFleeBehaviour : EnemyBehaviour
 
         // Condition for switching from flee to follow
         if (!paused && state == followState.Flee && (Timer >= fleeTime ||
-            playerPos.x >= maxX - radius ||
-            playerPos.x <= minX + radius ||
-            playerPos.y >= maxY - radius ||
-            playerPos.y <= minY + radius))
+            enemyPos.x >= maxX - radius ||
+            enemyPos.x <= minX + radius ||
+            enemyPos.y >= maxY - radius ||
+            enemyPos.y <= minY + radius))
         {
             paused = true;
             state = followState.Follow;
