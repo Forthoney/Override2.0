@@ -15,6 +15,7 @@ public class InputController : MonoBehaviour
 	[HideInInspector] public Vector2 MouseScreenPos;
 	[HideInInspector] public bool Firing = false;
 	[HideInInspector] public bool Swapping = false;
+  [HideInInspector] public bool Searching = false;
 	[HideInInspector] public bool Pausing = false;
 
   public Vector2 MouseWorldPos
@@ -53,6 +54,13 @@ public class InputController : MonoBehaviour
 			Swapping = true;
 		else if (context.canceled)
 			Swapping = false;
+	}
+
+  public void OnSearchInput(InputAction.CallbackContext context) {
+		if (context.started)
+			Searching = true;
+		else if (context.canceled)
+			Searching = false;
 	}
 
 	public void OnPauseInput(InputAction.CallbackContext context)

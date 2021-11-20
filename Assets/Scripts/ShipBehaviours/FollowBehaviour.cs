@@ -56,6 +56,11 @@ public class FollowBehaviour : EnemyBehaviour
                 state = Random.Range(0f, 1f) < stateChangeChance ?
                     followState.Follow : followState.Pause;
             }
+
+            if (state == followState.Follow)
+            {
+                pauseTimer = 0;
+            }
         }
 
         if (followDirection.magnitude < playerBoundRadius && state == followState.Follow)
