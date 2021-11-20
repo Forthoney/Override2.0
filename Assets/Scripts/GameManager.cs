@@ -263,9 +263,7 @@ public class GameManager : MonoBehaviour
     // Hide all visible parts of the ship
     PlayerShip.GetComponent<ShipBodySettings>().ToggleDisplay(false);
     // Wait for some time
-    yield return new WaitForSecondsRealtime(4);
-    // End slow motion
-    Time.timeScale = 1;
+    yield return new WaitForSecondsRealtime(3);
 
     // Next...
     TransitionCanvasController controller = FindObjectOfType<TransitionCanvasController>();
@@ -277,6 +275,11 @@ public class GameManager : MonoBehaviour
     {
       SceneControl.GameOver();
     }
+    // Wait for some time
+    yield return new WaitForSecondsRealtime(1);
+
+    // End slow motion
+    Time.timeScale = 1;
   }
 
   private EnemyBehaviour getBehaviourFromPool(ShipControlComponent shipControlComponent)
