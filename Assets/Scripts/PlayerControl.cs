@@ -225,7 +225,7 @@ public class PlayerControl : MonoBehaviour
         //overridable
         if (!_hijackCooldown)
         {
-          currShip.GetComponent<ShipBodySettings>().SetColor(true);
+          currShip.GetComponent<ShipBodySettings>().SetGlowColor(true);
         }
         //wait for cooldown
         else
