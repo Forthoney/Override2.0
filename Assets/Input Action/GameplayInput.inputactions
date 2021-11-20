@@ -183,7 +183,7 @@
                     "name": "",
                     "id": "1ec3daf9-df63-4f0f-a281-14d2f54d9d1a",
                     "path": "<Mouse>/rightButton",
-                    "interactions": "Press(behavior=1)",
+                    "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
                     "action": "Swap",
