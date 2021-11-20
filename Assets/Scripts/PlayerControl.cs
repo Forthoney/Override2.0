@@ -22,6 +22,8 @@ public class PlayerControl : MonoBehaviour
 
   private bool _isDead = false;
 
+  private CursorSet currentCursorSet; // FIXME: janky way to change cursors
+
   public float FreezeDurationOnSwap = 1f;
   public float HealthDecrement = 2f;
   public float HijackCooldownTime = 10f;
@@ -37,6 +39,7 @@ public class PlayerControl : MonoBehaviour
   private void Awake()
   {
     Instance = this;
+    currentCursorSet = GameObject.Find("Cursor Manager").GetComponent<CursorSet>();
   }
 
   // Start is called before the first frame update
@@ -51,12 +54,14 @@ public class PlayerControl : MonoBehaviour
     // Check for player's ship's null-ness
     if (GameManager.PlayerShip == null)
     {
+      currentCursorSet.SetCursorCrosshair(); // FIXME: a just-in-case set
       return;
     }
 
     // Check for player's dead-ness
     if (_isDead)
     {
+      currentCursorSet.SetCursorCrosshair(); // FIXME: a just-in-case set
       GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.zeroVelocity();
     }
 
@@ -110,11 +115,12 @@ public class PlayerControl : MonoBehaviour
       _firingCooldown.Start();
     }
 
-
-    //Highlight nearest swappable ship
-    if (InputController.Instance.Searching)
-    {
+    // Handle searching
+    if (InputController.Instance.Searching) {
+      currentCursorSet.SetCursorArrow();
       ColorNearestShip();
+    } else {
+      currentCursorSet.SetCursorCrosshair(); // FIXME: a just-in-case set
     }
 
     // Handle swapping

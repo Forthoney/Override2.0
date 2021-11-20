@@ -24,13 +24,13 @@ public class CursorSet : MonoBehaviour
             SetCursorCrosshair();
     }
 
-    void SetCursorArrow()
+    public void SetCursorArrow()
     {
-        Vector2 cursorOffset = new Vector2(0, 0);
+        Vector2 cursorOffset = new Vector2(ArrowCursor.width / 2, ArrowCursor.width / 2);
         Cursor.SetCursor(ArrowCursor, cursorOffset, CursorMode.Auto);
     }
 
-    void SetCursorCrosshair()
+    public void SetCursorCrosshair()
     {
         Vector2 cursorOffset = new Vector2(CrosshairCursor.width / 2, CrosshairCursor.height / 2);
         Cursor.SetCursor(CrosshairCursor, cursorOffset, CursorMode.Auto);
