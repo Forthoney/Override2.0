@@ -44,12 +44,18 @@ public class BulletBehaviour : MonoBehaviour
       if (other.gameObject != GameManager.PlayerShip)
       {
         other.gameObject.GetComponent<ShipControlComponent>()?.takeDamage(damage);
-        foreach (GameObject ship in GameManager.Instance.EnemyShips)
+
+        if (explodes)
         {
-          if ((other.transform.position - ship.transform.position).magnitude <= explosionRadius){
-            ship.GetComponent<ShipControlComponent>()?.takeDamage(damage);
+          foreach (GameObject ship in GameManager.Instance.EnemyShips)
+          {
+            if ((other.transform.position - ship.transform.position).magnitude <= explosionRadius)
+            {
+              ship.GetComponent<ShipControlComponent>()?.takeDamage(damage);
+            }
           }
         }
+
         ShockManager.Instance.StartShake(new Vector3(0, -2, 0));
         this.Die();
       }

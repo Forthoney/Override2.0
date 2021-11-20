@@ -67,7 +67,11 @@ public class PlayerControl : MonoBehaviour
     float attackSpeed = 1 / rateOfFire;
 
     if (GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth >= 1)
-      GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth -= HealthDecrement * Time.deltaTime;
+    {
+      float maxHealth = GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.MaxHealth;
+      GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth -= HealthDecrement / maxHealth * Time.deltaTime;
+
+    }
 
     if (_hijackCooldown)
     {
@@ -108,7 +112,8 @@ public class PlayerControl : MonoBehaviour
 
 
     //Highlight nearest swappable ship
-    if (InputController.Instance.Searching) {
+    if (InputController.Instance.Searching)
+    {
       ColorNearestShip();
     }
 
@@ -136,18 +141,20 @@ public class PlayerControl : MonoBehaviour
       }
 
       // If another ship to swap to was found
-      if (swapTargetShip != null && !_hijackCooldown) {
-          _hijackCooldown = new Timer((float)(HijackCooldownTime));
-          _hijackCooldown.Start();
-          _hijackCooldownStopped = false;
-          StartCoroutine(_hijack(swapTargetShip));
-      } else FMOD_Thuleanx.AudioManager.Instance?.PlayOneShot(HijackFail);
+      if (swapTargetShip != null && !_hijackCooldown)
+      {
+        _hijackCooldown = new Timer((float)(HijackCooldownTime));
+        _hijackCooldown.Start();
+        _hijackCooldownStopped = false;
+        StartCoroutine(_hijack(swapTargetShip));
+      }
+      else FMOD_Thuleanx.AudioManager.Instance?.PlayOneShot(HijackFail);
 
       InputController.Instance.Swapping.Stop();
 
     }
 
-    
+
 
   }
 

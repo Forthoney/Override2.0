@@ -9,7 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3637630408392106280, guid: 5db6aa6cfb713443d8a25a9c28d726d1, type: 3}
       propertyPath: m_Name
-      value: RoundBullet
+      value: RoundBullet Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 3637630408392106282, guid: 5db6aa6cfb713443d8a25a9c28d726d1, type: 3}
+      propertyPath: explodes
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3637630408392106283, guid: 5db6aa6cfb713443d8a25a9c28d726d1, type: 3}
       propertyPath: m_RootOrder
