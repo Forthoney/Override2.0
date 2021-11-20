@@ -181,6 +181,17 @@
                 },
                 {
                     "name": "",
+                    "id": "af14a026-c620-46cd-95f1-a24599f75cf4",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "1ec3daf9-df63-4f0f-a281-14d2f54d9d1a",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",

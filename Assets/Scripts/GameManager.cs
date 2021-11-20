@@ -9,15 +9,6 @@ public class GameManager : MonoBehaviour
   public static GameManager Instance = null;
 
   private static GameObject _playerShip;
-  public static GameObject PlayerShip
-  {
-    get { return _playerShip; }
-    set
-    {
-      _playerShip = value;
-      _playerShip?.GetComponent<ShipBodySettings>().SetDefaultColor();
-    }
-  }
 
   System.Random random = new System.Random();
   public GameObject deathParticleObject;
@@ -27,6 +18,16 @@ public class GameManager : MonoBehaviour
   public TextMeshProUGUI ScoreNumber;
   static float _score;
 
+  public static GameObject PlayerShip
+  {
+    get { return _playerShip; }
+    set
+    {
+      GameManager.Instance.EnemyShips.Remove(value);
+      _playerShip = value;
+      _playerShip?.GetComponent<ShipBodySettings>().SetDefaultColor();
+    }
+  }
   public static float Score
   {
     get => _score; set
@@ -95,6 +96,12 @@ public class GameManager : MonoBehaviour
 
     // if we have no player ship, the game should not be running
     if (PlayerShip == null) return;
+
+    Debug.Log(EnemyShips.Count);
+    if (currWaveSize == waveSize && EnemyShips.Count < 1)
+    {
+      timer += EnemyRate - 0.5f;
+    }
 
     timer += Time.deltaTime;
     if (timer > EnemyRate)
