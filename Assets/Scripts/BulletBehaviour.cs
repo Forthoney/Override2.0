@@ -6,6 +6,10 @@ public class BulletBehaviour : MonoBehaviour
 {
   // Set by the ship weapon after spawn
   public bool isEnemyBullet;
+
+  public bool explodes;
+
+  public float explosionRadius = 5;
   public float damage
   {
     get; set;
@@ -40,6 +44,12 @@ public class BulletBehaviour : MonoBehaviour
       if (other.gameObject != GameManager.PlayerShip)
       {
         other.gameObject.GetComponent<ShipControlComponent>()?.takeDamage(damage);
+        foreach (GameObject ship in GameManager.Instance.EnemyShips)
+        {
+          if ((other.transform.position - ship.transform.position).magnitude <= explosionRadius){
+            ship.GetComponent<ShipControlComponent>()?.takeDamage(damage);
+          }
+        }
         ShockManager.Instance.StartShake(new Vector3(0, -2, 0));
         this.Die();
       }
