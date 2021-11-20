@@ -2520,6 +2520,10 @@ PrefabInstance:
       propertyPath: PauseUIObjects.Array.data[6]
       value: 
       objectReference: {fileID: 719814027}
+    - target: {fileID: 7959052260835463318, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
+      propertyPath: recovery
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
 --- !u!1001 &5113838097652563989
