@@ -340,6 +340,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: cdb423b7-08f6-4977-bbf2-3c5bc2b9c79a
     m_ActionName: Gamplay Controls/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a6e35ad6-fc57-46c5-8215-0a20dc7e4788
+    m_ActionName: Gamplay Controls/Search[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gamplay Controls
@@ -362,6 +366,7 @@ MonoBehaviour:
   MouseScreenPos: {x: 0, y: 0}
   Firing: 0
   Swapping: 0
+  Searching: 0
   Pausing: 0
 --- !u!1 &4962210372555457879
 GameObject:
@@ -481,7 +486,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   EnemyRate: 6
-  waveSize: 2
+  waveSize: 3
   BaseShip: {fileID: 3547156444801734604, guid: 9fdcb3edb3d16c94fbc532d2c079df38, type: 3}
   bodyPool:
   - {fileID: 11400000, guid: 7ff620aa3d0944745bc827e8907173cc, type: 2}
