@@ -73,26 +73,27 @@ public class PlayerControl : MonoBehaviour
       //Debug.Log(percentage);
       if (percentage > 50f)
       {
-        GameManager.PlayerShip.GetComponent<ShipBodySettings>()?.Sprite?.material.SetFloat("_Intensity", Mathf.Sin(Mathf.PI / HijackCooldownTime * 10f * Time.time) + 1.5f);
+        GameManager.PlayerShip.GetComponent<ShipBodySettings>()?.Sprite?.material.SetFloat("_Intensity", 2f * Mathf.Sin(Mathf.PI / HijackCooldownTime * 40f * Time.time) + 1.5f);
       }
       //halfway done with cooldown
       else if (percentage > 15f)
       {
-        GameManager.PlayerShip.GetComponent<ShipBodySettings>()?.Sprite?.material.SetFloat("_Intensity", Mathf.Sin(Mathf.PI / HijackCooldownTime * 30f * Time.time) + 1.5f);
+        GameManager.PlayerShip.GetComponent<ShipBodySettings>()?.Sprite?.material.SetFloat("_Intensity", 2f * Mathf.Sin(Mathf.PI / HijackCooldownTime * 80f * Time.time) + 1.5f);
       }
       else
       {
-        GameManager.PlayerShip.GetComponent<ShipBodySettings>()?.Sprite?.material.SetFloat("_Intensity", Mathf.Sin(Mathf.PI / HijackCooldownTime * 60f * Time.time) + 1.5f);
+        GameManager.PlayerShip.GetComponent<ShipBodySettings>()?.Sprite?.material.SetFloat("_Intensity", 2f * Mathf.Sin(Mathf.PI / HijackCooldownTime * 160f * Time.time) + 1.5f);
       }
     }
     else
     {
-      GameManager.PlayerShip.GetComponent<ShipBodySettings>()?.Sprite?.material.SetFloat("_Intensity", 1f);
+      GameManager.PlayerShip.GetComponent<ShipBodySettings>()?.Sprite?.material.SetFloat("_Intensity", 4f);
       if (!_hijackCooldownStopped)
       {
         OnHijackCooldownEnd();
         _hijackCooldownStopped = true;
       }
+      GameManager.PlayerShip.GetComponent<ShipBodySettings>()?.Sprite?.material.SetFloat("_Intensity", 1f);
     }
 
     if (InputController.Instance.Firing && !_firingCooldown && GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon != null)
@@ -103,9 +104,11 @@ public class PlayerControl : MonoBehaviour
       _firingCooldown.Start();
     }
 
-    //Highlight nearest swappable ship
 
-    ColorNearestShip();
+    //Highlight nearest swappable ship
+    if (InputController.Instance.Searching) {
+      ColorNearestShip();
+    }
 
     // Handle swapping
     if (InputController.Instance.Swapping)
@@ -141,7 +144,6 @@ public class PlayerControl : MonoBehaviour
           StartCoroutine(_hijack(swapTargetShip));
         }
       }
-
       InputController.Instance.Swapping = false;
     }
 
