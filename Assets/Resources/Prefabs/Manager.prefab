@@ -365,7 +365,6 @@ MonoBehaviour:
   Movement: {x: 0, y: 0}
   MouseScreenPos: {x: 0, y: 0}
   Firing: 0
-  Swapping: 0
   Searching: 0
   Pausing: 0
 --- !u!1 &4962210372555457879
@@ -486,7 +485,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  EnemyRate: 6
+  EnemyRate: 4
   waveSize: 3
   BaseShip: {fileID: 3547156444801734604, guid: 9fdcb3edb3d16c94fbc532d2c079df38, type: 3}
   bodyPool:

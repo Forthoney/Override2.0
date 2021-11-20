@@ -284,10 +284,10 @@ public class GameManager : MonoBehaviour
     }
     // Wait for some time
     yield return new WaitForSecondsRealtime(2);
-    SceneControl.GameOver();
 
     // End slow motion
     Time.timeScale = 1;
+    SceneControl.GameOver();
   }
 
   private EnemyBehaviour getBehaviourFromPool(ShipControlComponent shipControlComponent)
