@@ -73,16 +73,16 @@ public class PlayerControl : MonoBehaviour
       //Debug.Log(percentage);
       if (percentage > 50f)
       {
-        GameManager.PlayerShip.GetComponent<ShipBodySettings>()?.Sprite?.material.SetFloat("_Intensity", 0.4f * Mathf.Sin(Mathf.PI / HijackCooldownTime * 10f * Time.time) + 0.6f);
+        GameManager.PlayerShip.GetComponent<ShipBodySettings>()?.Sprite?.material.SetFloat("_Intensity", Mathf.Sin(Mathf.PI / HijackCooldownTime * 10f * Time.time) + 1.5f);
       }
       //halfway done with cooldown
       else if (percentage > 15f)
       {
-        GameManager.PlayerShip.GetComponent<ShipBodySettings>()?.Sprite?.material.SetFloat("_Intensity", 0.4f * Mathf.Sin(Mathf.PI / HijackCooldownTime * 30f * Time.time) + 0.6f);
+        GameManager.PlayerShip.GetComponent<ShipBodySettings>()?.Sprite?.material.SetFloat("_Intensity", Mathf.Sin(Mathf.PI / HijackCooldownTime * 30f * Time.time) + 1.5f);
       }
       else
       {
-        GameManager.PlayerShip.GetComponent<ShipBodySettings>()?.Sprite?.material.SetFloat("_Intensity", 0.3f * Mathf.Sin(Mathf.PI / HijackCooldownTime * 60f * Time.time) + 0.7f);
+        GameManager.PlayerShip.GetComponent<ShipBodySettings>()?.Sprite?.material.SetFloat("_Intensity", Mathf.Sin(Mathf.PI / HijackCooldownTime * 60f * Time.time) + 1.5f);
       }
     }
     else
@@ -101,6 +101,10 @@ public class PlayerControl : MonoBehaviour
       _firingCooldown = new Timer((float)(1f / GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon.FireRate));
       _firingCooldown.Start();
     }
+
+    //Highlight nearest swappable ship
+    
+    ColorNearestShip();
 
     // Handle swapping
     if (InputController.Instance.Swapping)
@@ -184,6 +188,46 @@ public class PlayerControl : MonoBehaviour
 
     while (pause) yield return null;
     Time.timeScale = 1;
+  }
+
+  void ColorNearestShip(){
+  // Prepare stuff
+      ShipControlComponent swapTargetShip = null;
+      float swapTargetShipDist = float.PositiveInfinity;
+      Vector2 mouseWorldPos = InputController.Instance.MouseWorldPos;
+
+      // Iterate over all ships to find a ship to swap to
+      foreach (var currShip in GameObject.FindObjectsOfType<ShipControlComponent>())
+      {
+        // If it isn't the player's ship
+        if (currShip.gameObject != GameManager.PlayerShip)
+        {
+          float currDist = (mouseWorldPos - (Vector2) currShip.transform.position).magnitude;
+          if (currDist < swapTargetShipDist && currDist < _swapMaxDistFromMouse)
+          {
+            swapTargetShipDist = currDist;
+            swapTargetShip = currShip;
+          }
+        }
+      }
+
+      foreach (var currShip in GameObject.FindObjectsOfType<ShipControlComponent>())
+      {
+        //not nearest
+        if (currShip.gameObject != GameManager.PlayerShip && currShip != swapTargetShip) {
+          currShip.GetComponent<ShipBodySettings>().SetColor(false);
+        } else if (currShip == swapTargetShip) {
+          //overridable
+          if (!_hijackCooldown) 
+          {
+            currShip.GetComponent<ShipBodySettings>().SetColor(true);
+          } 
+          //wait for cooldown
+          else {
+
+          }
+        }
+      }
   }
 
   void OnHijackCooldownEnd() {
