@@ -281,7 +281,7 @@ public class GameManager : MonoBehaviour
 
   private EnemyBehaviour getBehaviourFromPool(ShipControlComponent shipControlComponent)
   {
-    EnemyBehaviour[] behaviourPool = new EnemyBehaviour[] { new FollowBehaviour(shipControlComponent), new BasicBehaviour(shipControlComponent) };
+    EnemyBehaviour[] behaviourPool = new EnemyBehaviour[] { new FollowBehaviour(shipControlComponent), new BasicBehaviour(shipControlComponent) , new FollowFleeBehaviour(shipControlComponent) };
 
     return behaviourPool[random.Next(behaviourPool.Length)];
   }
