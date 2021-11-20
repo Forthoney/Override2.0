@@ -28,6 +28,8 @@ public class PlayerControl : MonoBehaviour
 
   [FMODUnity.EventRef, SerializeField]
   string HijackCooldownEnd;
+  [FMODUnity.EventRef, SerializeField]
+  string HijackFail;
 
   public UnityEvent OnDamageTaken = new UnityEvent();
   public UnityEvent OnDeath = new UnityEvent();
@@ -67,7 +69,7 @@ public class PlayerControl : MonoBehaviour
     if (GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth >= 1)
       GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth -= HealthDecrement * Time.deltaTime;
 
-    if (_hijackCooldown && !_isDead)
+    if (_hijackCooldown)
     {
       float percentage = 100f * _hijackCooldown.TimeLeft / HijackCooldownTime;
       //Debug.Log(percentage);
@@ -111,7 +113,7 @@ public class PlayerControl : MonoBehaviour
     }
 
     // Handle swapping
-    if (InputController.Instance.Swapping)
+    if (InputController.Instance.Swapping && !_isDead)
     {
       // Prepare stuff
       ShipControlComponent swapTargetShip = null;
@@ -134,16 +136,12 @@ public class PlayerControl : MonoBehaviour
       }
 
       // If another ship to swap to was found
-      if (swapTargetShip != null)
-      {
-        if (!_hijackCooldown) // FIXME? consider tradeoffs of moving cooldown check to "handle swapping" if
-        {
+      if (swapTargetShip != null && !_hijackCooldown) {
           _hijackCooldown = new Timer((float)(HijackCooldownTime));
           _hijackCooldown.Start();
           _hijackCooldownStopped = false;
           StartCoroutine(_hijack(swapTargetShip));
-        }
-      }
+      } else FMOD_Thuleanx.AudioManager.Instance?.PlayOneShot(HijackFail);
       InputController.Instance.Swapping = false;
     }
 
