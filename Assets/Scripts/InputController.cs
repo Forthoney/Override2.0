@@ -14,7 +14,7 @@ public class InputController : MonoBehaviour
 	[HideInInspector] public Vector2 Movement;
 	[HideInInspector] public Vector2 MouseScreenPos;
 	[HideInInspector] public bool Firing = false;
-	[HideInInspector] public bool Swapping = false;
+	[HideInInspector] public Timer Swapping;
   [HideInInspector] public bool Searching = false;
 	[HideInInspector] public bool Pausing = false;
 
@@ -50,10 +50,9 @@ public class InputController : MonoBehaviour
     }
 
 	public void OnSwapInput(InputAction.CallbackContext context) {
-		if (context.started)
-			Swapping = true;
-		else if (context.canceled)
-			Swapping = false;
+		if (context.performed)
+      Swapping = new Timer(InputBufferTime);
+			Swapping.Start();
 	}
 
   public void OnSearchInput(InputAction.CallbackContext context) {

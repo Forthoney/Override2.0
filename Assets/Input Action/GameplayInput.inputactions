@@ -224,7 +224,7 @@
                     "name": "",
                     "id": "d36c814b-1e53-479d-806d-7dce2950cd8c",
                     "path": "<Mouse>/rightButton",
-                    "interactions": "Press",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
                     "action": "Search",
