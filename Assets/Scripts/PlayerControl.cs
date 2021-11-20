@@ -26,8 +26,8 @@ public class PlayerControl : MonoBehaviour
   public float HealthDecrement = 2f;
   public float HijackCooldownTime = 10f;
 
-	[FMODUnity.EventRef, SerializeField]
-	string HijackCooldownEnd;
+  [FMODUnity.EventRef, SerializeField]
+  string HijackCooldownEnd;
 
   public UnityEvent OnDamageTaken = new UnityEvent();
   public UnityEvent OnDeath = new UnityEvent();
@@ -55,7 +55,7 @@ public class PlayerControl : MonoBehaviour
     // Check for player's dead-ness
     if (_isDead)
     {
-       GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.zeroVelocity();
+      GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.zeroVelocity();
     }
 
     // Change rotation and velocity
@@ -88,22 +88,23 @@ public class PlayerControl : MonoBehaviour
     else
     {
       GameManager.PlayerShip.GetComponent<ShipBodySettings>()?.Sprite?.material.SetFloat("_Intensity", 1f);
-	  if (!_hijackCooldownStopped) {
-		  OnHijackCooldownEnd();
-		  _hijackCooldownStopped = true;
-	  }
+      if (!_hijackCooldownStopped)
+      {
+        OnHijackCooldownEnd();
+        _hijackCooldownStopped = true;
+      }
     }
 
     if (InputController.Instance.Firing && !_firingCooldown && GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon != null)
     {
       GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon.Fire(false);
-  GameManager.PlayerShip.GetComponent<Animator>()?.SetTrigger("AttackRecovery");
+      GameManager.PlayerShip.GetComponent<Animator>()?.SetTrigger("AttackRecovery");
       _firingCooldown = new Timer((float)(1f / GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipWeapon.FireRate));
       _firingCooldown.Start();
     }
 
     //Highlight nearest swappable ship
-    
+
     ColorNearestShip();
 
     // Handle swapping
@@ -120,7 +121,7 @@ public class PlayerControl : MonoBehaviour
         // If it isn't the player's ship
         if (currShip.gameObject != GameManager.PlayerShip)
         {
-          float currDist = (mouseWorldPos - (Vector2) currShip.transform.position).magnitude;
+          float currDist = (mouseWorldPos - (Vector2)currShip.transform.position).magnitude;
           if (currDist < swapTargetShipDist && currDist < _swapMaxDistFromMouse)
           {
             swapTargetShipDist = currDist;
@@ -136,14 +137,14 @@ public class PlayerControl : MonoBehaviour
         {
           _hijackCooldown = new Timer((float)(HijackCooldownTime));
           _hijackCooldown.Start();
-		  _hijackCooldownStopped = false;
+          _hijackCooldownStopped = false;
           StartCoroutine(_hijack(swapTargetShip));
         }
       }
-      
+
       InputController.Instance.Swapping = false;
     }
-    
+
   }
 
   // Tell the ship body to rotate towards the mouse
@@ -190,49 +191,66 @@ public class PlayerControl : MonoBehaviour
     Time.timeScale = 1;
   }
 
-  void ColorNearestShip(){
-  // Prepare stuff
-      ShipControlComponent swapTargetShip = null;
-      float swapTargetShipDist = float.PositiveInfinity;
-      Vector2 mouseWorldPos = InputController.Instance.MouseWorldPos;
+  void ColorNearestShip()
+  {
+    // Prepare stuff
+    ShipControlComponent swapTargetShip = null;
+    float swapTargetShipDist = float.PositiveInfinity;
+    Vector2 mouseWorldPos = InputController.Instance.MouseWorldPos;
 
-      // Iterate over all ships to find a ship to swap to
-      foreach (var currShip in GameObject.FindObjectsOfType<ShipControlComponent>())
+    // Iterate over all ships to find a ship to swap to
+    foreach (var currShip in GameObject.FindObjectsOfType<ShipControlComponent>())
+    {
+      // If it isn't the player's ship
+      if (currShip.gameObject != GameManager.PlayerShip)
       {
-        // If it isn't the player's ship
-        if (currShip.gameObject != GameManager.PlayerShip)
+        float currDist = (mouseWorldPos - (Vector2)currShip.transform.position).magnitude;
+        if (currDist < swapTargetShipDist && currDist < _swapMaxDistFromMouse)
         {
-          float currDist = (mouseWorldPos - (Vector2) currShip.transform.position).magnitude;
-          if (currDist < swapTargetShipDist && currDist < _swapMaxDistFromMouse)
-          {
-            swapTargetShipDist = currDist;
-            swapTargetShip = currShip;
-          }
+          swapTargetShipDist = currDist;
+          swapTargetShip = currShip;
         }
       }
+    }
 
-      foreach (var currShip in GameObject.FindObjectsOfType<ShipControlComponent>())
+    foreach (var currShip in GameObject.FindObjectsOfType<ShipControlComponent>())
+    {
+      //not nearest
+      if (currShip.gameObject != GameManager.PlayerShip && currShip != swapTargetShip)
       {
-        //not nearest
-        if (currShip.gameObject != GameManager.PlayerShip && currShip != swapTargetShip) {
-          currShip.GetComponent<ShipBodySettings>().SetColor(false);
-        } else if (currShip == swapTargetShip) {
-          //overridable
-          if (!_hijackCooldown) 
-          {
-            currShip.GetComponent<ShipBodySettings>().SetColor(true);
-          } 
-          //wait for cooldown
-          else {
+        currShip.GetComponent<ShipBodySettings>().SetColor(false);
+      }
+      else if (currShip == swapTargetShip)
+      {
+        //overridable
+        if (!_hijackCooldown)
+        {
+          currShip.GetComponent<ShipBodySettings>().SetColor(true);
+        }
+        //wait for cooldown
+        else
+        {
 
-          }
         }
       }
+    }
   }
 
-  void OnHijackCooldownEnd() {
-	GameManager.PlayerShip.GetComponent<Animator>()?.SetTrigger("Shine");
-	FMOD_Thuleanx.AudioManager.Instance?.PlayOneShot(HijackCooldownEnd);
+  private void LateUpdate()
+  {
+    Vector2 screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+    float objectWidth = GameManager.PlayerShip.GetComponentInChildren<SpriteRenderer>().bounds.extents.x; //extents = size of width / 2
+    float objectHeight = GameManager.PlayerShip.GetComponentInChildren<SpriteRenderer>().bounds.extents.y; //extents = size of height / 2
+    Vector3 viewPos = GameManager.PlayerShip.transform.position;
+    viewPos.x = Mathf.Clamp(viewPos.x, screenBounds.x * -1 + objectWidth, screenBounds.x - objectWidth);
+    viewPos.y = Mathf.Clamp(viewPos.y, screenBounds.y * -1 + objectHeight, screenBounds.y - objectHeight);
+    GameManager.PlayerShip.transform.position = viewPos;
+  }
+
+  void OnHijackCooldownEnd()
+  {
+    GameManager.PlayerShip.GetComponent<Animator>()?.SetTrigger("Shine");
+    FMOD_Thuleanx.AudioManager.Instance?.PlayOneShot(HijackCooldownEnd);
   }
 
   void die()
