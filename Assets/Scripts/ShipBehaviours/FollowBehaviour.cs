@@ -4,31 +4,28 @@ using UnityEngine;
 
 public class FollowBehaviour : EnemyBehaviour
 {
-    private float minX;
-    private float maxX;
-    private float minY;
-    private float maxY;
-    private float radius;
-    SpriteRenderer rend;
+    private enum followState
+    {
+        Follow,
+        Pause
+    }
 
+    private followState state;
+
+    private float playerBoundRadius;
+    private float pauseTimer = 0;
+    private float pauseTimeMin;
+    private float pauseTImeMax;
 
 
     public FollowBehaviour(ShipControlComponent enemyShip) : base(enemyShip)
     {
         this.enemyShip = enemyShip;
 
-        var vertExtent = Camera.main.GetComponent<Camera>().orthographicSize;
-        var horzExtent = vertExtent * Screen.width / Screen.height;
-
-        // Calculations assume map is position at the origin
-        minX = -horzExtent;
-        maxX = horzExtent;
-        minY = -vertExtent;
-        maxY = vertExtent;
-        rend = enemyShip.GetComponent<ShipBodySettings>().Sprite;
-
-        // A sphere that fully encloses the bounding box.
-        radius = rend.bounds.extents.magnitude;
+        state = followState.Follow;
+        playerBoundRadius = 5;
+        pauseTimeMin = 2;
+        pauseTImeMax = 4;
     }
 
     public override void doAction()
@@ -41,7 +38,36 @@ public class FollowBehaviour : EnemyBehaviour
         yDiff = playerPos.y - enemyShip.gameObject.transform.position.y;
 
         Vector3 followDirection = new Vector3(xDiff, yDiff);
-        enemyShip.gameObject.transform.position += Vector3.Normalize(followDirection) * Time.deltaTime * speed;
+
+        if (state == followState.Pause && pauseTimer > pauseTimeMin)
+        {
+            if (pauseTimer >= pauseTImeMax)
+                state = followState.Pause;
+            else
+            {
+                float stateChangeChance = Mathf.Lerp(.3f, .9f,
+                    (pauseTImeMax - pauseTimeMin)/(pauseTimer-pauseTimeMin));
+                state = Random.Range(0f, 1f) < stateChangeChance ?
+                    followState.Pause : followState.Follow;
+            }
+        }
+
+        if (followDirection.magnitude < playerBoundRadius && state == followState.Follow)
+        {
+            state = followState.Pause;
+        }
+
+        switch (state)
+        {
+            case followState.Follow:
+                enemyShip.gameObject.transform.position += Vector3.Normalize(followDirection) * Time.deltaTime * speed;
+                break;
+            case followState.Pause:
+                pauseTimer += Time.deltaTime;
+                break;
+            default:
+                break;
+        }
 
         rotateTowardsPlayer();
         fireWeapon();
