@@ -283,7 +283,8 @@ public class GameManager : MonoBehaviour
       SceneControl.GameOver();
     }
     // Wait for some time
-    yield return new WaitForSecondsRealtime(1);
+    yield return new WaitForSecondsRealtime(2);
+    SceneControl.GameOver();
 
     // End slow motion
     Time.timeScale = 1;
