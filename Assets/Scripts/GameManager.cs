@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     set
     {
       _playerShip = value;
-	  _playerShip?.GetComponent<ShipBodySettings>().SetDefaultColor();
+      _playerShip?.GetComponent<ShipBodySettings>().SetDefaultColor();
     }
   }
 
@@ -121,10 +121,11 @@ public class GameManager : MonoBehaviour
       {
         EnemyShips.Remove(destroyedShip);
         addScore(100);
-        if (deathParticleObject) {
-			ParticleUtils.EmitOnce(deathParticleObject, destroyedShip.transform.position, Quaternion.identity);
-        //   Instantiate(deathParticleObject, destroyedShip.transform.position, Quaternion.identity);
-		}
+        if (deathParticleObject)
+        {
+          ParticleUtils.EmitOnce(deathParticleObject, destroyedShip.transform.position, Quaternion.identity);
+          //   Instantiate(deathParticleObject, destroyedShip.transform.position, Quaternion.identity);
+        }
         Destroy(destroyedShip);
       }
     }

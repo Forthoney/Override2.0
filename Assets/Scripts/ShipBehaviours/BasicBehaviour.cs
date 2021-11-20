@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class BasicBehaviour : EnemyBehaviour
 {
-    private float minX;
-    private float maxX;
-    private float minY;
-    private float maxY;
-    private float radius;
-    SpriteRenderer rend;
+  private float minX;
+  private float maxX;
+  private float minY;
+  private float maxY;
+  private float radius;
+  SpriteRenderer rend;
 
   public BasicBehaviour(ShipControlComponent enemyShip) : base(enemyShip)
   {
@@ -27,7 +27,7 @@ public class BasicBehaviour : EnemyBehaviour
     rend = enemyShip.GetComponent<ShipBodySettings>().Sprite;
 
     // A sphere that fully encloses the bounding box.
-    radius = rend.bounds.extents.magnitude;
+    radius = rend.bounds.extents.magnitude * 1.2f;
   }
 
   public override void doAction()
