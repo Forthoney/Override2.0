@@ -53,7 +53,7 @@ public class FollowFleeBehaviour : EnemyBehaviour
         pauseTimeMin = 2;
         pauseTimeMax = 4;
 
-        fleeTime = 5f;
+        fleeTime = 2f;
     }
 
     public override void doAction()
@@ -87,14 +87,14 @@ public class FollowFleeBehaviour : EnemyBehaviour
         }
 
         // Condition for Switching from follow to flee
-        if (followDirection.magnitude < playerBoundRadius && state == followState.Follow)
+        if (!paused && followDirection.magnitude < playerBoundRadius && state == followState.Follow)
         {
             paused = true;
             state = followState.Flee;
         }
 
         // Condition for switching from flee to follow
-        if (state == followState.Flee && (Timer > fleeTime ||
+        if (!paused && state == followState.Flee && (Timer >= fleeTime ||
             playerPos.x >= maxX - radius ||
             playerPos.x <= minX + radius ||
             playerPos.y >= maxY - radius ||
