@@ -139,6 +139,7 @@ public class PlayerControl : MonoBehaviour
       if (swapTargetShip != null && !_hijackCooldown) {
           _hijackCooldown = new Timer((float)(HijackCooldownTime));
           _hijackCooldown.Start();
+          InputController.Instance.Swapping.Stop();
           _hijackCooldownStopped = false;
           StartCoroutine(_hijack(swapTargetShip));
       } else FMOD_Thuleanx.AudioManager.Instance?.PlayOneShot(HijackFail);
