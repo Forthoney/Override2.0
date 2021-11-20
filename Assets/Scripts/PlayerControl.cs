@@ -67,7 +67,7 @@ public class PlayerControl : MonoBehaviour
     if (GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth >= 1)
       GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth -= HealthDecrement * Time.deltaTime;
 
-    if (_hijackCooldown)
+    if (_hijackCooldown && !_isDead)
     {
       float percentage = 100f * _hijackCooldown.TimeLeft / HijackCooldownTime;
       //Debug.Log(percentage);
