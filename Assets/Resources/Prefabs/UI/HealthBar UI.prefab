@@ -5034,7 +5034,7 @@ MonoBehaviour:
   _effectSlider: {fileID: 9198457045490216252}
   _fullColor: {r: 1, g: 1, b: 1, a: 1}
   _emptyColor: {r: 0.8962264, g: 0.07186722, b: 0.07186722, a: 1}
-  _lengthMult: 166
+  _lengthMult: 50
   gradient:
     serializedVersion: 2
     key0: {r: 0.9803922, g: 0.9921569, b: 0.34117648, a: 1}
