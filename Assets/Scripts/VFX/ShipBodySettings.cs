@@ -44,6 +44,17 @@ public class ShipBodySettings : MonoBehaviour {
 			isPlayer ? playerColorSecondary: enemyColorSecondary
 		);
 	}
+
+	public void SetGlowColor(bool isNear) {
+		if (isNear) 
+		{ 
+			Outline?.material?.SetColor("_GlowColor", playerColorPrimary);
+			if (OutlineLight != null)
+				OutlineLight.color = playerColorPrimary;
+
+		}
+	}
+
 	public void SetColor(Color primary, Color secondary) {
 		Sprite?.material?.SetColor("_GlowColor", primary);
 		Sprite?.material?.SetColor("_GlowColor2", secondary);
