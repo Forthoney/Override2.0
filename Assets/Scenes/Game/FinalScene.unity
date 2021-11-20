@@ -2356,24 +2356,28 @@ PrefabInstance:
       value: "\n\n                       VERRIDE?"
       objectReference: {fileID: 0}
     - target: {fileID: 4038071273639719397, guid: b174fd44ee2d7674dbe4f162041be0c9, type: 3}
+      propertyPath: m_margin.z
+      value: 33.294373
+      objectReference: {fileID: 0}
+    - target: {fileID: 4038071273639719397, guid: b174fd44ee2d7674dbe4f162041be0c9, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4038071273639719399, guid: b174fd44ee2d7674dbe4f162041be0c9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 253.8
+      value: 241.5
       objectReference: {fileID: 0}
     - target: {fileID: 4038071273639719399, guid: b174fd44ee2d7674dbe4f162041be0c9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -204.6
+      value: -223.9
       objectReference: {fileID: 0}
     - target: {fileID: 4038071273639719399, guid: b174fd44ee2d7674dbe4f162041be0c9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 61.5
+      value: 55.3
       objectReference: {fileID: 0}
     - target: {fileID: 4038071273639719399, guid: b174fd44ee2d7674dbe4f162041be0c9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 25.9
+      value: 35.5
       objectReference: {fileID: 0}
     - target: {fileID: 4038071273796885577, guid: b174fd44ee2d7674dbe4f162041be0c9, type: 3}
       propertyPath: m_Name
@@ -2564,6 +2568,10 @@ PrefabInstance:
       propertyPath: PauseUIObjects.Array.data[6]
       value: 
       objectReference: {fileID: 719814027}
+    - target: {fileID: 4962210372555457878, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
+      propertyPath: HealthDecrement
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 7959052260835463318, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
       propertyPath: recovery
       value: 0.5
