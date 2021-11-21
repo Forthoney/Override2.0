@@ -415,8 +415,9 @@ MonoBehaviour:
   speed: 10
   rateOfFire: 2
   bullet: {fileID: 549320140095666342, guid: 582a299cb64424f429ab0b090c518c2b, type: 3}
+  LowCapHealth: 1
+  HealthToLowCapTime: 15
   FreezeDurationOnSwap: 1
-  HealthDecrement: 0.05
   HijackCooldownTime: 10
   HijackCooldownEnd: event:/SFX/Player/CooldownFinish
   HijackFail: event:/SFX/GUI/HijackFail
@@ -486,7 +487,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   EnemyRate: 4
-  waveSize: 3
+  waveSize: 4
   BaseShip: {fileID: 3547156444801734604, guid: 9fdcb3edb3d16c94fbc532d2c079df38, type: 3}
   bodyPool:
   - {fileID: 11400000, guid: 7ff620aa3d0944745bc827e8907173cc, type: 2}
