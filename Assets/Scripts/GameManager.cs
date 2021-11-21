@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
     // if we have no player ship, the game should not be running
     if (PlayerShip == null) return;
 
-    Debug.Log(EnemyShips.Count);
+    // Debug.Log(EnemyShips.Count);
     if (currWaveSize == waveSize && EnemyShips.Count < 1)
     {
       timer += EnemyRate - 0.5f;
