@@ -34,6 +34,16 @@ public class SceneControl : MonoBehaviour
         Application.Quit();
     }
 
+    public void Credits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
+
+    public void Controls()
+    {
+        SceneManager.LoadScene("Controls");
+    }
+
     /// <summary>
     /// Transition from gameplay scene to game over scene when player dies.
     /// Transition from gameplay scene to game over scene when player manually gives up from pause.
