@@ -24,9 +24,11 @@ public class PlayerControl : MonoBehaviour
 
   private CursorSet currentCursorSet; // FIXME: janky way to change cursors
 
+  public float LowCapHealth = 1;         // Lower limit of HP due to HP decay
+  public float HealthToLowCapTime = 15f; // Time to reach lower limit of HP, via decay
+
   public float FreezeDurationOnSwap = 1f;
-  public float HealthDecrement = 2f;
-  public float HijackCooldownTime = 10f;
+  public float HijackCooldownTime = 5f;
 
   [FMODUnity.EventRef, SerializeField]
   string HijackCooldownEnd;
@@ -74,7 +76,8 @@ public class PlayerControl : MonoBehaviour
     if (GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth >= 1)
     {
       float maxHealth = GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.MaxHealth;
-      GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth -= HealthDecrement * (maxHealth - 1) * Time.deltaTime;
+      GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.CurrHealth -=
+        (maxHealth - LowCapHealth) * Time.deltaTime / HealthToLowCapTime;
 
     }
 
