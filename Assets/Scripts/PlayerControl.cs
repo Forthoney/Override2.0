@@ -65,6 +65,7 @@ public class PlayerControl : MonoBehaviour
     {
       currentCursorSet.SetCursorCrosshair(); // FIXME: a just-in-case set
       GameManager.PlayerShip.GetComponent<ShipControlComponent>().ShipBody.zeroVelocity();
+      return;
     }
 
     // Change rotation and velocity
