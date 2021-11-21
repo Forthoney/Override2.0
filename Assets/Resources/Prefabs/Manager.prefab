@@ -418,7 +418,7 @@ MonoBehaviour:
   LowCapHealth: 1
   HealthToLowCapTime: 15
   FreezeDurationOnSwap: 1
-  HijackCooldownTime: 10
+  HijackCooldownTime: 5
   HijackCooldownEnd: event:/SFX/Player/CooldownFinish
   HijackFail: event:/SFX/GUI/HijackFail
   OnDamageTaken:
@@ -486,7 +486,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  EnemyRate: 4
+  EnemyRate: 5
   waveSize: 4
   BaseShip: {fileID: 3547156444801734604, guid: 9fdcb3edb3d16c94fbc532d2c079df38, type: 3}
   bodyPool:
