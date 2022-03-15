@@ -2,68 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletBehaviour : MonoBehaviour
+public class BulletBehaviour : DamageBehavior
 {
   // Set by the ship weapon after spawn
-  public bool isEnemyBullet;
-
-  public bool explodes;
-
-  public float explosionRadius = 5;
-  public float damage
+  public float Speed
   {
     get; set;
   }
-  public float speed
+  
+  public void SetProperties(bool fromEnemy, float damage, GameObject onHitEffect, float bulletSpeed)
   {
-    get; set;
+    base.SetProperties(fromEnemy, damage, onHitEffect);
+    Speed = bulletSpeed;
+    Debug.Log("Bullet made. Speed: " + bulletSpeed);
   }
-  public GameObject OnHitEffect
-  {
-    get; set;
-  }
-
+  
   void Update()
   {
-    transform.position += transform.right * speed * Time.deltaTime;
+    Debug.Log("Bullet moving");
+    transform.position += transform.right * Speed * Time.deltaTime;
   }
 
   void OnTriggerEnter2D(Collider2D other)
   {
-    if (isEnemyBullet)
+    if (DamagedShip(other)) // Checking if the collision is a valid hit 
     {
-      if (other.gameObject == GameManager.PlayerShip)
-      {
-        other.gameObject.GetComponent<ShipControlComponent>()?.takeDamage(damage);
-
-        this.Die();
-      }
-    }
-    else
-    {
-      if (other.gameObject != GameManager.PlayerShip)
-      {
-        other.gameObject.GetComponent<ShipControlComponent>()?.takeDamage(damage);
-
-        if (explodes)
-        {
-          foreach (GameObject ship in GameManager.Instance.EnemyShips)
-          {
-            if ((other.transform.position - ship.transform.position).magnitude <= explosionRadius)
-            {
-              ship.GetComponent<ShipControlComponent>()?.takeDamage(damage);
-            }
-          }
-        }
-
-        ShockManager.Instance.StartShake(new Vector3(0, -2, 0));
-        this.Die();
-      }
+      this.Die();
     }
   }
 
   // Called when the bullet dies
-  public void Die()
+  private void Die()
   {
     if (OnHitEffect != null)
       ParticleUtils.EmitOnce(OnHitEffect, transform);
