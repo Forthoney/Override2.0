@@ -23,17 +23,14 @@ public class ShotgunWeapon : ShipWeapon
       _firingSource.transform.position,
       _firingSource.transform.rotation * Quaternion.Euler(0, 0, startSpreadAngle + i * spreadAngleInterval));
       // Instantiate bullet fields
-      bullet.GetComponent<BulletBehaviour>().isEnemyBullet = isEnemyBullet;
-      bullet.GetComponent<BulletBehaviour>().damage = _damage;
-      bullet.GetComponent<BulletBehaviour>().speed = _bulletSpeed;
-      bullet.GetComponent<BulletBehaviour>().OnHitEffect = ShootEffectHitPrefab;
+      bullet.GetComponent<BulletBehaviour>().SetProperties(isEnemyBullet, _damage, ShootEffectHitPrefab, _bulletSpeed);
 
       _firingEffect?.GetComponent<ParticleCombo>()?.Play();
 
       // If this is a player bullet
       if (!isEnemyBullet)
       {
-        bullet.GetComponent<BulletBehaviour>().speed *= 2;
+        bullet.GetComponent<BulletBehaviour>().Speed *= 2;
         ShockManager.Instance.StartShake(FiringSource.transform.rotation * Quaternion.Euler(0, 0, -90) * new Vector3(0, -1.5f, 0));
         if (bullet.GetComponentInChildren<SpriteRenderer>() != null)
           bullet.GetComponentInChildren<SpriteRenderer>().color = Color.red;

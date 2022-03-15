@@ -18,14 +18,13 @@ public class ChargeWeapon : ShipWeapon
     GameObject laser = Instantiate(this._bulletPrefab, _firingSource.transform.position, _firingSource.transform.rotation);
 
     // Instantiate bullet fields
-    laser.GetComponent<BulletBehaviour>().isEnemyBullet = isEnemyBullet;
-    laser.GetComponent<BulletBehaviour>().damage = _damage;
-    laser.GetComponent<BulletBehaviour>().speed = _bulletSpeed;
+    laser.GetComponent<BulletBehaviour>().SetProperties(isEnemyBullet, _damage, ShootEffectHitPrefab, _bulletSpeed);
+
 
     // If this is a player bullet
     if (!isEnemyBullet)
     {
-      laser.GetComponent<BulletBehaviour>().speed *= 2;
+      laser.GetComponent<BulletBehaviour>().Speed *= 2;
       ShockManager.Instance.StartShake(new Vector3(0, -0.5f, 0));
       laser.GetComponent<SpriteRenderer>().color = Color.red;
       TrailRenderer trail = laser.GetComponentInChildren<TrailRenderer>();
