@@ -17,4 +17,12 @@ public enum CameraWallNum {
     East,
     South,
     Weest
+}
+
+public enum DamageRelation
+{
+    EnemyToPlayer,
+    EnemyToEnemy,
+    PlayerToEnemy,
+    PlayerToPlayer
 } 
