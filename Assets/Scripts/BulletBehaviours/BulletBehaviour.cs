@@ -9,14 +9,16 @@ public class BulletBehaviour : DamageBehavior
   {
     get; set;
   }
-  
+
+  public bool pierces = false;
+
   public void SetProperties(bool fromEnemy, float damage, GameObject onHitEffect, float bulletSpeed)
   {
     base.SetProperties(fromEnemy, damage, onHitEffect);
     Speed = bulletSpeed;
     Debug.Log("Bullet made. Speed: " + bulletSpeed);
   }
-  
+
   void Update()
   {
     Debug.Log("Bullet moving");
@@ -27,7 +29,8 @@ public class BulletBehaviour : DamageBehavior
   {
     if (DamagedShip(other)) // Checking if the collision is a valid hit 
     {
-      this.Die();
+      if (!pierces)
+        this.Die();
     }
   }
 

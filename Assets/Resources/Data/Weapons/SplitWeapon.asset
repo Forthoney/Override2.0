@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d68b4d6968d0a44d839e0edba163140, type: 3}
+  m_Name: SplitWeapon
+  m_EditorClassIdentifier: 
+  _damage: 5
+  _fireRate: 2
+  _bulletSpeed: 15
+  _bulletPrefab: {fileID: 999617580366188411, guid: 199266827ee3bac40838825d0b63a366, type: 3}
+  _spritePosOffset: {x: 0, y: 0}
+  _shootEffectPrefab: {fileID: 4870883522907922192, guid: 5bd5acb6dcf604751814fed7b51fd508, type: 3}
+  _shootEffectHitPrefab: {fileID: 6906376240121617889, guid: 1035f0b8d683f48edbaad8f49dcf2c68, type: 3}
+  _tier: 0
+  _material: {fileID: 2100000, guid: a330617cdd2864f49985b2d8b875e85e, type: 2}
+  attackSound: event:/SFX/Weapon/LightBulletShot

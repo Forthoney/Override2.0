@@ -2916,6 +2916,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 696057790}
     - target: {fileID: 4962210372555457876, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
+      propertyPath: weaponPool.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 77a242fbc871b96478908a6250003191, type: 2}
+    - target: {fileID: 4962210372555457876, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
       propertyPath: PauseUIObjects.Array.size
       value: 8
       objectReference: {fileID: 0}
