@@ -14,7 +14,7 @@ public abstract class EnemyBehaviour
 
     private float fireTimer = 0;
 
-    public EnemyBehaviour(ShipControlComponent enemyShip){
+    protected EnemyBehaviour(ShipControlComponent enemyShip){
       this.enemyShip = enemyShip;
 
         speed = enemyShip.ShipBody.Speed * speedMod;
@@ -42,5 +42,10 @@ public abstract class EnemyBehaviour
         {
             fireTimer += Time.deltaTime;
         }
+    }
+
+    public void AdjustSpeed(float magnitude)
+    {
+        speed *= magnitude;
     }
 }
