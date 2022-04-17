@@ -2,32 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletBehaviour : DamageBehavior
+public class BulletBehaviour : DamageBehaviour
 {
   // Set by the ship weapon after spawn
   public float Speed
   {
-    get; set;
+    get;
+    set;
   }
   
   public void SetProperties(bool fromEnemy, float damage, GameObject onHitEffect, float bulletSpeed)
   {
     base.SetProperties(fromEnemy, damage, onHitEffect);
     Speed = bulletSpeed;
-    Debug.Log("Bullet made. Speed: " + bulletSpeed);
   }
   
   void Update()
   {
-    Debug.Log("Bullet moving");
-    transform.position += transform.right * Speed * Time.deltaTime;
+    Transform bullet = transform;
+    bullet.position += bullet.right * Speed * Time.deltaTime;
   }
 
   void OnTriggerEnter2D(Collider2D other)
   {
     if (DamagedShip(other)) // Checking if the collision is a valid hit 
     {
-      this.Die();
+      Die();
     }
   }
 

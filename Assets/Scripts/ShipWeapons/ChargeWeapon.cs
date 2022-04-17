@@ -11,18 +11,18 @@ public class ChargeWeapon : ShipWeapon
 
   private float _chargedTIme;
 
-  public override void Fire(bool isEnemyBullet)
-  {
-	  base.Fire(isEnemyBullet);
+  public override void Fire(bool isFromEnemy)
+  { 
+    base.Fire(isFromEnemy);
     // Load and instantiate bullet prefab from resource
     GameObject laser = Instantiate(this._bulletPrefab, _firingSource.transform.position, _firingSource.transform.rotation);
 
     // Instantiate bullet fields
-    laser.GetComponent<BulletBehaviour>().SetProperties(isEnemyBullet, _damage, ShootEffectHitPrefab, _bulletSpeed);
+    laser.GetComponent<BulletBehaviour>().SetProperties(isFromEnemy, _damage, ShootEffectHitPrefab, _bulletSpeed);
 
 
     // If this is a player bullet
-    if (!isEnemyBullet)
+    if (!isFromEnemy)
     {
       laser.GetComponent<BulletBehaviour>().Speed *= 2;
       ShockManager.Instance.StartShake(new Vector3(0, -0.5f, 0));

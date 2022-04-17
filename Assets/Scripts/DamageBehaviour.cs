@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 // Class outlining the behavior of damage-inflicting object's behavior
-public abstract class DamageBehavior : MonoBehaviour
+public abstract class DamageBehaviour : MonoBehaviour
 {
     [FormerlySerializedAs("isEnemyBullet")] public bool isFromEnemy;
 

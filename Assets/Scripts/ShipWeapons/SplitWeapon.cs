@@ -5,14 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SplitWeapon", menuName = "~/Combat/Weapons/SplitWeapon", order = 5)]
 public class SplitWeapon : ShipWeapon
 {
-  public override void Fire(bool isEnemyBullet)
+  public override void Fire(bool isFromEnemy)
   {
-	base.Fire(isEnemyBullet);
+	base.Fire(isFromEnemy);
     // Load and instantiate bullet prefab from resource
     GameObject bullet = Instantiate(this._bulletPrefab, _firingSource.transform.position, _firingSource.transform.rotation);
 
     // Instantiate bullet fields
-    bullet.GetComponent<BulletBehaviour>().isFromEnemy = isEnemyBullet;
+    bullet.GetComponent<BulletBehaviour>().isFromEnemy = isFromEnemy;
     bullet.GetComponent<BulletBehaviour>().Damage = _damage;
     bullet.GetComponent<BulletBehaviour>().Speed = _bulletSpeed;
     bullet.GetComponent<BulletBehaviour>().OnHitEffect = ShootEffectHitPrefab;
@@ -20,7 +20,7 @@ public class SplitWeapon : ShipWeapon
     _firingEffect?.GetComponent<ParticleCombo>()?.Play();
 
     // If this is a player bullet
-    if (!isEnemyBullet)
+    if (!isFromEnemy)
     {
       bullet.GetComponent<BulletBehaviour>().Speed *= 2;
       ShockManager.Instance.StartShake(new Vector3(0, -0.5f, 0));
