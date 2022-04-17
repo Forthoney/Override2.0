@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa8745d963fa7964f8f5d4f1e502d254, type: 3}
+  m_Name: BlitzWeapon
+  m_EditorClassIdentifier: 
+  _damage: 2
+  _fireRate: 0.5
+  _bulletSpeed: 15
+  _bulletPrefab: {fileID: 4217884717191485884, guid: d9478cf83480e4fdca29c087cdc6c742, type: 3}
+  _spritePosOffset: {x: 0, y: 0}
+  _shootEffectPrefab: {fileID: 4870883522907922192, guid: 88bfe2e6c825e47e4bee70a61ada8d0e, type: 3}
+  _shootEffectHitPrefab: {fileID: 6906376240121617889, guid: 1035f0b8d683f48edbaad8f49dcf2c68, type: 3}
+  _tier: 0
+  _material: {fileID: 2100000, guid: 8994cd8f34f1efc4bafdd2d04d1aaf8a, type: 2}
+  attackSound: 
+  numBulletsInShot: 7
+  bulletDelay: 0.1

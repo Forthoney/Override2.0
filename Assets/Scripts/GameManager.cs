@@ -38,7 +38,12 @@ public class GameManager : MonoBehaviour
   }
   public GameObject[] PauseUIObjects;
 
+  [Tooltip("The number of seconds between each wave")]
   public float EnemyRate;
+
+  // The amount of enemies spawned each wave
+  [Tooltip("The amount of enemies spawned each wave")]
+
   public float waveSize;
   private float timer;
 

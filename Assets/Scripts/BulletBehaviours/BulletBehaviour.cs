@@ -7,14 +7,16 @@ public class BulletBehaviour : DamageBehaviour
   // Set by the ship weapon after spawn
   public float Speed
   {
-    get;
-    set;
+    get; set;
   }
-  
+
+  public bool pierces = false;
+
   public void SetProperties(bool fromEnemy, float damage, GameObject onHitEffect, float bulletSpeed)
   {
     base.SetProperties(fromEnemy, damage, onHitEffect);
     Speed = bulletSpeed;
+    Debug.Log("Bullet made. Speed: " + bulletSpeed);
   }
   
   void Update()
@@ -27,7 +29,8 @@ public class BulletBehaviour : DamageBehaviour
   {
     if (DamagedShip(other)) // Checking if the collision is a valid hit 
     {
-      Die();
+      if (!pierces)
+        this.Die();
     }
   }
 
