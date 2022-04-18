@@ -3054,7 +3054,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startBody: {fileID: 11400000, guid: 7ff620aa3d0944745bc827e8907173cc, type: 2}
-  startWeapon: {fileID: 11400000, guid: cacf319db68ac427388694a549993112, type: 2}
+  startWeapon: {fileID: 11400000, guid: 77a242fbc871b96478908a6250003191, type: 2}
 --- !u!1 &2019360296
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 087378a2546bf7047bd4eec3b3ec0391, type: 3}
   m_Name: HomingWeapon
   m_EditorClassIdentifier: 
-  _damage: 1
-  _fireRate: 1
+  _damage: 3
+  _fireRate: 2
   _bulletSpeed: 10
   _bulletPrefab: {fileID: 3732986073239120137, guid: a6bb55c78f6215f4db257d55aefc57f8, type: 3}
   _spritePosOffset: {x: 0, y: 0}
