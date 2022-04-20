@@ -231,6 +231,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!4 &85472435 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4962210370707467525, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
+  m_PrefabInstance: {fileID: 1567829789}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &86184104
 GameObject:
   m_ObjectHideFlags: 0
@@ -2711,6 +2716,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b40f09bb227eb48918fbd1b18ebc70f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1799888606
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1799888607}
+  - component: {fileID: 1799888608}
+  m_Layer: 0
+  m_Name: SpawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1799888607
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799888606}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 85472435}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1799888608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799888606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eff5b197d14ec744a11258f70278129, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BaseShip: {fileID: 3547156444801734604, guid: 9fdcb3edb3d16c94fbc532d2c079df38, type: 3}
+  bodyPool:
+  - {fileID: 11400000, guid: 7ff620aa3d0944745bc827e8907173cc, type: 2}
+  - {fileID: 11400000, guid: b459aa10e3cb8644baab3d78e65b9ba7, type: 2}
+  - {fileID: 11400000, guid: 732db857fc9bb41f79c6893c7c1c94c3, type: 2}
+  weaponPool:
+  - {fileID: 11400000, guid: 7225588b6936d19459bb40246fa90080, type: 2}
+  - {fileID: 11400000, guid: 7e2158bd68f08f0458a5762f24114394, type: 2}
+  - {fileID: 11400000, guid: 0e50bc645b1d12248833550ee13af628, type: 2}
+  EnemyRate: 4
+  waveSize: 3
 --- !u!1 &1850907826
 GameObject:
   m_ObjectHideFlags: 0

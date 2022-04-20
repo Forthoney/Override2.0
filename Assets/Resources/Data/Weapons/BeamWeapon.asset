@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 655a6e8f651a84f46a7db5a7824ba065, type: 3}
   m_Name: BeamWeapon
   m_EditorClassIdentifier: 
-  _damage: 8
+  _damage: 15
   _fireRate: 1
   _bulletSpeed: 0
   _bulletPrefab: {fileID: 51407815256307658, guid: 8c89054aeac6749aebe18aab79ded20f, type: 3}
