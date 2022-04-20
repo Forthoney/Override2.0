@@ -12,9 +12,9 @@ public class ShotgunWeapon : ShipWeapon
   [SerializeField] float spreadAngleInterval;
   [SerializeField] float startSpreadAngle;
 
-  public override void Fire(bool isEnemyBullet)
+  public override void Fire(bool isFromEnemy)
   {
-    base.Fire(isEnemyBullet);
+	base.Fire(isFromEnemy);
     List<GameObject> bullets = new List<GameObject>();
 
     for (int i = 0; i < numBulletsInShot; i++)
@@ -23,12 +23,12 @@ public class ShotgunWeapon : ShipWeapon
       _firingSource.transform.position,
       _firingSource.transform.rotation * Quaternion.Euler(0, 0, startSpreadAngle + i * spreadAngleInterval));
       // Instantiate bullet fields
-      bullet.GetComponent<BulletBehaviour>().SetProperties(isEnemyBullet, _damage, ShootEffectHitPrefab, _bulletSpeed);
+      bullet.GetComponent<BulletBehaviour>().SetProperties(isFromEnemy, _damage, ShootEffectHitPrefab, _bulletSpeed);
 
       _firingEffect?.GetComponent<ParticleCombo>()?.Play();
 
       // If this is a player bullet
-      if (!isEnemyBullet)
+      if (!isFromEnemy)
       {
         bullet.GetComponent<BulletBehaviour>().Speed *= 2;
         ShockManager.Instance.StartShake(FiringSource.transform.rotation * Quaternion.Euler(0, 0, -90) * new Vector3(0, -1.5f, 0));

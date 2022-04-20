@@ -107,4 +107,9 @@ public class ShipBody : ScriptableObject
     Quaternion newRot = Quaternion.Euler(0, 0, angle - 90);
     obj.transform.rotation = Quaternion.RotateTowards(currRot, newRot, Time.deltaTime * _rotationSpeed);
   }
+
+  public void AdjustSpeed(float magnitude)
+  {
+    _speed *= magnitude;
+  }
 }

@@ -5,20 +5,20 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "RapidWeapon", menuName = "~/Combat/Weapons/RapidWeapon", order = 4)]
 public class RapidWeapon : ShipWeapon
 {
-  public override void Fire(bool isEnemyBullet)
+  public override void Fire(bool isFromEnemy)
   {
-	  base.Fire(isEnemyBullet);
+	  base.Fire(isFromEnemy);
 
     // Load and instantiate bullet prefab from resource
     GameObject bullet = Instantiate(this._bulletPrefab, _firingSource.transform.position, _firingSource.transform.rotation);
 
     // Instantiate bullet fields
-    bullet.GetComponent<BulletBehaviour>().SetProperties(isEnemyBullet, _damage, ShootEffectHitPrefab, _bulletSpeed);
+    bullet.GetComponent<BulletBehaviour>().SetProperties(isFromEnemy, _damage, ShootEffectHitPrefab, _bulletSpeed);
     
     _firingEffect?.GetComponent<ParticleCombo>()?.Play();
 
     // If this is a player bullet
-    if (!isEnemyBullet)
+    if (!isFromEnemy)
     {
       bullet.GetComponent<BulletBehaviour>().Speed *= 2;
       ShockManager.Instance.StartShake(new Vector3(0, -0.5f, 0));

@@ -80,7 +80,7 @@ public abstract class ShipWeapon : ScriptableObject
   }
 
   // Important! must be overridden in derived class
-  public virtual void Fire(bool isEnemyBullet) {
+  public virtual void Fire(bool isFromEnemy) {
 	if (attackSound != null && attackSound.Length > 0)
 		FMOD_Thuleanx.AudioManager.Instance?.PlayOneShot(attackSound);
   }

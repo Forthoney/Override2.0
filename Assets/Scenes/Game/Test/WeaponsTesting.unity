@@ -2632,16 +2632,16 @@ PrefabInstance:
       objectReference: {fileID: 1864169966}
     - target: {fileID: 4962210372555457876, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
       propertyPath: weaponPool.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4962210372555457876, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
       propertyPath: weaponPool.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 77a242fbc871b96478908a6250003191, type: 2}
+      objectReference: {fileID: 11400000, guid: 7225588b6936d19459bb40246fa90080, type: 2}
     - target: {fileID: 4962210372555457876, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
       propertyPath: weaponPool.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 0e50bc645b1d12248833550ee13af628, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 4962210372555457876, guid: 628b7d2b5525a483e8fe912674d98979, type: 3}
       propertyPath: weaponPool.Array.data[2]
       value: 

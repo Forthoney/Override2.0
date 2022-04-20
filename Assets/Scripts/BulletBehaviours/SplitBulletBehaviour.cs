@@ -11,7 +11,6 @@ public class SplitBulletBehaviour : BulletBehaviour
 
   void Update()
   {
-    Debug.Log("Bullet moving");
     transform.position += transform.right * Speed * Time.deltaTime;
   }
 
