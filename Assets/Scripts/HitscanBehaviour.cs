@@ -5,14 +5,26 @@ using UnityEngine.InputSystem.Interactions;
 
 public class HitscanBehaviour : DamageBehaviour
 {
-    public new void SetProperties(bool fromEnemy, float damage, GameObject onHitEffect)
-    {
-        base.SetProperties(fromEnemy, damage, onHitEffect);
-    }
+  public new void SetProperties(bool fromEnemy, float damage, GameObject onHitEffect)
+  {
+    base.SetProperties(fromEnemy, damage, onHitEffect);
+  }
 
-    public void Fire()
+  public void Fire()
+  {
+    RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.right * 1000);
+
+    foreach (RaycastHit2D hit in hits)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.forward);
-        DamagedShip(hit.collider);
+      DamagedShip(hit.collider);
     }
+  }
+
+  float timer = 0f;
+
+  void Update()
+  {
+    if (timer > 2) Destroy(this);
+    timer += Time.deltaTime;
+  }
 }
