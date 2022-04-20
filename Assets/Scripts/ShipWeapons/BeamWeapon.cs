@@ -47,6 +47,7 @@ public class BeamWeapon : ShipWeapon
     beamBehaviour.Fire();
     beam.GetComponent<LineRenderer>().endColor = Color.red;
     beam.GetComponent<LineRenderer>().startColor = Color.red;
+    beam.GetComponent<LineRenderer>().widthMultiplier = 5;
     beam.GetComponent<ParticleSystem>().Stop();
     beam.GetComponent<ParticleSystem>().Clear();
     beam.GetComponent<ParticleSystem>().Play();
